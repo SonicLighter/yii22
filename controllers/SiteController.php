@@ -93,10 +93,15 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    // test
+    public function actionSay($target = "World"){
+          echo "Hello world!";
+         return $this->render("say",["target" => $target]);
+    }
+
     // database
-    public function actionDataBase()
+    public function actionDatabase()
     {
-         echo "Hello world!";
          /*
          $modelUser = new Users();
          $modelUser->username = "testUser";
@@ -104,6 +109,14 @@ class SiteController extends Controller
          $modelUser->authKey = "123";
          $modelUser->accessToken = "123";
          $modelUser->admin = "0";
-         */
+         $modelUser->save();
+          echo "Information successful saved!";
+          */
+
+          /*
+          $id = 1;
+          $result = Users::find()->where(['id' => $id])->one();
+          echo $result->id." - username: ".$result->username." password: ".$result->password." ";
+          */
     }
 }
