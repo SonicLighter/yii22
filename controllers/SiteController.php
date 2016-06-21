@@ -91,4 +91,10 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    // database
+    public function actionDataBase(){
+        
+
+    }
 }
