@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Users;
 
 class SiteController extends Controller
 {
@@ -93,8 +94,16 @@ class SiteController extends Controller
     }
 
     // database
-    public function actionDataBase(){
-        
-
+    public function actionDataBase()
+    {
+         echo "Hello world!";
+         /*
+         $modelUser = new Users();
+         $modelUser->username = "testUser";
+         $modelUser->password = "123";
+         $modelUser->authKey = "123";
+         $modelUser->accessToken = "123";
+         $modelUser->admin = "0";
+         */
     }
 }
