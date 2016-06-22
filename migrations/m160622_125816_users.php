@@ -33,10 +33,7 @@ class m160622_125816_users extends Migration
 
     public function down()
     {
-        $this->delete('tempUsers', ['username' => 'admin']);
-        $this->delete('tempUsers', ['username' => 'user']);
-        $this->dropTable('tempUsers');
-        return false;
+        $this->dropTable('users');
     }
 
     /*
