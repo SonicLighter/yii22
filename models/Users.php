@@ -17,11 +17,11 @@ use Yii;
 class Users extends \yii\db\ActiveRecord
 {
 
-     public $id;
-     public $username;
-     public $password;
-     public $authKey;
-     public $accessToken;
+     public $idRecord;
+     public $usernameRecord;
+     public $passwordRecord;
+     public $authKeyRecord;
+     public $accessTokenRecord;
 
      /**
      * Finds user by username
@@ -40,25 +40,16 @@ class Users extends \yii\db\ActiveRecord
          $result = Users::find()->where(['username' => $username])->one();
          if (strcasecmp($result->username, $username) === 0) {
              $user = [
-               'id' => $result->id,
-               'username' => $result->username,
-               'password' => $result->password,
-               'authKey' => $result->authKey,
-               'accessToken' => $result->accessToken
+               'idRecord' => $result->id,
+               'usernameRecord' => $result->username,
+               'passwordRecord' => $result->password,
+               'authKeyRecord' => $result->authKey,
+               'accessTokenRecord' => $result->accessToken,
              ];
              return new static($user);
          }
 
          return null;
-         /*
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
-        */
     }
 
     /**
@@ -69,7 +60,7 @@ class Users extends \yii\db\ActiveRecord
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->passwordRecord === $password;
     }
 
     /**

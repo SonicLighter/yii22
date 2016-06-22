@@ -102,6 +102,11 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         $username = "admin1";
+         $result = Users::find()->where(['username' => $username])->count();
+         echo "result: ".$result;
+         $result = Users::find()->where(['username' => $username])->one();
+         echo "<br/>username: ".$result->username;
          /*
          $modelUser = new Users();
          $modelUser->username = "testUser";
@@ -113,10 +118,10 @@ class SiteController extends Controller
           echo "Information successful saved!";
           */
 
-          /*
-          $id = 1;
-          $result = Users::find()->where(['id' => $id])->one();
-          echo $result->id." - username: ".$result->username." password: ".$result->password." ";
-          */
+
+          //$id = 3;
+          //$result = Users::find()->where(['id' => $id])->one();
+          //echo $result->id." - username: ".$result->username." password: ".$result->password." ";
+
     }
 }
