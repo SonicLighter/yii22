@@ -45,11 +45,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-         $result = User::find()->where(['id' => $id])->one();
-         if(!empty($result)){
-             return $result;
-         }
-         return null;
+         return User::find()->where(['id' => $id])->one();
     }
 
     /**
@@ -57,13 +53,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-         $result = User::find()->where(['accessToken' => $token])->one();
-         if(!empty($result)){
-              if(strcasecmp($result->accessToken, $token) === 0){
-                   return $result;
-              }
-         }
-         return null;
+         return User::find()->where(['accessToken' => $token])->one();
     }
 
     /**
@@ -74,13 +64,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-         $result = User::find()->where(['username' => $username])->one();
-         if(!empty($result)){
-              if(strcasecmp($result->username, $username) === 0){
-                   return $result;
-              }
-         }
-         return null;
+         return User::find()->where(['username' => $username])->one();
     }
 
     /**
