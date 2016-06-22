@@ -33,7 +33,7 @@ class m160622_125816_users extends Migration
 
     public function down()
     {
-        $this->dropTable('users');
+        $this->dropTable('users');//
     }
 
     /*
