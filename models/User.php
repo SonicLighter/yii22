@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
+use Yii;
+
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
@@ -101,4 +105,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->password === $password;
     }
+
+    public static function getDataProvider(){
+
+          $query = User::find()->orderBy("id");
+
+          $dataProvider = new ActiveDataProvider([
+              'query' => $query,
+          ]);
+
+          return $dataProvider;
+
+    }
+
 }

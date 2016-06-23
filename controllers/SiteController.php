@@ -8,7 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\Users;
+use app\models\User;
+use yii\data\Pagination;
 
 class SiteController extends Controller
 {
@@ -124,4 +125,13 @@ class SiteController extends Controller
           //echo $result->id." - username: ".$result->username." password: ".$result->password." ";
 
     }
+
+    public function actionUsers(){
+
+         return $this->render("users", [
+              'dataProvider' => User::getDataProvider(),
+         ]);
+
+    }
+
 }
