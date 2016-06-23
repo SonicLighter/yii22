@@ -17,11 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
         Users list:
     </p>
 
-    <?=
+    <?=//
          GridView::widget([
               'dataProvider' => $dataProvider,
               'columns' => [
-                  'id',
                   'username',
                   'admin',
               ],
