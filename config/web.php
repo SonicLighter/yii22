@@ -41,7 +41,12 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
+        // choosing dataBase config file
+        'db' => (file_exists(__DIR__ . '/db-local.php')) ? (
+               require(__DIR__ . '/db-local.php')
+        ) : (
+               require(__DIR__ . '/db.php')
+        ),
     ],
     'params' => $params,
 ];
