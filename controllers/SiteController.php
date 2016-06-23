@@ -126,12 +126,4 @@ class SiteController extends Controller
 
     }
 
-    public function actionUsers(){
-
-         return $this->render("users", [
-              'dataProvider' => User::getDataProvider(),
-         ]);
-
-    }
-
 }
