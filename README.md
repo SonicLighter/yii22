@@ -95,6 +95,19 @@ return [
     'charset' => 'utf8',
 ];
 ```
+If you don't want to change data in `config/db.php` to access your own local database, you can
+use your configurations file, just create `config/db-local.php` and edit the file, for example:
+
+```php
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'username' => 'root',
+    'password' => '1234',
+    'charset' => 'utf8',
+];
+```
+If you create `config/db-local.php`, this file will be used instead of `config/db.php`automatically.
 
 **NOTES:**
 - Yii won't create the database for you, this has to be done manually before you can access it.
