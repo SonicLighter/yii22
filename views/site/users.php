@@ -21,8 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
          GridView::widget([
               'dataProvider' => $dataProvider,
               'columns' => [
-                  'username',
-                  'admin',
+                  [
+                       'header' => 'Name',
+                       'value' => 'username',
+                  ],
+                  [
+                       'header' => 'Role',
+                       'value' => function($model){
+                            if($model->admin > 0){
+                                 return "Admin";
+                            }
+                            else{
+                                 return "User";
+                            }
+                       },
+                  ],
               ],
           ]);
      ?>
