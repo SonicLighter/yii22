@@ -6,6 +6,15 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\grid\GridView;
 
+// only for admins
+if (!isset(Yii::$app->user->identity->admin)){
+     return Yii::$app->response->redirect(['site/index']);
+}
+else if(Yii::$app->user->identity->admin != 1){
+     return Yii::$app->response->redirect(['site/index']);
+}
+//
+
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -17,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Users list:
     </p>
 
-    <?=//
+    <?=
          GridView::widget([
               'dataProvider' => $dataProvider,
               'columns' => [
