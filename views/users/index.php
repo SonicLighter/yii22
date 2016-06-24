@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        This webpage is abailable for admins only!<br/>
+        This webpage is abailable for admins and moderators only!<br/>
         Users list:
     </p>
 
@@ -28,12 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   [
                        'header' => 'Role',
                        'value' => function($model){
-                            if($model->admin > 0){
-                                 return "Admin";
-                            }
-                            else{
-                                 return "User";
-                            }
+                            return key(Yii::$app->authManager->getRolesByUser($model->id));
                        },
                   ],
               ],

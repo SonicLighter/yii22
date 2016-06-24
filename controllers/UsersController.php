@@ -18,19 +18,12 @@ class UsersController extends Controller{
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['openUsers'], // admin and moderator
                     ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -51,13 +44,37 @@ class UsersController extends Controller{
 
      public function actionIndex(){
 
+          /*
+          if((Yii::$app->user->can('openUsers')) && (Yii::$app->user->can('openRoles'))){
+               echo "This user can open USERS and ROLES!";
+          }
+          else if(Yii::$app->user->can('openUsers')){
+               echo "This user can open USERS!";
+          }
+          else{
+               echo "This user can't open anything!";
+          }
+          die();
+          */
+
           // only for admins
+          /*
           if (!isset(Yii::$app->user->identity->admin)){
                return Yii::$app->response->redirect(['site/index']);
           }
           else if(Yii::$app->user->identity->admin != 1){
                return Yii::$app->response->redirect(['site/index']);
           }
+
+          */
+
+          //print_r(Yii::$app->authManager->getRoles(1));
+          //echo "<br/>".key(Yii::$app->authManager->getRoles(1));
+          //if(empty()){
+               //$role = Yii::$app->authManager->getRolesByUser(1)[]->name;
+               //echo $role;
+          //}
+          //die();
 
           return $this->render("index", [
               'dataProvider' => User::getDataProvider(),
