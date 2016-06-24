@@ -29,6 +29,13 @@ class m160622_125816_users extends Migration
               'accessToken' => "user",
               'admin' => "0",
          ]);
+         $this->insert('users', [
+              'username' => "moder",
+              'password' => "moder",
+              'authKey' => "moder",
+              'accessToken' => "moder",
+              'admin' => "0",
+         ]);
     }
 
     public function down()

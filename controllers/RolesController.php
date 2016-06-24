@@ -8,10 +8,10 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\User;
+use app\models\Roles;
 use yii\data\Pagination;
 
-class UsersController extends Controller{
+class RolesController extends Controller{
 
     public function behaviors()
     {
@@ -22,7 +22,7 @@ class UsersController extends Controller{
                     [
                         'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['openUsers'], // admin and moderator
+                        'roles' => ['openRoles'], // admin and moderator
                     ],
                 ],
             ],
@@ -42,13 +42,13 @@ class UsersController extends Controller{
         ];
     }
 
-     public function actionIndex(){
+    public function actionIndex(){
 
-          return $this->render("index", [
-              'dataProvider' => User::getDataProvider(),
-          ]);
+         return $this->render('index', [
+              'dataProvider' => Roles::getDataProvider(),
+         ]);
 
-     }
+    }
 
 }
 
