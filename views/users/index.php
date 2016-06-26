@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\grid\GridView;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
@@ -13,7 +14,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        This webpage is abailable for admins and moderators only!<br/>
+        This webpage is available for admins and moderators only!<br/>
+    </p>
+    <?php
+          if(key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) == 'admin'){
+               printf("
+                    <p>
+                         Follow this link to create a new user: <a href='createuser'> Create User </a> <br/>
+                    </p>
+               ");
+          }
+    ?>
+
+    <p>
         Users list:
     </p>
 

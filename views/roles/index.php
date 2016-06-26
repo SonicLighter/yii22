@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        This webpage is abailable for admins only!<br/>
+        This webpage is available for admins only!<br/>
         Roles list:
     </p>
 

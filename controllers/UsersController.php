@@ -24,6 +24,11 @@ class UsersController extends Controller{
                         'allow' => true,
                         'roles' => ['openUsers'], // admin and moderator
                     ],
+                    [
+                        'actions' => ['createuser'],
+                        'allow' => true,
+                        'roles' => ['admin'], // admin
+                    ],
                 ],
             ],
         ];
@@ -47,6 +52,12 @@ class UsersController extends Controller{
           return $this->render("index", [
               'dataProvider' => User::getDataProvider(),
           ]);
+
+     }
+
+     public function actionCreateuser(){
+
+          return $this->render("createuser");
 
      }
 
