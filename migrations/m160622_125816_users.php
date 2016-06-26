@@ -15,23 +15,29 @@ class m160622_125816_users extends Migration
               'accessToken' => Schema::TYPE_STRING,
               'admin' => Schema::TYPE_INTEGER,
          ]);
+
+         $adminPassword = hash("sha256", "admin");
          $this->insert('users', [
               'username' => "admin",
-              'password' => "admin",
+              'password' => $adminPassword,
               'authKey' => "admin",
               'accessToken' => "admin",
               'admin' => "1",
          ]);
+
+         $userPassword = hash("sha256", "user");
          $this->insert('users', [
               'username' => "user",
-              'password' => "user",
+              'password' => $userPassword,
               'authKey' => "user",
               'accessToken' => "user",
               'admin' => "0",
          ]);
+
+         $moderPassword = hash("sha256", "moder");
          $this->insert('users', [
               'username' => "moder",
-              'password' => "moder",
+              'password' => $moderPassword,
               'authKey' => "moder",
               'accessToken' => "moder",
               'admin' => "0",
