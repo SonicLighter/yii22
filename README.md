@@ -78,6 +78,27 @@ directly under the Web root.
 http://localhost/basic/web/
 ~~~
 
+### Getting Started
+
+Before you can go on you need to use following command, which allows you to create table for storing users data:
+
+~~~
+yii migrate/to m160622_125816_users
+~~~
+
+After that you should prepare some tables for DbManager to store its data. Use following command:
+
+~~~
+yii migrate --migrationPath=@yii/rbac/migrations
+~~~
+
+To build authorization data you should use this command:
+
+~~~
+yii rbac/init
+~~~
+
+This command allows you to associate rules with roles and permissions.
 
 CONFIGURATION
 -------------
