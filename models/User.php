@@ -26,7 +26,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['admin'], 'integer'],
-            [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 30],
+            [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
     }
 
@@ -117,6 +117,32 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
           ]);
 
           return $dataProvider;
+
+    }
+
+    public static function createUser($name, $password, $role){
+
+         if(User::find()->where(['username' => $name])->count() > 0){
+              return false;   // user already exists
+         }
+
+         // create user
+         $modelUser = new User();
+         $modelUser->username = $name;
+         $modelUser->password = hash("sha256", $password);
+         $modelUser->authKey = "0";
+         $modelUser->accessToken = "0";
+         $modelUser->admin = "0";
+         $modelUser->save();
+
+         $currentUser = User::find()->select('id')->where(['username' => $name])->one();
+
+         // set role
+         $auth = YII::$app->authManager;
+         $userRole = $auth->getRole($role);
+         $auth->assign($userRole, $currentUser->id);
+
+         return true;
 
     }
 

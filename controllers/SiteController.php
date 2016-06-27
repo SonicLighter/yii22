@@ -103,13 +103,15 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         /*
          $username = "admin1";
          $result = Users::find()->where(['username' => $username])->count();
          echo "result: ".$result;
          $result = Users::find()->where(['username' => $username])->one();
          echo "<br/>username: ".$result->username;
-         /*
-         $modelUser = new Users();
+         */
+
+         $modelUser = new User();
          $modelUser->username = "testUser";
          $modelUser->password = "123";
          $modelUser->authKey = "123";
@@ -117,7 +119,7 @@ class SiteController extends Controller
          $modelUser->admin = "0";
          $modelUser->save();
           echo "Information successful saved!";
-          */
+          die();
 
 
           //$id = 3;

@@ -115,13 +115,25 @@ class Roles extends \yii\db\ActiveRecord
 
     public static function getDataProvider(){
 
-         $query = Roles::find()->where(['type' => 1]);
+         $query = Roles::find()->select('name')->where(['type' => 1]);
 
          $dataProvider = new ActiveDataProvider([
               'query' => $query,
          ]);
 
          return $dataProvider;
+
+    }
+
+    public static function getRoles(){
+
+         $result = array();
+         $roles = Roles::find()->select('name')->where(['type' => 1])->all();
+         foreach ($roles as $role) {
+              $result[] = $role->name;
+         }
+
+         return $result;
 
     }
 }
