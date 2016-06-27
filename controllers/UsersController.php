@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\CreateuserForm;
 use app\models\User;
 use yii\data\Pagination;
 
@@ -56,6 +57,9 @@ class UsersController extends Controller{
      }
 
      public function actionCreateuser(){
+
+          $model = new CreateuserForm();
+
 
           return $this->render("createuser");
 
