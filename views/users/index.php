@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
           if(key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) == 'admin'){
                printf("
                     <p>
-                         Follow this link to create a new user: <a href='createuser'> Create User </a> <br/>
+                         Follow this link to create a new user: <a href='create'> Create User </a> <br/>
                     </p>
                ");
           }

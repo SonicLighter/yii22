@@ -8,7 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\CreateuserForm;
+use app\models\UserForm;
 use app\models\User;
 use yii\data\Pagination;
 
@@ -26,7 +26,7 @@ class UsersController extends Controller{
                         'roles' => ['openUsers'], // admin and moderator
                     ],
                     [
-                        'actions' => ['createuser'],
+                        'actions' => ['create'],
                         'allow' => true,
                         'roles' => ['admin'], // admin
                     ],
@@ -56,12 +56,12 @@ class UsersController extends Controller{
 
      }
 
-     public function actionCreateuser(){
+     public function actionCreate(){
 
-          $model = new CreateuserForm();
+          $model = new UserForm();
 
 
-          return $this->render("createuser");
+          return $this->render("create");
 
      }
 

@@ -34,104 +34,48 @@ AppAsset::register($this);
         ],
     ]);
 
-    // Show different menu for all type of users
-    switch (key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))) {
-         case 'admin':{
-              echo Nav::widget([
-                  'options' => ['class' => 'navbar-nav navbar-right'],
-                  'items' => [
-                      ['label' => 'Users', 'url' => ['/users/index']],
-                      ['label' => 'Roles', 'url' => ['/roles/index']],
-                      ['label' => 'Home', 'url' => ['/site/index']],
-                      ['label' => 'About', 'url' => ['/site/about']],
-                      ['label' => 'Contact', 'url' => ['/site/contact']],
-                      Yii::$app->user->isGuest ? (
-                          ['label' => 'Login', 'url' => ['/site/login']]
-                      ) : (
-                          '<li>'
-                          . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                          . Html::submitButton(
-                              'Logout (' . Yii::$app->user->identity->username . ')',
-                              ['class' => 'btn btn-link']
-                          )
-                          . Html::endForm()
-                          . '</li>'
-                      )
-                  ],
-              ]);
-              break;
-         }
-         case 'moderator':{
-             echo Nav::widget([
-                 'options' => ['class' => 'navbar-nav navbar-right'],
-                 'items' => [
-                     ['label' => 'Users', 'url' => ['/users/index']],
-                     ['label' => 'Home', 'url' => ['/site/index']],
-                     ['label' => 'About', 'url' => ['/site/about']],
-                     ['label' => 'Contact', 'url' => ['/site/contact']],
-                     Yii::$app->user->isGuest ? (
-                         ['label' => 'Login', 'url' => ['/site/login']]
-                     ) : (
-                         '<li>'
-                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                         . Html::submitButton(
-                             'Logout (' . Yii::$app->user->identity->username . ')',
-                             ['class' => 'btn btn-link']
-                         )
-                         . Html::endForm()
-                         . '</li>'
-                     )
-                 ],
-             ]);
-             break;
-        }
-        case 'user':{
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                    Yii::$app->user->isGuest ? (
-                        ['label' => 'Login', 'url' => ['/site/login']]
-                    ) : (
-                        '<li>'
-                        . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                        . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
-                            ['class' => 'btn btn-link']
-                        )
-                        . Html::endForm()
-                        . '</li>'
-                    )
-                ],
-            ]);
-            break;
-        }
-        default:{
-             echo Nav::widget([
-                 'options' => ['class' => 'navbar-nav navbar-right'],
-                 'items' => [
-                     ['label' => 'Home', 'url' => ['/site/index']],
-                     ['label' => 'About', 'url' => ['/site/about']],
-                     ['label' => 'Contact', 'url' => ['/site/contact']],
-                     Yii::$app->user->isGuest ? (
-                         ['label' => 'Login', 'url' => ['/site/login']]
-                     ) : (
-                         '<li>'
-                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                         . Html::submitButton(
-                             'Logout (' . Yii::$app->user->identity->username . ')',
-                             ['class' => 'btn btn-link']
-                         )
-                         . Html::endForm()
-                         . '</li>'
-                     )
-                 ],
-             ]);
-            break;
-       }
-    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            [
+                 'label' => 'Users',
+                 'url' => ['/users/index'],
+                 'visible' =>  (key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) === 'admin') ? (true) :
+                 (
+                      (key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) === 'moderator') ? (true) : (false)
+                 ),
+            ],
+            [
+                 'label' => 'Roles',
+                 'url' => ['/roles/index'],
+                 'visible' => (key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) === 'admin') ? (true) : (false),
+             ],
+            [
+                 'label' => 'Home',
+                 'url' => ['/site/index']
+             ],
+            [
+                 'label' => 'About',
+                 'url' => ['/site/about']
+            ],
+            [
+                 'label' => 'Contact',
+                 'url' => ['/site/contact']
+            ],
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Login', 'url' => ['/site/login']]
+            ) : (
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    ['class' => 'btn btn-link']
+                )
+                . Html::endForm()
+                . '</li>'
+            )
+        ],
+    ]);
 
     NavBar::end();
     ?>

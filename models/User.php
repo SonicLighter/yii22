@@ -9,6 +9,8 @@ use Yii;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
+     public static $adminLevel; // 0 - user, 1 - moder, 2 -admin
+
     /**
      * @inheritdoc
      */
@@ -117,5 +119,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
           return $dataProvider;
 
     }
+
+    /*
+    public static function isAdmin(){
+         if(key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) == 'admin'){
+              return true;
+         }
+         return false;
+    }
+    */
 
 }

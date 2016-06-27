@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
-class CreateuserForm extends Model{
+class UserForm extends Model{
 
      public $name;
      public $password;
