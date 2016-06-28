@@ -26,12 +26,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            ['username', 'validateUsername'],
+            ['username', 'unique', 'message' => 'Such user name already exists!'],
             [['username','password','role'], 'required'],
             [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
     }
 
+    /*
     public function validateUsername(){
 
          if(User::isExists($this->username)){
@@ -39,6 +40,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          }
 
     }
+    */
 
     /**
      * @inheritdoc
