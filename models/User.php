@@ -9,7 +9,7 @@ use Yii;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
-     public static $adminLevel; // 0 - user, 1 - moder, 2 -admin
+     //public static $adminLevel; // 0 - user, 1 - moder, 2 -admin
 
     /**
      * @inheritdoc
@@ -25,7 +25,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['admin'], 'integer'],
+            //[['admin'], 'integer'],
             [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
     }
@@ -41,7 +41,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'password' => 'Password',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
-            'admin' => 'Admin',
+            //'admin' => 'Admin',
         ];
     }
 
@@ -120,11 +120,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
-    public static function createUser($name, $password, $role){
+    public static function isExists($username){
 
-         if(User::find()->where(['username' => $name])->count() > 0){
-              return false;   // user already exists
+         if(User::find()->where(['username' => $username])->count() > 0){
+              return true;   // user already exists
          }
+         
+         return false;
+
+    }
+
+    public static function createUser($name, $password, $role){
 
          // create user
          $modelUser = new User();
@@ -132,7 +138,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          $modelUser->password = hash("sha256", $password);
          $modelUser->authKey = "0";
          $modelUser->accessToken = "0";
-         $modelUser->admin = "0";
+         //$modelUser->admin = "0";
          $modelUser->save();
 
          $currentUser = User::find()->select('id')->where(['username' => $name])->one();

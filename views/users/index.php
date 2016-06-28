@@ -44,6 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             return key(Yii::$app->authManager->getRolesByUser($model->id));
                        },
                   ],
+                  [
+                       'header' => 'Operations',
+                       'value' => function(){
+                            return "update/delete";
+                       },
+                  ],
               ],
           ]);
      ?>

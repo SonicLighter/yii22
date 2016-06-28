@@ -40,15 +40,12 @@ AppAsset::register($this);
             [
                  'label' => 'Users',
                  'url' => ['/users/index'],
-                 'visible' =>  (key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) === 'admin') ? (true) :
-                 (
-                      (key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) === 'moderator') ? (true) : (false)
-                 ),
+                 'visible' =>  (Yii::$app->user->can("openUsers")) ? (true) : (false),
             ],
             [
                  'label' => 'Roles',
                  'url' => ['/roles/index'],
-                 'visible' => (key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) === 'admin') ? (true) : (false),
+                 'visible' => (Yii::$app->user->can("openRoles")) ? (true) : (false),
              ],
             [
                  'label' => 'Home',
