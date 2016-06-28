@@ -9,6 +9,7 @@ use Yii;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
+     public $role;
      //public static $adminLevel; // 0 - user, 1 - moder, 2 -admin
 
     /**
@@ -25,9 +26,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            //[['admin'], 'integer'],
+            ['username', 'validateUsername'],
+            [['username','password','role'], 'required'],
             [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
+    }
+
+    public function validateUsername(){
+
+         if(User::isExists($this->username)){
+              $this->addError('username', 'Such user name already exists!');
+         }
+
     }
 
     /**
@@ -125,7 +135,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          if(User::find()->where(['username' => $username])->count() > 0){
               return true;   // user already exists
          }
-         
+
          return false;
 
     }
@@ -138,7 +148,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          $modelUser->password = hash("sha256", $password);
          $modelUser->authKey = "0";
          $modelUser->accessToken = "0";
-         //$modelUser->admin = "0";
+         $modelUser->role = $role;
          $modelUser->save();
 
          $currentUser = User::find()->select('id')->where(['username' => $name])->one();
@@ -151,14 +161,5 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return true;
 
     }
-
-    /*
-    public static function isAdmin(){
-         if(key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) == 'admin'){
-              return true;
-         }
-         return false;
-    }
-    */
 
 }

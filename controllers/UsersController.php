@@ -8,7 +8,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\UserForm;
 use app\models\User;
 use app\models\Roles;
 use yii\data\Pagination;
@@ -59,10 +58,10 @@ class UsersController extends Controller{
 
      public function actionCreate(){
 
-          $model = new UserForm();
+          $model = new User();
           if($model->load(Yii::$app->request->post()) && $model->validate()){
                $role = Roles::getRoles()[$model->role];
-               if(User::createUser($model->name, $model->password, $role)){
+               if(User::createUser($model->username, $model->password, $role)){
                     return Yii::$app->response->redirect(['users/index']);
                }
           }
