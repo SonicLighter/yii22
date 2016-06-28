@@ -32,15 +32,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 
-    /*
-    public function validateUsername(){
+    public function beforeSave($insert){
 
-         if(User::isExists($this->username)){
-              $this->addError('username', 'Such user name already exists!');
+         if(!preg_match('/^[a-f0-9]{64}$/', $this->password)){   // if password is not hash
+             $this->password = hash('sha256', $this->password);
          }
 
+         return parent::beforeSave($insert);
+
     }
-    */
 
     /**
      * @inheritdoc
@@ -142,6 +142,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public static function setRole($idUser, $idRole){
+
+         $role = Roles::getRoles()[$idRole];
+         $auth = YII::$app->authManager;
+         $auth->revokeAll($idUser);
+         $userRole = $auth->getRole($role);
+         $auth->assign($userRole, $idUser);
+
+    }
+
+    /*
     public static function createUser($name, $password, $role){
 
          // create user
@@ -163,7 +174,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return true;
 
     }
-
+*/
+     /*
     public static function updateUser($id, $username, $password, $authKey, $accessToken, $role){
 
          // update user
@@ -184,5 +196,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return true;
 
     }
+    */
+
 
 }

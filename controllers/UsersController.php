@@ -59,12 +59,10 @@ class UsersController extends Controller{
      public function actionCreate(){
 
           $model = new User();
-          $model->scenario = 'create'; // using create to validate only for this action
-          if($model->load(Yii::$app->request->post()) && $model->validate()){
-               $role = Roles::getRoles()[$model->role];
-               if(User::createUser($model->username, $model->password, $role)){
-                    return Yii::$app->response->redirect(['users/index']);
-               }
+          $model->scenario = 'create'; // using create to validate username only for this action
+          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
+               User::setRole($model->id, $model->role);
+               return $this->redirect(['users/index']);
           }
 
           return $this->render('create', ['model' => $model, 'roles' => Roles::getRoles()]);
@@ -74,30 +72,34 @@ class UsersController extends Controller{
      public function actionUpdate(){
 
           $id = Yii::$app->request->get('id');
-          $user = User::findIdentity($id);
-          if(empty($user)){
-               return Yii::$app->response->redirect(['users/index']); // no user with such id
+          $model = User::findIdentity($id);
+          if(empty($model)){
+               return $this->redirect(['users/index']); // no user with such id
           }
 
-          $model = new User();
-          if($model->load(Yii::$app->request->post()) && $model->validate()){ // without validate, because there is some problems with user name
-               $role = Roles::getRoles()[$model->role];
-               if(User::updateUser($id, $model->username, $model->password, $model->authKey, $model->accessToken, $role)){
-                    return Yii::$app->response->redirect(['users/index']);
-               }
+          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
+               User::setRole($model->id, $model->role);
+               return $this->redirect(['users/index']);
           }
 
-          return $this->render('update', ['model' => $model, 'user' => $user, 'roles' => Roles::getRoles()]);
+          return $this->render('update', ['model' => $model, 'user' => $model, 'roles' => Roles::getRoles()]);
 
      }
 
      public function actionDelete(){
 
-          $request = Yii::$app->request;
-          $id = $request->get('id');
+          $id = Yii::$app->request->get('id');
+          $model = User::findIdentity($id);
+          if(empty($model)){
+               return $this->redirect(['users/index']); // no user with such id
+          }
 
-          echo $id;
-          die();
+          if($model->delete()){
+               $auth = YII::$app->authManager;
+               $auth->revokeAll($id);
+          }
+
+          return $this->redirect(['users/index']);
 
      }
 

@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'value' => $user->username]) ?>
 
-                <?= $form->field($model, 'password')->textInput(['autofocus' => true, 'value' => $user->password]) ?>
+                <?= $form->field($model, 'password')->hiddenInput(['autofocus' => true, 'value' => $user->password])->label(false) ?>
 
                 <?= $form->field($model, 'authKey')->textInput(['autofocus' => true, 'value' => $user->authKey]) ?>
 

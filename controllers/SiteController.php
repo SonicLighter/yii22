@@ -103,6 +103,14 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+
+         echo strlen('b465361ffa25886d97c693b209bd347e600d1b14d397a8e42b7b7c408f32f0a9')."<br/>";
+         if(!preg_match('/^[a-f0-9]{64}$/', 'b465361ffa25886d97c693b209bd347e600d1b14d397a8e42b7b7c408f32f0a9')){
+              echo "NO!";
+         }
+         else{
+              echo "YES!";
+         }
          /*
          $username = "admin1";
          $result = Users::find()->where(['username' => $username])->count();
@@ -110,7 +118,7 @@ class SiteController extends Controller
          $result = Users::find()->where(['username' => $username])->one();
          echo "<br/>username: ".$result->username;
          */
-
+         /*
          $modelUser = new User();
          $modelUser->username = "testUser";
          $modelUser->password = "123";
@@ -120,7 +128,7 @@ class SiteController extends Controller
          $modelUser->save();
           echo "Information successful saved!";
           die();
-
+          */
 
           //$id = 3;
           //$result = Users::find()->where(['id' => $id])->one();
