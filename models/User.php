@@ -164,4 +164,25 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public static function updateUser($id, $username, $password, $authKey, $accessToken, $role){
+
+         // create user
+         $modelUser = User::findIdentity($id);
+         $modelUser->username = $username;
+         $modelUser->password = $password;
+         $modelUser->authKey = $authKey;
+         $modelUser->accessToken = $accessToken;
+         $modelUser->role = $role;
+         $modelUser->save();
+
+         // set role
+         $auth = YII::$app->authManager;
+         $auth->revokeAll($id);
+         $userRole = $auth->getRole($role);
+         $auth->assign($userRole, $id);
+
+         return true;
+
+    }
+
 }

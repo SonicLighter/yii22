@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
+use yii\grid\ActionColumn;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
@@ -45,11 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
                        },
                   ],
                   [
-                       'header' => 'Operations',
-                       'value' => function($model){
-                            return "<a href='update?id=".$model->id."'> update</a> /delete";
-                       },
+                       'header' => 'Options',
+                       'class' => ActionColumn::className(),
+                       'template' => '{update} {delete}',
                        'visible' => (Yii::$app->user->can("openRoles")) ? (true) : (false),
+                       'options' => ['style' => 'width: 65px; max-width: 65px;'],
                   ],
               ],
           ]);

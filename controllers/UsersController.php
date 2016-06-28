@@ -26,12 +26,7 @@ class UsersController extends Controller{
                         'roles' => ['openUsers'], // admin and moderator
                     ],
                     [
-                        'actions' => ['create'],
-                        'allow' => true,
-                        'roles' => ['admin'], // admin
-                    ],
-                    [
-                        'actions' => ['update'],
+                        'actions' => ['create', 'update','delete'],
                         'allow' => true,
                         'roles' => ['admin'], // admin
                     ],
@@ -76,6 +71,26 @@ class UsersController extends Controller{
      }
 
      public function actionUpdate(){
+
+          $id = Yii::$app->request->get('id');
+          $user = User::findIdentity($id);
+          if(empty($user)){
+               return Yii::$app->response->redirect(['users/index']); // no user with such id
+          }
+
+          $model = new User();
+          if($model->load(Yii::$app->request->post())/* && $model->validate()*/){ // without validate, because there is some problems with user name
+               $role = Roles::getRoles()[$model->role];
+               if(User::updateUser($id, $model->username, $model->password, $model->authKey, $model->accessToken, $role)){
+                    return Yii::$app->response->redirect(['users/index']);
+               }
+          }
+
+          return $this->render('update', ['model' => $model, 'user' => $user, 'roles' => Roles::getRoles()]);
+
+     }
+
+     public function actionDelete(){
 
           $request = Yii::$app->request;
           $id = $request->get('id');
