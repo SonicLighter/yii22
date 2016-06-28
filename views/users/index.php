@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                        'header' => 'Options',
                        'class' => ActionColumn::className(),
                        'template' => '{update} {delete}',
-                       'visible' => (Yii::$app->user->can("openRoles")) ? (true) : (false),
+                       'visible' => Yii::$app->user->can("openRoles"),
                        'options' => ['style' => 'width: 65px; max-width: 65px;'],
                   ],
               ],

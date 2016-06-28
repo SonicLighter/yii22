@@ -26,7 +26,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            ['username', 'unique', 'message' => 'Such user name already exists!'],
+            ['username', 'unique', 'message' => 'Such user name already exists!', 'on' => 'create'],
             [['username','password','role'], 'required'],
             [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
@@ -166,7 +166,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public static function updateUser($id, $username, $password, $authKey, $accessToken, $role){
 
-         // create user
+         // update user
          $modelUser = User::findIdentity($id);
          $modelUser->username = $username;
          $modelUser->password = $password;

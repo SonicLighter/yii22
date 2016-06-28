@@ -59,6 +59,7 @@ class UsersController extends Controller{
      public function actionCreate(){
 
           $model = new User();
+          $model->scenario = 'create'; // using create to validate only for this action
           if($model->load(Yii::$app->request->post()) && $model->validate()){
                $role = Roles::getRoles()[$model->role];
                if(User::createUser($model->username, $model->password, $role)){
@@ -79,7 +80,7 @@ class UsersController extends Controller{
           }
 
           $model = new User();
-          if($model->load(Yii::$app->request->post())/* && $model->validate()*/){ // without validate, because there is some problems with user name
+          if($model->load(Yii::$app->request->post()) && $model->validate()){ // without validate, because there is some problems with user name
                $role = Roles::getRoles()[$model->role];
                if(User::updateUser($id, $model->username, $model->password, $model->authKey, $model->accessToken, $role)){
                     return Yii::$app->response->redirect(['users/index']);

@@ -40,12 +40,12 @@ AppAsset::register($this);
             [
                  'label' => 'Users',
                  'url' => ['/users/index'],
-                 'visible' =>  (Yii::$app->user->can("openUsers")) ? (true) : (false),
+                 'visible' =>  Yii::$app->user->can("openUsers"),
             ],
             [
                  'label' => 'Roles',
                  'url' => ['/roles/index'],
-                 'visible' => (Yii::$app->user->can("openRoles")) ? (true) : (false),
+                 'visible' => Yii::$app->user->can("openRoles"),
              ],
             [
                  'label' => 'Home',
