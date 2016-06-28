@@ -30,6 +30,11 @@ class UsersController extends Controller{
                         'allow' => true,
                         'roles' => ['admin'], // admin
                     ],
+                    [
+                        'actions' => ['update'],
+                        'allow' => true,
+                        'roles' => ['admin'], // admin
+                    ],
                 ],
             ],
         ];
@@ -67,6 +72,16 @@ class UsersController extends Controller{
           }
 
           return $this->render('create', ['model' => $model, 'roles' => Roles::getRoles()]);
+
+     }
+
+     public function actionUpdate(){
+
+          $request = Yii::$app->request;
+          $id = $request->get('id');
+
+          echo $id;
+          die();
 
      }
 

@@ -46,9 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
                   ],
                   [
                        'header' => 'Operations',
-                       'value' => function(){
-                            return "update/delete";
+                       'value' => function($model){
+                            return "<a href='update?id=".$model->id."'> update</a> /delete";
                        },
+                       'visible' => (Yii::$app->user->can("openRoles")) ? (true) : (false),
                   ],
               ],
           ]);
