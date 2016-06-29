@@ -6,7 +6,17 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    //
+    'timeZone' => 'Europe/Minsk',
+    //
     'components' => [
+         //
+         'formatter' => [
+            'dateFormat' => 'd.MM.yyyy',
+            'timeFormat' => 'H:mm:ss',
+            'datetimeFormat' => 'd.MM.yyyy H:mm',
+        ],
+        //
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
