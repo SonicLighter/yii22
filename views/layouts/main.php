@@ -46,7 +46,12 @@ AppAsset::register($this);
                  'label' => 'Roles',
                  'url' => ['/roles/index'],
                  'visible' => Yii::$app->user->can("openRoles"),
-             ],
+            ],
+            [
+                  'label' => 'Posts',
+                  'url' => ['/posts/index'],
+                  'visible' => !Yii::$app->user->isGuest,
+            ],
             [
                  'label' => 'Home',
                  'url' => ['/site/index']
