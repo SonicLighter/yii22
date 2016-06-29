@@ -26,10 +26,34 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
+            ['username', 'validateUpdate', 'on' => 'update'],
+            ['role', 'validateRole', 'on' => 'update'],
             ['username', 'unique', 'message' => 'Such user name already exists!', 'on' => 'create'],
             [['username','password','role'], 'required'],
             [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
+    }
+
+    public function validateUpdate(){
+
+         $anotherUser = User::findByUsername($this->username);
+         if(!empty($anotherUser)){
+              if($anotherUser->id != $this->id){
+                   $this->addError('username', 'There is another user which has the same username!');
+              }
+         }
+
+    }
+
+    public function validateRole(){
+
+       if($this->id == Yii::$app->user->getId()){ // this is your user record
+            $yourRole = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())));
+            if($yourRole != $this->role){
+                 $this->addError('role', 'You cant change your role!');
+            }
+       }
+
     }
 
     public function beforeSave($insert){

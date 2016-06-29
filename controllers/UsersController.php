@@ -72,10 +72,12 @@ class UsersController extends Controller{
      public function actionUpdate($id){
 
           $model = User::findIdentity($id);
+          $model->scenario = 'update'; // using update to validate username in own validator
           if(empty($model)){
                return $this->redirect(['users/index']); // no user with such id
           }
 
+          $model->role = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser($id)));
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
                User::setRole($model->id, $model->role);
                return $this->redirect(['users/index']);
@@ -88,7 +90,7 @@ class UsersController extends Controller{
      public function actionDelete($id){
 
           $model = User::findIdentity($id);
-          if(empty($model)){
+          if(empty($model) || ($id == Yii::$app->user->getId())){
                return $this->redirect(['users/index']); // no user with such id
           }
 

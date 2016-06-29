@@ -30,7 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'accessToken')->textInput(['autofocus' => true, 'value' => $user->accessToken]) ?>
 
-                <?= $form->field($model, 'role')->dropDownList($roles,['prompt' => key(Yii::$app->authManager->getRolesByUser($user->id))]) ?>
+                <?= $form->field($model, 'role')->dropDownList($roles,[
+                         'prompt' => 'Choose role...',
+
+                     ]) ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'update-button']) ?>

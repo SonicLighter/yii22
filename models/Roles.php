@@ -136,4 +136,14 @@ class Roles extends \yii\db\ActiveRecord
          return $result;
 
     }
+
+    public static function findRoleIndex($array, $role){
+
+         for($i = 0; $i < count($array); $i++){
+              if($array[$i] == $role){
+                   return $i;
+              }
+         }
+
+    }
 }
