@@ -14,10 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-         This webpage is available for all users!<br/>
-    </p>
     <p>
          Follow this link to create a new post: <a href='create'> Create Post </a>
     </p>

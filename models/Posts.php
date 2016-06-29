@@ -69,13 +69,22 @@ class Posts extends \yii\db\ActiveRecord
 
     public static function getDataProvider(){
 
-          $query = Posts::find()->where(['userId' => Yii::$app->user->getId()]);
+          $query = Posts::find()->where(['userId' => Yii::$app->user->getId()])->orderBy('id DESC');
 
           $dataProvider = new ActiveDataProvider([
               'query' => $query,
+              'pagination' => [
+                  'pageSize' => 5,
+               ],
           ]);
 
           return $dataProvider;
+
+    }
+
+    public static function getPost($userId, $postId){
+
+         return Posts::find()->where(['userId' => $userId, 'id' => $postId])->one();
 
     }
 

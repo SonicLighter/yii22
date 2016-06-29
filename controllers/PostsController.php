@@ -23,7 +23,7 @@ class PostsController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create'],
+                        'actions' => ['index', 'create', 'update','delete'],
                         'allow' => true,
                         'roles' => ['@'], // admin and moderator
                     ],
@@ -63,6 +63,30 @@ class PostsController extends Controller{
          }
 
          return $this->render('create', ['model' => $model,'date' => Yii::$app->getFormatter()->asDateTime(time())]);
+
+    }
+
+    public function actionUpdate($id){
+
+         $model = Posts::getPost(Yii::$app->user->getId(), $id);
+         if(!empty($model)){
+             if(!($model->load(Yii::$app->request->post()) && $model->validate() && $model->save())){
+                 return $this->render('update', ['model' => $model,'date' => Yii::$app->getFormatter()->asDateTime(time())]);
+             }
+         }
+
+         return $this->redirect('index');
+
+    }
+
+    public function actionDelete($id){
+
+         $model = Posts::getPost(Yii::$app->user->getId(), $id);
+         if(!empty($model)){
+              $model->delete();
+         }
+
+         return $this->redirect('index');
 
     }
 
