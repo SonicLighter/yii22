@@ -69,9 +69,8 @@ class UsersController extends Controller{
 
      }
 
-     public function actionUpdate(){
+     public function actionUpdate($id){
 
-          $id = Yii::$app->request->get('id');
           $model = User::findIdentity($id);
           if(empty($model)){
                return $this->redirect(['users/index']); // no user with such id
@@ -86,9 +85,8 @@ class UsersController extends Controller{
 
      }
 
-     public function actionDelete(){
+     public function actionDelete($id){
 
-          $id = Yii::$app->request->get('id');
           $model = User::findIdentity($id);
           if(empty($model)){
                return $this->redirect(['users/index']); // no user with such id

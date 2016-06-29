@@ -12,7 +12,7 @@ class m160629_064651_posts extends Migration
              'title' => $this->string()->notNull();
              'description' => $this->text()->notNull();
              'text' => $this->text()->notNull();
-             
+
          ]);
     }
 
