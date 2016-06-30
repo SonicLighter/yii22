@@ -8,6 +8,8 @@ use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
+use app\models\User;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
@@ -47,6 +49,10 @@ $this->params['breadcrumbs'][] = $this->title;
                        'value' => function($model){
                             return key(Yii::$app->authManager->getRolesByUser($model->id));
                        },
+                  ],
+                  [
+                       'header' => 'News count',
+                       'value' => 'postCount',
                   ],
                   [
                        'header' => 'Options',

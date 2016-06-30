@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Posts;
 use yii\data\Pagination;
 
 class SiteController extends Controller
@@ -103,7 +104,35 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         /*
+         $user = User::findOne(11);
+         //echo count($user->posts);
+         foreach ($user as $u) {
+              echo $u->posts->username;
+         }
+         */
+         /*
+         $user = User::findOne(11);
+         $posts = $user->getPosts()->all();
+         //print_r($posts);
+         foreach ($posts as $post) {
+              echo $post->title;
+         }
+         */
+         /*
+         $user = User::findOne(11);
+         $posts = $user->getPosts()->with('users')->count();
 
+         $user = User::find()->with('posts')->where(['id' => 11])->all();
+
+         //print_r($user);
+         //$user->joinWith(['posts']);
+
+         foreach ($user as $u) {
+              echo $u->title."<br/>";
+         }
+         */
+         /*
          echo strlen('b465361ffa25886d97c693b209bd347e600d1b14d397a8e42b7b7c408f32f0a9')."<br/>";
          if(!preg_match('/^[a-f0-9]{64}$/', 'b465361ffa25886d97c693b209bd347e600d1b14d397a8e42b7b7c408f32f0a9')){
               echo "NO!";
@@ -111,6 +140,7 @@ class SiteController extends Controller
          else{
               echo "YES!";
          }
+         */
          /*
          $username = "admin1";
          $result = Users::find()->where(['username' => $username])->count();
