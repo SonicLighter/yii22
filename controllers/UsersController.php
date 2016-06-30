@@ -61,7 +61,6 @@ class UsersController extends Controller{
           $model = new User();
           $model->scenario = 'create'; // using create to validate username only for this action
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
-               User::setRole($model->id, $model->role);
                return $this->redirect(['users/index']);
           }
 
@@ -79,7 +78,6 @@ class UsersController extends Controller{
 
           $model->role = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser($id)));
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
-               User::setRole($model->id, $model->role);
                return $this->redirect(['users/index']);
           }
 

@@ -66,6 +66,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public function afterSave($insert, $changedAttributes){
+
+         $role = Roles::getRoles()[$this->role];
+         $auth = YII::$app->authManager;
+         $auth->revokeAll($this->id);
+         $userRole = $auth->getRole($role);
+         $auth->assign($userRole, $this->id);
+
+         return parent::afterSave($insert, $changedAttributes);
+
+    }
+
     /**
      * @inheritdoc
      */
@@ -150,6 +162,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
           $dataProvider = new ActiveDataProvider([
               'query' => $query,
+              'sort' => [
+                   'attributes' => [
+                        'username' => [
+                             'asc' => 'username',
+                             'desc' => 'username DESC',
+                        ],
+                   ],
+              ],
           ]);
 
           return $dataProvider;
@@ -165,62 +185,5 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return false;
 
     }
-
-    public static function setRole($idUser, $idRole){
-
-         $role = Roles::getRoles()[$idRole];
-         $auth = YII::$app->authManager;
-         $auth->revokeAll($idUser);
-         $userRole = $auth->getRole($role);
-         $auth->assign($userRole, $idUser);
-
-    }
-
-    /*
-    public static function createUser($name, $password, $role){
-
-         // create user
-         $modelUser = new User();
-         $modelUser->username = $name;
-         $modelUser->password = hash("sha256", $password);
-         $modelUser->authKey = "0";
-         $modelUser->accessToken = "0";
-         $modelUser->role = $role;
-         $modelUser->save();
-
-         $currentUser = User::find()->select('id')->where(['username' => $name])->one();
-
-         // set role
-         $auth = YII::$app->authManager;
-         $userRole = $auth->getRole($role);
-         $auth->assign($userRole, $currentUser->id);
-
-         return true;
-
-    }
-*/
-     /*
-    public static function updateUser($id, $username, $password, $authKey, $accessToken, $role){
-
-         // update user
-         $modelUser = User::findIdentity($id);
-         $modelUser->username = $username;
-         $modelUser->password = $password;
-         $modelUser->authKey = $authKey;
-         $modelUser->accessToken = $accessToken;
-         $modelUser->role = $role;
-         $modelUser->save();
-
-         // set role
-         $auth = YII::$app->authManager;
-         $auth->revokeAll($id);
-         $userRole = $auth->getRole($role);
-         $auth->assign($userRole, $id);
-
-         return true;
-
-    }
-    */
-
 
 }

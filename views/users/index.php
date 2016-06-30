@@ -25,6 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     </p>
                ");
           }
+          //echo "<br/>".$dataProvider->models[]->id;
+          //die();
     ?>
 
     <p>
@@ -49,6 +51,22 @@ $this->params['breadcrumbs'][] = $this->title;
                        'header' => 'Options',
                        'class' => ActionColumn::className(),
                        'template' => '{update} {delete}',
+                       'buttons' => [
+                            'update' => function($url, $model){
+                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url,
+                                  [
+                                      'title' => Yii::t('app', 'Update user'),
+                                  ]);
+                            },
+                            'delete' => function($url, $model){
+                                 if($model->id !=Yii::$app->user->getId()){
+                                      return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url,
+                                       [
+                                           'title' => Yii::t('app', 'Delete user'),
+                                       ]);
+                                 }
+                            },
+                       ],
                        'visible' => Yii::$app->user->can("openRoles"),
                        'options' => ['style' => 'width: 65px; max-width: 65px;'],
                   ],
