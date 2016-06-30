@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use yii\helpers\Url;
 ?>
 
 <div class="news-item">
@@ -13,7 +14,7 @@ use yii\helpers\HtmlPurifier;
     <?= HtmlPurifier::process($model->text) ?>
     <p>
      <br/> Created: <?= HtmlPurifier::process($model->dateCreate) ?> | Updated: <?= HtmlPurifier::process($model->dateUpdate) ?>
-     | <a href='update?id=<?php echo $model->id ?>'> Update Post </a> | <a href='delete?id=<?php echo $model->id ?>'> Delete Post </a>
+     | <a href=<?php echo Url::toRoute(['update', 'id' => $model->id]); ?>> Update Post </a> | <a href=<?php echo Url::toRoute(['delete', 'id' => $model->id]); ?>> Delete Post </a>
     </p>
 </div>
 <hr/>

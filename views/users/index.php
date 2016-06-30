@@ -7,6 +7,7 @@ use yii\widgets\LinkPager;
 use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
 use yii\grid\ActionColumn;
+use yii\helpers\Url;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
