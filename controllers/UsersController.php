@@ -83,7 +83,7 @@ class UsersController extends Controller{
                return $this->redirect(['users/index']); // no user with such id
           }
 
-          $model->role = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser($id)));
+          //$model->role = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser($id)));
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
                return $this->redirect(['users/index']);
           }

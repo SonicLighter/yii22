@@ -104,8 +104,9 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
-         
-         //user = User::findOne(11);
+
+         $user = User::findOne(11);
+         print_r($user->role->item_name);
          //echo count($user->role);
          /*
          $user = User::findOne(11);

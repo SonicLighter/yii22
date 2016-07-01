@@ -34,9 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
           //die();
     ?>
     <p>
-         <h4> Filters: </h4>
-    </p>
-    <p>
          <h4> Users list: </h4>
     </p>
 
@@ -55,7 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
                   [
                        //'class' => DataColumn::className(), // this line is optional
                        //'header' => 'Role',
-                       'attribute' => 'role',
+                       'attribute' => 'userRole',
+                       'label' => 'User Role',
                        'filter' => $roles,
                        'value' => 'userRole',
                        /*'value' => function($model){

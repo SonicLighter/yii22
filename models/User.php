@@ -10,7 +10,7 @@ use Yii;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
-     public $role;
+     //public $role;
      //public static $adminLevel; // 0 - user, 1 - moder, 2 -admin
 
     /**
@@ -49,8 +49,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function validateRole(){
 
        if($this->id == Yii::$app->user->getId()){ // this is your user record
-            $yourRole = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())));
-            if($yourRole != $this->role){
+            $yourRole = key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
+            if($yourRole != $this->role->item_name){
                  $this->addError('role', 'You cant change your role!');
             }
        }
@@ -69,10 +69,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function afterSave($insert, $changedAttributes){
 
-         $role = Roles::getRoles()[$this->role];
+         //$role = Roles::getRoles()[$this->role];
          $auth = YII::$app->authManager;
          $auth->revokeAll($this->id);
-         $userRole = $auth->getRole($role);
+         $userRole = $auth->getRole($this->role->item_name);
          $auth->assign($userRole, $this->id);
 
          return parent::afterSave($insert, $changedAttributes);
@@ -95,15 +95,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     // Roles
     public function getRole(){
 
-         return $this->hasMany(Role::className(), ['user_id' => 'id']);
+         //return Roles::getRoles();
+         return $this->hasOne(Role::className(), ['user_id' => 'id']);
 
     }
 
     public function getUserRole(){
 
-         //print_r($this->role);
-         //die();
-         return count($this->role);
+         return $this->role->item_name;
 
     }
 
