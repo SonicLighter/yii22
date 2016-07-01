@@ -9,7 +9,9 @@ use yii\bootstrap\ActiveForm;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use yii\grid\DataColumn;
 use app\models\User;
+use app\models\Roles;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
@@ -44,14 +46,21 @@ $this->params['breadcrumbs'][] = $this->title;
               'filterModel' => $searchModel,
               'columns' => [
                   [
-                       'header' => 'Name',
+                       'class' => DataColumn::className(), // this line is optional
+                       'attribute' => 'username',
+                       'label' => 'Name',
+                       //'header' => 'Name',
                        'value' => 'username',
                   ],
                   [
-                       'header' => 'Role',
-                       'value' => function($model){
+                       //'class' => DataColumn::className(), // this line is optional
+                       //'header' => 'Role',
+                       'attribute' => 'role',
+                       'filter' => $roles,
+                       'value' => 'userRole',
+                       /*'value' => function($model){
                             return key(Yii::$app->authManager->getRolesByUser($model->id));
-                       },
+                       },*/
                   ],
                   [
                        'header' => 'News count',

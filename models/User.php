@@ -79,6 +79,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    // Post
     public function getPosts(){
 
           return $this->hasMany(Posts::className(), ['userId' => 'id']);
@@ -88,6 +89,21 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function getPostCount(){
 
          return count($this->posts);
+
+    }
+
+    // Roles
+    public function getRole(){
+
+         return $this->hasMany(Role::className(), ['user_id' => 'id']);
+
+    }
+
+    public function getUserRole(){
+
+         //print_r($this->role);
+         //die();
+         return count($this->role);
 
     }
 
@@ -175,14 +191,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
           $dataProvider = new ActiveDataProvider([
               'query' => $query,
-              'sort' => [
-                   'attributes' => [
-                        'username' => [
-                             'asc' => 'username',
-                             'desc' => 'username DESC',
-                        ],
-                   ],
-              ],
           ]);
 
           return $dataProvider;
