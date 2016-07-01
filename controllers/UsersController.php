@@ -11,6 +11,7 @@ use app\models\ContactForm;
 use app\models\User;
 use app\models\Roles;
 use yii\data\Pagination;
+use app\models\search\UserSearch;
 
 class UsersController extends Controller{
 
@@ -50,8 +51,12 @@ class UsersController extends Controller{
 
      public function actionIndex(){
 
+          $searchModel = new UserSearch();
+          $dataProvider = $searchModel->search(Yii::$app->request->get());
+
           return $this->render("index", [
-              'dataProvider' => User::getDataProvider(),
+              'dataProvider' => $dataProvider,
+              'searchModel' => $searchModel,
           ]);
 
      }

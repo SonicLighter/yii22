@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
+use yii\base\Model;
 use Yii;
 
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface

@@ -31,53 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
           //echo "<br/>".$dataProvider->models[]->id;
           //die();
     ?>
-
     <p>
-        Users list:
+         <h4> Filters: </h4>
+    </p>
+    <p>
+         <h4> Users list: </h4>
     </p>
 
     <?=
          GridView::widget([
               'dataProvider' => $dataProvider,
-              'columns' => [
-                  [
-                       'header' => 'Name',
-                       'value' => 'username',
-                  ],
-                  [
-                       'header' => 'Role',
-                       'value' => function($model){
-                            return key(Yii::$app->authManager->getRolesByUser($model->id));
-                       },
-                  ],
-                  [
-                       'header' => 'News count',
-                       'value' => 'postCount',
-                  ],
-                  [
-                       'header' => 'Options',
-                       'class' => ActionColumn::className(),
-                       'template' => '{update} {delete}',
-                       'buttons' => [
-                            'update' => function($url, $model){
-                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url,
-                                  [
-                                      'title' => Yii::t('app', 'Update user'),
-                                  ]);
-                            },
-                            'delete' => function($url, $model){
-                                 if($model->id !=Yii::$app->user->getId()){
-                                      return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url,
-                                       [
-                                           'title' => Yii::t('app', 'Delete user'),
-                                       ]);
-                                 }
-                            },
-                       ],
-                       'visible' => Yii::$app->user->can("openRoles"),
-                       'options' => ['style' => 'width: 65px; max-width: 65px;'],
-                  ],
-              ],
+              'filterModel' => $searchModel,
           ]);
      ?>
 
