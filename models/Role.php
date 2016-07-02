@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "auth_assignment".
@@ -70,6 +72,18 @@ class Role extends \yii\db\ActiveRecord
          }
 
          return $result;
+
+    }
+
+    public static function getDataProvider(){
+
+         $query = Role::find()->select('item_name')->distinct();
+
+         $dataProvider = new ActiveDataProvider([
+              'query' => $query,
+         ]);
+
+         return $dataProvider;
 
     }
 

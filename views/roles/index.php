@@ -12,11 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        This webpage is available for admins only!<br/>
-        Roles list:
-    </p>
-
     <?=
 
          GridView::widget([
@@ -24,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'columns' => [
                   [
                        'header' => 'Roles:',
-                       'value' => 'name',
+                       'value' => 'item_name',
                   ],
               ],
           ]);

@@ -8,7 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\Roles;
+use app\models\Role;
 use yii\data\Pagination;
 
 class RolesController extends Controller{
@@ -45,7 +45,7 @@ class RolesController extends Controller{
     public function actionIndex(){
 
          return $this->render('index', [
-              'dataProvider' => Roles::getDataProvider(),
+              'dataProvider' => Role::getDataProvider(),
          ]);
 
     }

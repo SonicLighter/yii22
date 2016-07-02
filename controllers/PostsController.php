@@ -9,7 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
-use app\models\Roles;
+use app\models\Role;
 use app\models\Posts;
 use yii\data\Pagination;
 
