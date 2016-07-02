@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                        'value' => 'username',
                   ],
                   [
-                       //'class' => DataColumn::className(), // this line is optional
+                       'class' => DataColumn::className(), // this line is optional
                        //'header' => 'Role',
                        'attribute' => 'userRole',
                        'label' => 'User Role',
@@ -61,8 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
                        },*/
                   ],
                   [
-                       'header' => 'News count',
-                       'value' => 'postCount',
+                       'class' => DataColumn::className(), // this line is optional
+                       'attribute' => 'postCount',
+                       'label' => 'Posts count',
+                       //'value' => 'a',
                   ],
                   [
                        'header' => 'Options',

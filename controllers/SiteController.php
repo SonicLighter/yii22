@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Role;
 use app\models\Posts;
 use yii\data\Pagination;
 
@@ -104,9 +105,10 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
-
-         $user = User::findOne(11);
+         Role::getRoles();
+         /*$user = User::findOne(11);
          print_r($user->role->item_name);
+         */
          //echo count($user->role);
          /*
          $user = User::findOne(11);

@@ -9,7 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
-use app\models\Roles;
+use app\models\Role;
 use yii\data\Pagination;
 use app\models\search\UserSearch;
 
@@ -53,7 +53,7 @@ class UsersController extends Controller{
 
           $searchModel = new UserSearch();
           $dataProvider = $searchModel->search(Yii::$app->request->get());
-          $roles = Roles::getRoles();
+          $roles = Role::getRoles();
 
           return $this->render("index", [
               'dataProvider' => $dataProvider,
@@ -83,7 +83,7 @@ class UsersController extends Controller{
                return $this->redirect(['users/index']); // no user with such id
           }
 
-          //$model->role = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser($id)));
+          $model->role = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser($id)));
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
                return $this->redirect(['users/index']);
           }

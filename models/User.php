@@ -117,6 +117,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'password' => 'Password',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
+            'userRole' => 'User Role',
+            'postCount' => 'Posts Count',
             //'admin' => 'Admin',
         ];
     }

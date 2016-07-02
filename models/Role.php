@@ -61,4 +61,16 @@ class Role extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public static function getRoles(){
+
+         $result = array();
+         $array = Role::find()->select('item_name')->distinct()->all();
+         foreach ($array as $a) {
+              $result[$a->item_name] = $a->item_name;
+         }
+
+         return $result;
+
+    }
+
 }
