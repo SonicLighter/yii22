@@ -18,23 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
+    <p>
 
-    <p>
-        This webpage is available for admins and moderators only!<br/>
-    </p>
-    <?php
-          if(key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) == 'admin'){
-               printf("
-                    <p>
-                         Follow this link to create a new user: <a href='create'> Create User </a> <br/>
-                    </p>
-               ");
-          }
-          //echo "<br/>".$dataProvider->models[]->id;
-          //die();
-    ?>
-    <p>
-         <h4> Users list: </h4>
+         <?php
+              if(key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) == 'admin'){
+                   echo Html::a('Create User', ['create'], ['class' => 'btn btn-info']);
+              }
+         ?>
+         <?= Html::a('Refresh filters', ['index'], ['class' => 'btn btn-info']) ?>
+
     </p>
 
     <?=

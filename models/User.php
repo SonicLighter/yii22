@@ -10,8 +10,7 @@ use Yii;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
-     //public $role;
-     //public static $adminLevel; // 0 - user, 1 - moder, 2 -admin
+     public $newRole; // it's contains role from create user page
 
     /**
      * @inheritdoc
@@ -28,9 +27,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             ['username', 'validateUpdate', 'on' => 'update'],
-            ['role', 'validateRole', 'on' => 'update'],
+            ['newRole', 'validateRole', 'on' => 'update'],
             ['username', 'unique', 'message' => 'Such user name already exists!', 'on' => 'create'],
-            [['username','password','role'], 'required'],
+            [['username','password','newRole'], 'required'],
             [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
     }
@@ -50,8 +49,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
        if($this->id == Yii::$app->user->getId()){ // this is your user record
             $yourRole = key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
-            if($yourRole != $this->role->item_name){
-                 $this->addError('role', 'You cant change your role!');
+            if($yourRole != $this->newRole){
+                 $this->addError('newRole', 'You cant change your role!');
             }
        }
 
@@ -72,7 +71,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          //$role = Roles::getRoles()[$this->role];
          $auth = YII::$app->authManager;
          $auth->revokeAll($this->id);
-         $userRole = $auth->getRole($this->role->item_name);
+         $userRole = $auth->getRole($this->newRole);
          $auth->assign($userRole, $this->id);
 
          return parent::afterSave($insert, $changedAttributes);

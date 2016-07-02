@@ -14,9 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        This webpage is available for admins only!<br/>
-    </p>
     <div class="row">
        <div class="col-lg-5">
 
@@ -26,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?= $form->field($model, 'role')->dropDownList($roles,['prompt' => 'Choose role...']) ?>
+                <?= $form->field($model, 'newRole')->dropDownList($roles,['prompt' => 'Choose role...']) ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-primary', 'name' => 'user-button']) ?>
