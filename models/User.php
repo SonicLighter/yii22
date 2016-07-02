@@ -78,6 +78,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public function beforeDelete(){
+
+         if(parent::beforeDelete()){
+             Posts::deleteAll(['userId' => $this->id]);     // deleting all posts by userId
+             return true;
+         }
+         else{
+              return false;
+         }
+
+    }
+
     // Post
     public function getPosts(){
 
