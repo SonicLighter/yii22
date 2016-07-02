@@ -6,6 +6,7 @@ use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use yii\base\Model;
 use app\models\User;
+use app\models\Posts;
 use Yii;
 
 class UserSearch extends User{
@@ -22,8 +23,6 @@ class UserSearch extends User{
 
      }
 
-     // filter
-
      public function scenarios(){
 
          return Model::scenarios();
@@ -33,9 +32,13 @@ class UserSearch extends User{
      public function search($params){
 
          $query = User::find();
+         $subQuery = Posts::find()->select('userId, COUNT(userId) as post_count')->groupBy('userId');
+         $query->leftJoin([
+              'userPosts' => $subQuery,
+         ], 'userPosts.userId=id');
 
          $dataProvider = new ActiveDataProvider([
-              'query' => $query,
+             'query' => $query,
          ]);
 
          $dataProvider->setSort([
@@ -53,34 +56,29 @@ class UserSearch extends User{
                       'label' => 'User Role',
                  ],
                  'postCount' => [
-                      'asc' => ['COUNT(posts.id)' => SORT_ASC],
-                      'desc' => ['COUNT(posts.id)' => SORT_DESC],
-                      'label' => 'Posts count',
+                      'asc' => ['userPosts.post_count' => SORT_ASC],
+                      'desc' => ['userPosts.post_count' => SORT_DESC],
+                      'label' => 'Posts Count',
                  ],
-                 //'country_id'
             ],
          ]);
 
          // load the search form data and validate
          if(!($this->load($params) && $this->validate())){
                $query->joinWith(['role']);
-               $query->joinWith(['posts']);
                return $dataProvider;
          }
 
          $query->andFilterWhere(['id' => $this->id]);
          $query->andFilterWhere(['like','username' , $this->username]);
-               //->andFilterWhere(['like','postCount' , $this->postCount]);
+
+         // postFilter | refresh doesn't work...
+         //$query->andWhere(['userPosts.post_count' => $this->postCount]);
 
          // role filter
          $query->joinWith(['role' => function($q){
               $q->where('auth_assignment.item_name LIKE "%' . $this->userRole . '%"');
          }]);
-
-         $query->joinWith(['posts' => function($q){
-              $q->where('COUNT(posts.id) LIKE "%' . $this->postCount . '%"');
-         }]);
-
 
          return $dataProvider;
 

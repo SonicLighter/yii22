@@ -61,10 +61,11 @@ $this->params['breadcrumbs'][] = $this->title;
                        },*/
                   ],
                   [
-                       'class' => DataColumn::className(), // this line is optional
+                       //'class' => DataColumn::className(), // this line is optional
                        'attribute' => 'postCount',
                        'label' => 'Posts count',
-                       //'value' => 'a',
+                       'value' => 'postCount',
+                       'filter' => false,
                   ],
                   [
                        'header' => 'Options',

@@ -82,13 +82,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     // Post
     public function getPosts(){
 
-          return $this->hasMany(Posts::className(), ['userId' => 'id']);
+          return $this->hasMany(Posts::className(), ['userId' => 'id'])->count();
 
     }
 
     public function getPostCount(){
 
-         return count($this->posts);
+         return $this->posts;
 
     }
 
