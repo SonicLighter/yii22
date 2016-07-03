@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\data\ActiveDataProvider;
+use yii\validators\EmailValidator;
 use yii\data\Pagination;
 use yii\base\Model;
 use Yii;
@@ -26,12 +27,22 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
+            ['email', 'validateEmail'],
             ['email', 'validateUpdate', 'on' => 'update'],
             ['newRole', 'validateRole', 'on' => 'update'],
             ['email', 'unique', 'message' => 'Such e-mail address already exists!', 'on' => 'create'],   // username
             [['email','username','password','newRole'], 'required'],
             [['username', 'password', 'authKey', 'accessToken','email'], 'string', 'max' => 255],
         ];
+    }
+
+    public function validateEmail(){
+
+         $validator = new EmailValidator();
+         if(!$validator->validate($this->email, $error)){
+              $this->addError('email', $error);
+         }
+
     }
 
     public function validateUpdate(){
