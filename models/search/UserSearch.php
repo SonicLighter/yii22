@@ -18,7 +18,7 @@ class UserSearch extends User{
 
           return[
                [['id'], 'integer'],
-               [['username', 'userRole', 'postCount'], 'safe'],
+               [['username', 'userRole', 'postCount', 'email'], 'safe'],
           ];
 
      }
@@ -44,11 +44,15 @@ class UserSearch extends User{
          $dataProvider->setSort([
              'attributes'=>[
                  'id',
+                 'email' => [
+                     'asc' => ['email' => SORT_ASC],
+                     'desc' => ['email' => SORT_DESC],
+                     'label' => 'E-mail',
+                 ],
                  'username' => [
                      'asc' => ['username' => SORT_ASC],
                      'desc' => ['username' => SORT_DESC],
                      'label' => 'Name',
-                     'default' => false,
                  ],
                  'userRole' => [
                       'asc' => ['auth_assignment.item_name' => SORT_ASC],
@@ -70,7 +74,8 @@ class UserSearch extends User{
          }
 
          $query->andFilterWhere(['id' => $this->id]);
-         $query->andFilterWhere(['like','username' , $this->username]);
+         $query->andFilterWhere(['like','username' , $this->username])
+               ->andFilterWhere(['like','email' , $this->email]);
 
          // postFilter | refresh doesn't work...
          //$query->andWhere(['userPosts.post_count' => $this->postCount]);

@@ -26,20 +26,20 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            ['username', 'validateUpdate', 'on' => 'update'],
+            ['email', 'validateUpdate', 'on' => 'update'],
             ['newRole', 'validateRole', 'on' => 'update'],
-            ['username', 'unique', 'message' => 'Such user name already exists!', 'on' => 'create'],
-            [['username','password','newRole'], 'required'],
-            [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255],
+            ['email', 'unique', 'message' => 'Such e-mail address already exists!', 'on' => 'create'],   // username
+            [['email','username','password','newRole'], 'required'],
+            [['username', 'password', 'authKey', 'accessToken','email'], 'string', 'max' => 255],
         ];
     }
 
     public function validateUpdate(){
 
-         $anotherUser = User::findByUsername($this->username);
+         $anotherUser = User::find()->where(['email' => $this->email])->one();
          if(!empty($anotherUser)){
               if($anotherUser->id != $this->id){
-                   $this->addError('username', 'There is another user which has the same username!');
+                   $this->addError('email', 'There is another user which has the same e-mail address!');
               }
          }
 
@@ -130,6 +130,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'accessToken' => 'Access Token',
             'userRole' => 'User Role',
             'postCount' => 'Posts Count',
+            'email' => 'E-mail',
             //'admin' => 'Admin',
         ];
     }

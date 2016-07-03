@@ -34,6 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
               'dataProvider' => $dataProvider,
               'filterModel' => $searchModel,
               'columns' => [
+                   [
+                       'class' => DataColumn::className(), // this line is optional
+                       'attribute' => 'email',
+                       'label' => 'E-mail',
+                       //'header' => 'Name',
+                       'value' => 'email',
+                  ],
                   [
                        'class' => DataColumn::className(), // this line is optional
                        'attribute' => 'username',

@@ -19,6 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php $form = ActiveForm::begin(['id' => 'update-form']); ?>
 
+                <?= $form->field($model, 'email')->textInput(['autofocus' => true, 'value' => $user->email]) ?>
+
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'value' => $user->username]) ?>
 
                 <?= $form->field($model, 'password')->hiddenInput(['autofocus' => true, 'value' => $user->password])->label(false) ?>
