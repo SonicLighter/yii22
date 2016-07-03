@@ -174,6 +174,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return User::find()->where(['username' => $username])->one();
     }
 
+    public static function findByEmail($email)
+    {
+         return User::find()->where(['email' => $email])->one();
+    }
+
     /**
      * @inheritdoc
      */
