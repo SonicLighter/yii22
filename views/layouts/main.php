@@ -73,7 +73,7 @@ AppAsset::register($this);
                      'label' => Yii::$app->user->identity->username,
                      'options' => ['class' => 'navbar-nav navbar-right'],
                      'items' => [
-                         ['label' => 'Profile', 'url' => '/users/profile'],
+                         ['label' => 'My Profile', 'url' => '/profile/index'],
                          '<li>'
                          . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
                          . Html::submitButton(

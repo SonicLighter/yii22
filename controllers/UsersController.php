@@ -114,11 +114,19 @@ class UsersController extends Controller{
 
      }
 
+     /*
      public function actionProfile(){
 
-          return $this->render('profile');
+          $model = new EditUser();
+
+          if($model->load(Yii::$app->request->post()) && $model->validate()){
+
+          }
+
+          return $this->render('profile', ['model' => $model]);
 
      }
+     */
 
 }
 

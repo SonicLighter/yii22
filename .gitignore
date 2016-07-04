@@ -27,3 +27,5 @@ phpunit.phar
 /phpunit.xml
 
 /config/db-local.php
+
+/web/images/profile/

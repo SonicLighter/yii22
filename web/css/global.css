@@ -6,6 +6,7 @@
 .profile-left_column{
      float: left;
      width: 30%;
+     padding-right: 20px;
 }
 
 .profile-right_column{
@@ -16,12 +17,11 @@
 .profile-right_column-header{
      display: block;
      width: 100%;
-     padding-top: 1px;
-     padding-bottom: 1px;
+     padding-top: 5px;
+     padding-bottom: 5px;
      padding-left: 10px;
-     border-radius: 5px;
      color: #000000;
-     background: #dcdcdc;
+     background: #E8E8E8;
 }
 
 .profile-right_column-content{
@@ -34,4 +34,52 @@
      border-radius: 5px;
      color: #000000;
      /*background: #f7f7f7;*/
+}
+
+.userMenu {
+counter-reset: li;
+list-style: none;
+font: 14px "Trebuchet MS", "Lucida Sans";
+padding: 0;
+text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.userMenu a {
+position: relative;
+display: block;
+padding: .4em .4em .4em .8em;
+margin: .5em 0 .5em 2.5em;
+background: #D3D4DA;
+color: #444;
+text-decoration: none;
+transition: all .3s ease-out;
+}
+.userMenu a:hover {
+background: #DCDDE1;
+}
+.userMenu a:before {
+content: counter(li);
+counter-increment: li;
+position: absolute;
+left: -2.5em;
+top: 50%;
+margin-top: -1em;
+background: #9097A2;
+height: 2em;
+width: 2em;
+line-height: 2em;
+text-align: center;
+font-weight: bold;
+}
+.userMenu a:after {
+position: absolute;
+content: "";
+border: .5em solid transparent;
+left: -1em;
+top: 50%;
+margin-top: -.5em;
+transition: all .3s ease-out;
+}
+.userMenu a:hover:after {
+left: -.5em;
+border-left-color: #9097A2;
 }
