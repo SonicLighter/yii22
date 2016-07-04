@@ -1,0 +1,37 @@
+.site-profile{
+     display: block;
+     margin: auto;
+}
+
+.profile-left_column{
+     float: left;
+     width: 30%;
+}
+
+.profile-right_column{
+     float: left;
+     width: 70%;
+}
+
+.profile-right_column-header{
+     display: block;
+     width: 100%;
+     padding-top: 1px;
+     padding-bottom: 1px;
+     padding-left: 10px;
+     border-radius: 5px;
+     color: #000000;
+     background: #dcdcdc;
+}
+
+.profile-right_column-content{
+     margin-top: 10px;
+     display: block;
+     width: 100%;
+     padding-top: 10px;
+     padding-bottom: 1px;
+     padding-left: 10px;
+     border-radius: 5px;
+     color: #000000;
+     /*background: #f7f7f7;*/
+}

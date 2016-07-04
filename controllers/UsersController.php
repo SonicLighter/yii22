@@ -31,6 +31,11 @@ class UsersController extends Controller{
                         'allow' => true,
                         'roles' => ['admin'], // admin
                     ],
+                    [
+                         'actions' => ['profile'],
+                         'allow' => !Yii::$app->user->isGuest,
+                         'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -106,6 +111,12 @@ class UsersController extends Controller{
           }
 
           return $this->redirect(['users/index']);
+
+     }
+
+     public function actionProfile(){
+
+          return $this->render('profile');
 
      }
 

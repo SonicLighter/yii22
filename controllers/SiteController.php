@@ -105,11 +105,12 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
-
+         /*
          $userModel = User::find()->all();
          foreach ($userModel as $user) {
               echo $user->username."<br/>";
          }
+         */
          /*
          $user = User::findOne(11);
          print_r($user->getPostCount());

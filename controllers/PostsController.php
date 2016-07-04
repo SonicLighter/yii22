@@ -57,9 +57,7 @@ class PostsController extends Controller{
 
          $model = new Posts();
          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
-              return $this->render("index", [
-                'dataProvider' => Posts::getDataProvider(),
-             ]);
+             return $this->redirect('index');
          }
 
          return $this->render('create', ['model' => $model,'date' => Yii::$app->getFormatter()->asDateTime(time())]);
