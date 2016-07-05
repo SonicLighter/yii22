@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use app\models\User;
 use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
 class Profile extends User{
 
@@ -28,11 +29,12 @@ class Profile extends User{
      public function rules(){
 
           return [
-               ['username', 'required'],
-               ['editPassword', 'boolean'],
-               ['newPassword', 'string', 'min' => 6],
-               ['editPassword', 'validateEditPassword'],
-               [['picture'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+               ['username', 'required', 'on' => 'editProfile'],
+               ['editPassword', 'boolean', 'on' => 'editProfile'],
+               ['newPassword', 'string', 'min' => 6, 'on' => 'editProfile'],
+               ['editPassword', 'validateEditPassword', 'on' => 'editProfile'],
+               //['picture', 'validateFileName', 'on' => 'editPicture'],
+               [['picture'], 'file', 'extensions' => 'png, jpg', 'on' => 'editPicture'],
           ];
 
      }
@@ -58,10 +60,19 @@ class Profile extends User{
     }
 
 
+    public function validateFileName(){
+         echo "asd";
+         die();
+         if(empty($this->picture)){
+             $this->addError('picture', 'File not found!');
+         }
+
+    }
+
+
     public static function getRandomFileName($path, $extension){
 
           do {
-               //$name = md5(microtime().rand(0, 9999));
                $name = uniqid().rand(0, 9999);
                $file = $path.$name.'.'.$extension;
           } while (file_exists($file));
@@ -72,22 +83,18 @@ class Profile extends User{
 
     public function uploadPicture(){
 
-         //if($this->validate()){
+         if($this->validate()){
+              $this->picture = UploadedFile::getInstance($this, 'picture');
               $fileName = Profile::getRandomFileName('images/profile/', $this->picture->extension);
-             // echo $fileName;
-             // die();
-              //echo $fileName.' extension: '.$this->profilePicture->extension;
-              //die();
               $this->picture->saveAs($fileName);
               $this->picture = "";
               $this->profilePicture = $fileName;
-
               return true;
-         /*}
+         }
          else{
               return false;
          }
-         */
+
 
     }
 

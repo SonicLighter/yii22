@@ -55,6 +55,7 @@ class ProfileController extends Controller{
     public function actionEdit(){
 
          $model = Profile::findOne(Yii::$app->user->id);
+         $model->scenario = 'editProfile';
          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
               return $this->redirect(['profile/index']);
          }
@@ -66,11 +67,19 @@ class ProfileController extends Controller{
     public function actionPicture(){
 
          $model = Profile::findOne(Yii::$app->user->id);
-         if(Yii::$app->request->isPost){
-              $model->picture = UploadedFile::getInstance($model, 'picture');
-              if($model->uploadPicture() && $model->save(false)){
-                   return $this->redirect(['profile/index']);
+         $model->scenario = 'editPicture';
+         $fileToDelete = $model->profilePicture;
+         if($model->load(Yii::$app->request->post())){
+              echo $model->picture.' '.strlen($model->picture);
+              die();
+              if((strlen($model->picture) > 0)/* && $model->uploadPicture() && $model->save()*/){
+                   echo $model->picture;
+                   die();
               }
+              if($fileToDelete != 'images/default/no-avatar.jpg'){
+                   unlink($fileToDelete);
+              }
+              return $this->redirect(['profile/index']);
          }
 
          return $this->render('picture', ['model' => $model]);

@@ -72,6 +72,7 @@ class UsersController extends Controller{
 
           $model = new User();
           $model->scenario = 'create'; // using create to validate username only for this action
+          $model->profilePicture = 'images/default/no-avatar.jpg';
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
                return $this->redirect(['users/index']);
           }

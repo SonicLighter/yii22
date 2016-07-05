@@ -7,7 +7,7 @@ use yii\widgets\LinkPager;
 use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Set Profile Picture';
+$this->title = 'Profile Picture';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
