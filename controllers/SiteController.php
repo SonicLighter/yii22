@@ -106,10 +106,10 @@ class SiteController extends Controller
     public function actionDatabase()
     {
          /*
-         $userModel = User::find()->all();
-         foreach ($userModel as $user) {
-              echo $user->username."<br/>";
-         }
+         $auth = YII::$app->authManager;
+         $userModel = User::findOne(11);
+         $userRole = $auth->getRole('admin');
+         $auth->assign($userRole, $userModel->id);
          */
          /*
          $user = User::findOne(11);

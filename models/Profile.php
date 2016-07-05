@@ -6,18 +6,26 @@ use Yii;
 use yii\base\Model;
 use app\models\User;
 
-class Profile extends Model{
+class Profile extends User{
 
-     public $username;
      public $newPassword;
      public $editPassword = true;
+     public $newRole;
 
+
+     public function __construct(){
+
+          $this->newRole = key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->id));
+
+     }
 
      public function rules(){
 
           return [
-               [['username', 'newPassword'], 'required'],
+               ['username', 'required'],
                ['editPassword', 'boolean'],
+               ['newPassword', 'string', 'min' => 6],
+               ['editPassword', 'validateEditPassword'],
           ];
 
      }
@@ -25,10 +33,21 @@ class Profile extends Model{
     public function attributeLabels()
     {
         return [
-            'username' => 'Username',
             'newPassword' => 'New Password',
             'editPassword' => 'Edit Password',
         ];
+    }
+
+    public function validateEditPassword(){
+         $this->newPassword = trim($this->newPassword);
+         if($this->editPassword){
+              if(isset($this->newPassword) && (strlen($this->newPassword) != 0)){
+                   $this->password = $this->newPassword;    // and then beforeSave add hash
+              }
+              else{
+                   $this->addError('newPassword', 'You can\'t leave new password empty!');
+              }
+         }
     }
 
 

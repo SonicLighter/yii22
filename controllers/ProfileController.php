@@ -53,9 +53,9 @@ class ProfileController extends Controller{
 
     public function actionEdit(){
 
-         $model = new Profile();
-         if($model->load(Yii::$app->request->post()) && $model->validate()){
-
+         $model = Profile::findOne(Yii::$app->user->id);
+         if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
+              return $this->redirect(['profile/index']);
          }
 
          return $this->render('edit', ['model' => $model]);

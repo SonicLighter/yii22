@@ -16,9 +16,7 @@ $this->title = 'Profile';
       <div class='profile-left_column'>
            <?= Html::img(Url::toRoute('images/default/no-avatar.jpg'), ['width' => '100%']) ?>
            <br/><br/>
-           <ol class="userMenu">
-             <li><a href="edit">Edit profile</a></li>
-           </ol>
+           <a href='edit'><div class='userMenu'>Edit Profile</div></a>
       </div>
       <div class='profile-right_column'>
            <div class='profile-right_column-header'>

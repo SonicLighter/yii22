@@ -21,12 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id' => 'edit-form',
              ]); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'value' => Yii::$app->user->identity->username]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'value' => $model->username]) ?>
 
                 <?= $form->field($model, 'newPassword')->passwordInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'editPassword')->checkbox([
-                ]) ?>
+                <?= $form->field($model, 'editPassword')->checkbox() ?>
 
                 <div class="form-group">
                         <?= Html::submitButton('Edit Profile', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
