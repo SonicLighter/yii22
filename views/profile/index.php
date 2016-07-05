@@ -14,9 +14,10 @@ $this->title = 'Profile';
 ?>
 <div class="site-profile">
       <div class='profile-left_column'>
-           <?= Html::img(Url::toRoute('images/default/no-avatar.jpg'), ['width' => '100%']) ?>
+           <?= Html::img(Url::toRoute(Yii::$app->user->identity->profilePicture), ['width' => '100%']) ?>
            <br/><br/>
            <a href='edit'><div class='userMenu'>Edit Profile</div></a>
+           <a href='picture'><div class='userMenu'>Set Profile Picture</div></a>
       </div>
       <div class='profile-right_column'>
            <div class='profile-right_column-header'>

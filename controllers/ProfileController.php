@@ -13,6 +13,7 @@ use app\models\Role;
 use app\models\Profile;
 use yii\data\Pagination;
 use app\models\search\UserSearch;
+use yii\web\UploadedFile;
 
 class ProfileController extends Controller{
 
@@ -23,7 +24,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index','edit'],
+                         'actions' => ['index', 'edit', 'picture'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -59,6 +60,20 @@ class ProfileController extends Controller{
          }
 
          return $this->render('edit', ['model' => $model]);
+
+    }
+
+    public function actionPicture(){
+
+         $model = Profile::findOne(Yii::$app->user->id);
+         if(Yii::$app->request->isPost){
+              $model->picture = UploadedFile::getInstance($model, 'picture');
+              if($model->uploadPicture() && $model->save()){
+                   return $this->redirect(['profile/index']);
+              }
+         }
+
+         return $this->render('picture', ['model' => $model]);
 
     }
 
