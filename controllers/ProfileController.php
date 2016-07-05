@@ -68,7 +68,7 @@ class ProfileController extends Controller{
          $model = Profile::findOne(Yii::$app->user->id);
          if(Yii::$app->request->isPost){
               $model->picture = UploadedFile::getInstance($model, 'picture');
-              if($model->uploadPicture() && $model->save()){
+              if($model->uploadPicture() && $model->save(false)){
                    return $this->redirect(['profile/index']);
               }
          }

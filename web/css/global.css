@@ -5,13 +5,13 @@
 
 .profile-left_column{
      float: left;
-     width: 30%;
+     width: 25%;
      padding-right: 20px;
 }
 
 .profile-right_column{
      float: left;
-     width: 70%;
+     width: 75%;
 }
 
 .profile-right_column-header{
