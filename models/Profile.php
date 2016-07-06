@@ -14,6 +14,7 @@ class Profile extends User{
      public $editPassword = true;
      public $newRole;
      public $picture;
+     //public $activeNew;
 
 
      public function __construct(){
@@ -31,6 +32,7 @@ class Profile extends User{
           return [
                ['username', 'required', 'on' => 'editProfile'],
                ['editPassword', 'boolean', 'on' => 'editProfile'],
+               ['active', 'boolean', 'on' => 'editProfile'],
                ['newPassword', 'string', 'min' => 6, 'on' => 'editProfile'],
                ['editPassword', 'validateEditPassword', 'on' => 'editProfile'],
                //['picture', 'validateFileName', 'on' => 'editPicture'],
@@ -44,6 +46,7 @@ class Profile extends User{
         return [
             'newPassword' => 'New Password',
             'editPassword' => 'Edit Password',
+            'active' => 'Press to change your account status',
         ];
     }
 
