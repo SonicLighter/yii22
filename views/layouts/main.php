@@ -53,6 +53,11 @@ AppAsset::register($this);
                   'visible' => !Yii::$app->user->isGuest,
             ],
             [
+                 'label' => 'Search',
+                 'url' => ['/profile/search'],
+                 'visible' => !Yii::$app->user->isGuest,
+            ],
+            [
                  'label' => 'Home',
                  'url' => ['/site/index']
              ],

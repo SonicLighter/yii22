@@ -24,7 +24,7 @@ $this->title = 'Profile';
 
                      Username: <?php echo Yii::$app->user->identity->username ?> /
                      E-mail: <?php echo Yii::$app->user->identity->email ?> /
-                     Account: <?php echo (Yii::$app->user->identity->active == 1) ? ('active') : ('not active'); ?>
+                     Profile status: <?php echo (Yii::$app->user->identity->active == 1) ? ('active') : ('not active'); ?>
 
            </div>
            <div class='profile-right_column-content'>

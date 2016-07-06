@@ -21,6 +21,7 @@
      user-select: none;
      background: #343434 /*rgb(212,75,56)*/;
      padding: .7em 1.5em;
+     border-radius: 10px;
 }
 
 .profile-right_column-content{
@@ -44,6 +45,7 @@
      padding: .7em 1.5em;
      outline: none;
      border-bottom: 1px solid rgb(157,157,157);
+     border-radius: 10px;
 }
 .userMenu:hover {
      color: #FFFFFF;

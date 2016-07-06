@@ -217,7 +217,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function getDataProvider(){
 
           $query = User::find()->orderBy("id");
-
           $dataProvider = new ActiveDataProvider([
               'query' => $query,
           ]);

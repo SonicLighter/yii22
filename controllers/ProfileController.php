@@ -24,7 +24,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture'],
+                         'actions' => ['index', 'edit', 'picture', 'search'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -80,6 +80,14 @@ class ProfileController extends Controller{
          }
 
          return $this->render('picture', ['model' => $model]);
+
+    }
+
+    public function actionSearch(){
+
+         return $this->render('search', [
+              'dataProvider' => User::getDataProvider(),
+         ]);
 
     }
 
