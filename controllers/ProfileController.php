@@ -69,17 +69,14 @@ class ProfileController extends Controller{
          $model = Profile::findOne(Yii::$app->user->id);
          $model->scenario = 'editPicture';
          $fileToDelete = $model->profilePicture;
-         if($model->load(Yii::$app->request->post())){
-              echo $model->picture.' '.strlen($model->picture);
-              die();
-              if((strlen($model->picture) > 0)/* && $model->uploadPicture() && $model->save()*/){
-                   echo $model->picture;
-                   die();
+         if(Yii::$app->request->isPost){
+              $model->picture = UploadedFile::getInstance($model, 'picture');
+              if(isset($model->picture) && $model->uploadPicture() && $model->save()){
+                   if($fileToDelete != Yii::getAlias('@noAvatar')){
+                        unlink($fileToDelete);
+                   }
+                   return $this->redirect(['profile/index']);
               }
-              if($fileToDelete != 'images/default/no-avatar.jpg'){
-                   unlink($fileToDelete);
-              }
-              return $this->redirect(['profile/index']);
          }
 
          return $this->render('picture', ['model' => $model]);

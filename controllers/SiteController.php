@@ -106,6 +106,10 @@ class SiteController extends Controller
     public function actionDatabase()
     {
          /*
+         echo Yii::getAlias('@profilePictures');
+         die();
+         */
+         /*
          $auth = YII::$app->authManager;
          $userModel = User::findOne(11);
          $userRole = $auth->getRole('admin');

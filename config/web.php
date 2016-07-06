@@ -62,6 +62,10 @@ $config = [
         ),
     ],
     'params' => $params,
+    'aliases' => [
+          '@profilePictures' => 'images/profile/',
+          '@noAvatar' => 'images/default/no-avatar.jpg',
+     ],
 ];
 
 if (YII_ENV_DEV) {

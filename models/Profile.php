@@ -18,8 +18,8 @@ class Profile extends User{
 
      public function __construct(){
 
-          if(!file_exists('images/profile')){     // create images/profile directory to store profile pictures
-               FileHelper::createDirectory('images/profile', '0777');
+          if(!file_exists(Yii::getAlias('@profilePictures'))){     // create images/profile directory to store profile pictures
+               FileHelper::createDirectory(Yii::getAlias('@profilePictures'), '0777');
           }
 
           $this->newRole = key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->id));
@@ -59,22 +59,22 @@ class Profile extends User{
          }
     }
 
-
+    /*
     public function validateFileName(){
-         echo "asd";
-         die();
-         if(empty($this->picture)){
-             $this->addError('picture', 'File not found!');
+         //echo "asd";
+         //die();
+         if(!isset($this->picture)){
+             $this->addError('picture', 'You can\'t leave this field empty!');
          }
 
     }
-
+    */
 
     public static function getRandomFileName($path, $extension){
 
           do {
                $name = uniqid().rand(0, 9999);
-               $file = $path.$name.'.'.$extension;
+               $file = $path.'/'.$name.'.'.$extension;
           } while (file_exists($file));
 
           return $file;
@@ -84,8 +84,7 @@ class Profile extends User{
     public function uploadPicture(){
 
          if($this->validate()){
-              $this->picture = UploadedFile::getInstance($this, 'picture');
-              $fileName = Profile::getRandomFileName('images/profile/', $this->picture->extension);
+              $fileName = Profile::getRandomFileName(Yii::getAlias('@profilePictures'), $this->picture->extension);
               $this->picture->saveAs($fileName);
               $this->picture = "";
               $this->profilePicture = $fileName;
@@ -94,7 +93,6 @@ class Profile extends User{
          else{
               return false;
          }
-
 
     }
 
