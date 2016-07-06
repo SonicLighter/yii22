@@ -15,13 +15,12 @@
 }
 
 .profile-right_column-header{
-     display: block;
      width: 100%;
-     padding-top: 5px;
-     padding-bottom: 5px;
-     padding-left: 10px;
-     color: #000000;
-     background: #E8E8E8;
+     color: #FFFFFF;
+     text-decoration: none;
+     user-select: none;
+     background: #343434 /*rgb(212,75,56)*/;
+     padding: .7em 1.5em;
 }
 
 .profile-right_column-content{
@@ -36,6 +35,20 @@
      /*background: #f7f7f7;*/
 }
 
+.userMenu {
+     width: 100%;
+     color: rgb(157,157,157);
+     text-decoration: none;
+     user-select: none;
+     background: #343434 /*rgb(212,75,56)*/;
+     padding: .7em 1.5em;
+     outline: none;
+     border-bottom: 1px solid rgb(157,157,157);
+}
+.userMenu:hover {
+     color: #FFFFFF;
+}
+/*
 .userMenu {
      padding: 5px;
      width: 100%;
@@ -54,3 +67,4 @@
 .userMenu:hover{
      background: #d6d6d6;
 }
+*/
