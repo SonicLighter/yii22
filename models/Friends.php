@@ -74,17 +74,13 @@ class Friends extends \yii\db\ActiveRecord
     public static function addPermission($userId){
 
          $userExists = User::findIdentity($userId);    // user which you are going to add
-         /*$findFriend = Friends::find()->where(['or', 'senderId' => Yii::$app->user->identity->id, 'receiverId' => Yii::$app->user->identity->id])
-                                      ->andWhere(['or', 'senderId' => $userId, 'receiverId' => $userId])->one();*/
-         $findFriend = Friends::find()->where(['or', ['and', 'senderId' => Yii::$app->user->id, 'receiverId' => $userId], ['and', 'senderId' => $userId, 'receiverId' => Yii::$app->user->id]])->one();
-         echo " senderId: ".$findFriend->senderId." receiverId: ".$findFriend->receiverId."<br/>";
-         if(empty($userExists) || !empty($findFriend)){ // !empty($findFriend) means that friendship already exists
-              echo "NO!";
+         $findFriend = Friends::find()->where('(senderId = '.Yii::$app->user->id.' AND receiverId = '.$userId.') OR
+                                   (senderId = '.$userId.' AND receiverId = '.Yii::$app->user->id.')')->one();
+         if(empty($userExists) || !empty($findFriend) || (Yii::$app->user->id == $userId)){ // !empty($findFriend) means that friendship already exists
+              return false;
          }
-         else{
-              echo "YES!";
-         }
-         die();
+
+         return true;
 
     }
 }

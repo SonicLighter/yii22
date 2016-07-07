@@ -13,7 +13,6 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 
 $this->title = 'Search';
-
 ?>
 <div class="site-about">
      <div class='searchPage'>
@@ -40,7 +39,13 @@ $this->title = 'Search';
                             'label' => 'Search by username',
                             'format' => 'html',
                             //'header' => 'Name',
-                            'value' => function($model){
+                            'value' => function($model, $friends){
+                                 if($model->friend){
+                                      $resultButton = Html::a('Add to friends', [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-info']);
+                                 }
+                                 else{
+                                      $resultButton = Html::a('Delete friend', [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-info']);
+                                 }
                                  $resultString =
                                      "<div class='searchWrapper'>
                                            <div class='searchLeftColumn'>
@@ -55,7 +60,7 @@ $this->title = 'Search';
 
                                            </div>
                                            <div class='searchRightColumn'>
-                                                ".Html::a('Add to friends', [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-info'])."
+                                                ".$resultButton."
                                            </div>
                                       </div>";
                                       return $resultString;

@@ -260,4 +260,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public function getFriend(){
+
+         if(Friends::addPermission($this->id)){
+              return true;
+         }
+
+         return false;
+         
+    }
+
 }
