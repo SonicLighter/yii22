@@ -225,6 +225,20 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public static function getActiveUsers(){
+
+          $query = User::find()->where(['active' => 1])->orderBy("id");
+          $dataProvider = new ActiveDataProvider([
+              'query' => $query,
+              'pagination' => [
+                   'pageSize' => 10,
+              ],
+          ]);
+
+          return $dataProvider;
+
+    }
+
     public static function isExists($username){
 
          if(User::find()->where(['username' => $username])->count() > 0){

@@ -70,3 +70,37 @@
      background: #d6d6d6;
 }
 */
+
+.searchWrapper{
+     margin: auto;
+     margin-top: 20px;
+     width: 60%;
+     border-bottom: 1px solid rgb(157,157,157);
+     border-top: 1px solid rgb(157,157,157);
+     border-radius: 10px;
+     padding: 20px;
+}
+
+.searchLeftColumn{
+     width: 30%;
+     display: inline-block;
+}
+
+.searchMiddleColumn{
+     width: 50%;
+     display: inline-block;
+     /*border-right: 1px solid rgb(157,157,157);
+     border-left: 1px solid rgb(157,157,157);*/
+     padding: 5px;
+     vertical-align: top;
+}
+
+.searchRightColumn{
+     display: inline-block;
+     vertical-align: bottom;;
+}
+
+.searchUsername{
+     width: 100%;
+     text-align: center;
+}

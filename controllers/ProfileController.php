@@ -85,8 +85,12 @@ class ProfileController extends Controller{
 
     public function actionSearch(){
 
+         $searchModel = new UserSearch('search');
+         $dataProvider = $searchModel->search(Yii::$app->request->get());
+
          return $this->render('search', [
-              'dataProvider' => User::getDataProvider(),
+              'dataProvider' => $dataProvider,
+              'searchModel' => $searchModel,
          ]);
 
     }

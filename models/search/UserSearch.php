@@ -13,6 +13,13 @@ class UserSearch extends User{
 
      public $userRole;
      public $postCount;
+     public $type;
+
+     public function __construct($value = 'users'){
+
+          $this->type = $value;    // if users, then searching for users page, search for search page etc.
+
+     }
 
      public function rules(){
 
@@ -31,7 +38,16 @@ class UserSearch extends User{
 
      public function search($params){
 
-         $query = User::find();
+         switch ($this->type) {
+              case 'search':
+                   $query = User::find()->where(['active' => 1]);
+                   break;
+
+              default:
+                   $query = User::find();
+                   break;
+         }
+
          $subQuery = Posts::find()->select('userId, COUNT(userId) as post_count')->groupBy('userId');
          $query->leftJoin([
               'userPosts' => $subQuery,
@@ -39,6 +55,9 @@ class UserSearch extends User{
 
          $dataProvider = new ActiveDataProvider([
              'query' => $query,
+             'pagination' => [
+                  'pageSize' => 20,
+             ],
          ]);
 
          $dataProvider->setSort([
