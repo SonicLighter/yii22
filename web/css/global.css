@@ -71,10 +71,16 @@
 }
 */
 
+.searchPage{
+     width: 60%;
+     margin: auto;
+}
+
 .searchWrapper{
      margin: auto;
      margin-top: 20px;
-     width: 60%;
+     margin-bottom: 20px;
+     width: 100%;
      border-bottom: 1px solid rgb(157,157,157);
      border-top: 1px solid rgb(157,157,157);
      border-radius: 10px;
