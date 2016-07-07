@@ -40,7 +40,7 @@ class UserSearch extends User{
 
          switch ($this->type) {
               case 'search':
-                   $query = User::find()->where(['active' => 1]);
+                   $query = User::find()->where(['active' => 1])->andWhere(['!=', 'id', Yii::$app->user->identity->id]);
                    break;
 
               default:
@@ -48,6 +48,7 @@ class UserSearch extends User{
                    break;
          }
 
+         //$query = User::find();
          $subQuery = Posts::find()->select('userId, COUNT(userId) as post_count')->groupBy('userId');
          $query->leftJoin([
               'userPosts' => $subQuery,
@@ -56,7 +57,7 @@ class UserSearch extends User{
          $dataProvider = new ActiveDataProvider([
              'query' => $query,
              'pagination' => [
-                  'pageSize' => 20,
+                  'pageSize' => 10,
              ],
          ]);
 

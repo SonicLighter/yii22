@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Friends;
 use app\models\Role;
 use app\models\Posts;
 use yii\data\Pagination;
@@ -105,6 +106,26 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         $friends = Friends::findFriends(11);
+         foreach ($friends as $friend) {
+              if($friend->senderId == 11){
+                   echo '<br/>Friend ID: '.$friend->receiverId;
+              }
+              else{
+                   echo '<br/>Friend ID: '.$friend->senderId;
+              }
+         }
+         /*$user = User::findOne(11);
+         $friends = $user->friends;
+         foreach ($friends as $friend) {
+              if($friend->senderId == $user->id){
+                   echo '<br/>Friend ID: '.$friend->receiverId;
+              }
+              else{
+                   echo '<br/>Friend ID: '.$friend->senderId;
+              }
+         }
+         */
          /*
          echo Yii::getAlias('@profilePictures');
          die();

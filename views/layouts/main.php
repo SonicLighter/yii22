@@ -79,6 +79,7 @@ AppAsset::register($this);
                      'options' => ['class' => 'navbar-nav navbar-right'],
                      'items' => [
                          ['label' => 'My Profile', 'url' => '/profile/index'],
+                         ['label' => 'Friends', 'url' => '/profile/friends'],
                          '<li>'
                          . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
                          . Html::submitButton(

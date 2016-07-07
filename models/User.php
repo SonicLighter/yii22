@@ -93,6 +93,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
          if(parent::beforeDelete()){
              Posts::deleteAll(['userId' => $this->id]);     // deleting all posts by userId
+             Friends::deleteAll(['senderId' => $this->id]); // deleting from friends
+             Friends::deleteAll(['receiverId' => $this->id]);
              return true;
          }
          else{
@@ -127,6 +129,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return $this->role->item_name;
 
     }
+
+    // Friends
+    /*
+    public function getFriends(){
+
+          return $this->hasMany(Friends::className(), ['senderId' => 'id']);
+
+    }
+    */
 
     /**
      * @inheritdoc

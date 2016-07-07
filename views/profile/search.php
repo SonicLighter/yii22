@@ -13,7 +13,6 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 
 $this->title = 'Search';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="site-about">

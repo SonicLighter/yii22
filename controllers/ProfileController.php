@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Friends;
 use app\models\Role;
 use app\models\Profile;
 use yii\data\Pagination;
@@ -24,7 +25,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture', 'search'],
+                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -92,6 +93,18 @@ class ProfileController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
          ]);
+
+    }
+
+    public function actionFriends(){
+
+         return $this->render('friends');
+
+    }
+
+    public function actionInvite($id){
+
+         Friends::addPermission($id);
 
     }
 
