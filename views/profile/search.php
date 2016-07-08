@@ -39,8 +39,8 @@ $this->title = 'Search';
                             'label' => 'Search by username',
                             'format' => 'html',
                             //'header' => 'Name',
-                            'value' => function($model, $friends){
-                                 if($model->friend){
+                            'value' => function($model){
+                                 if(empty($model->friend)){
                                       $resultButton = Html::a('Add to friends', [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-info']);
                                  }
                                  else{
@@ -63,7 +63,7 @@ $this->title = 'Search';
                                                 ".$resultButton."
                                            </div>
                                       </div>";
-                                      return $resultString;
+                                  return $resultString;
                             },
                        ],
                    ],

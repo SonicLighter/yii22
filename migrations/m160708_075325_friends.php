@@ -2,12 +2,13 @@
 
 use yii\db\Migration;
 
-class m160707_115154_friends extends Migration
+class m160708_075325_friends extends Migration
 {
     public function up()
     {
          $this->createTable('friends',[
-             'senderId' => $this->primaryKey(),
+             'id' => $this->primaryKey(),
+             'senderId' => $this->integer()->notNull(),
              'receiverId' => $this->integer()->notNull(),
              'accepted' => $this->integer()->notNull(),
          ]);

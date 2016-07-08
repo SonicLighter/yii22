@@ -32,8 +32,8 @@ class Friends extends \yii\db\ActiveRecord
         return [
             [['receiverId', 'accepted'], 'required'],
             [['receiverId', 'accepted'], 'integer'],
-            [['receiverId'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['receiverId' => 'id']],
-            [['senderId'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['senderId' => 'id']],
+            [['receiverId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['receiverId' => 'id']],
+            [['senderId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['senderId' => 'id']],
         ];
     }
 
@@ -54,7 +54,7 @@ class Friends extends \yii\db\ActiveRecord
      */
     public function getReceiver()
     {
-        return $this->hasOne(Users::className(), ['id' => 'receiverId']);
+        return $this->hasOne(User::className(), ['id' => 'receiverId']);
     }
 
     /**
@@ -62,25 +62,32 @@ class Friends extends \yii\db\ActiveRecord
      */
     public function getSender()
     {
-        return $this->hasOne(Users::className(), ['id' => 'senderId']);
+        return $this->hasOne(User::className(), ['id' => 'senderId']);
     }
 
+    /*
     public static function findFriends($userId){
 
          return Friends::find()->where(['or', 'senderId' => $userId, 'receiverId' => $userId])->all();
 
     }
+    */
 
-    public static function addPermission($userId){
+    /*public static function addPermission($userId){
 
-         $userExists = User::findIdentity($userId);    // user which you are going to add
+         //$userExists = User::findIdentity($userId);    // user which you are going to add
          $findFriend = Friends::find()->where('(senderId = '.Yii::$app->user->id.' AND receiverId = '.$userId.') OR
                                    (senderId = '.$userId.' AND receiverId = '.Yii::$app->user->id.')')->one();
-         if(empty($userExists) || !empty($findFriend) || (Yii::$app->user->id == $userId)){ // !empty($findFriend) means that friendship already exists
+         if(!empty($findFriend) || (Yii::$app->user->id == $userId)){ // !empty($findFriend) means that friendship already exists
               return false;
          }
 
          return true;
 
+    }*/
+
+    public static function findFriend($userId){
+         return Friends::find()->where('(senderId = '.Yii::$app->user->id.' AND receiverId = '.$userId.') OR
+                                   (senderId = '.$userId.' AND receiverId = '.Yii::$app->user->id.')')->one();
     }
 }

@@ -25,7 +25,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite'],
+                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -104,7 +104,30 @@ class ProfileController extends Controller{
 
     public function actionInvite($id){
 
-         Friends::addPermission($id);
+         if(empty(Friends::findFriend($id)) && (Yii::$app->user->id != $id)){
+              $newFriend = new Friends();
+              $newFriend->senderId = Yii::$app->user->id;
+              $newFriend->receiverId = $id;
+              $newFriend->accepted = 0;
+              if($newFriend->save()){
+                   return $this->redirect(['profile/search']);
+              }
+         }
+
+         return $this->redirect(['profile/index']);
+
+    }
+
+    public function actionRemove($id){
+
+         $removeFriend = Friends::findFriend($id);
+         if(!empty($removeFriend)){   // user with such $id exists and we can remove him from friends
+              if($removeFriend->delete()){
+                   return $this->redirect(['profile/search']);
+              }
+         }
+
+         return $this->redirect(['profile/index']);
 
     }
 

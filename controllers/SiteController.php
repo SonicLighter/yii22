@@ -106,6 +106,7 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         /*
          $friends = Friends::findFriends(11);
          foreach ($friends as $friend) {
               if($friend->senderId == 11){
@@ -115,6 +116,7 @@ class SiteController extends Controller
                    echo '<br/>Friend ID: '.$friend->senderId;
               }
          }
+         */
          /*$user = User::findOne(11);
          $friends = $user->friends;
          foreach ($friends as $friend) {

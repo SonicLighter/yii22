@@ -131,13 +131,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     // Friends
-    /*
-    public function getFriends(){
-
-          return $this->hasMany(Friends::className(), ['senderId' => 'id']);
-
+    public function getSender(){
+         return $this->hasOne(Friends::className(),['receiverId' => 'id'])->where(['senderId' => Yii::$app->user->id]);
     }
-    */
+
+    public function getReceiver(){
+         return $this->hasOne(Friends::className(),['senderId' => 'id'])->where(['receiverId' => Yii::$app->user->id]);
+    }
 
     /**
      * @inheritdoc
@@ -262,12 +262,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function getFriend(){
 
-         if(Friends::addPermission($this->id)){
-              return true;
-         }
+         return Friends::findFriend($this->id);
 
-         return false;
-         
     }
+
+
 
 }
