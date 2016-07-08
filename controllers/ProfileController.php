@@ -150,7 +150,7 @@ class ProfileController extends Controller{
 
     public function actionInvite($id){
 
-         if(is_int($id) && empty(Friends::findFriend($id)) && (Yii::$app->user->id != $id)){
+         if(is_numeric($id) && empty(Friends::findFriend($id)) && (Yii::$app->user->id != $id)){
               $newFriend = new Friends();
               $newFriend->senderId = Yii::$app->user->id;
               $newFriend->receiverId = $id;
@@ -165,7 +165,7 @@ class ProfileController extends Controller{
     }
 
     public function actionRemove($id){
-         if(is_int($id)){
+         if(is_numeric($id)){
               $removeFriend = Friends::findFriend($id);
               if(!empty($removeFriend)){   // user with such $id exists and we can remove him from friends
                    if($removeFriend->delete()){
@@ -179,7 +179,7 @@ class ProfileController extends Controller{
     }
 
     public function actionAccept($id){
-          if(is_int($id)){
+          if(is_numeric($id)){
               $acceptFriend = Friends::findFriend($id);
               if(!empty($acceptFriend) && ($acceptFriend->senderId != Yii::$app->user->id)){ // if you are sender, then you can't accept by get[]
                    $acceptFriend->accepted = 1;
