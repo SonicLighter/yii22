@@ -12,11 +12,10 @@ use yii\grid\ActionColumn;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 
-$this->title = 'Search';
+$this->title = 'People';
 ?>
 <div class="site-about">
      <div class='searchPage'>
-         <h1><?= Html::encode($this->title) ?></h1>
          <p>
               <?= Html::a('Reset search', [Url::toRoute(['search'])], ['class' => 'btn btn-info']) ?>
          </p>
@@ -40,10 +39,19 @@ $this->title = 'Search';
                             'format' => 'html',
                             //'header' => 'Name',
                             'value' => function($model){
+                                 $acceptButton = "";
+                                 $infoMessage = "";
                                  if(empty($model->friend)){
                                       $resultButton = Html::a('Add to friends', [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-info']);
                                  }
                                  else{
+                                      if(!empty($model->sender) && ($model->sender->accepted == 0)){
+                                           $infoMessage = "Info: This user did not accept you yet.";
+                                      }
+                                      else if(!empty($model->receiver) && ($model->receiver->accepted == 0)){
+                                           $infoMessage = "Info: You didn't accept this user.";
+                                           $acceptButton = Html::a('Accept user&nbsp', [Url::toRoute(['accept', 'id' => $model->id])], ['class' => 'btn btn-info']);
+                                      }
                                       $resultButton = Html::a('Delete friend', [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-info']);
                                  }
                                  $resultString =
@@ -56,11 +64,13 @@ $this->title = 'Search';
 
                                                 E-mail: ".HtmlPurifier::process($model->email)."<br/>
 
-                                                Role: ".HtmlPurifier::process($model->role->item_name)."
+                                                Role: ".HtmlPurifier::process($model->role->item_name)."<br/>
+
+                                                ".$infoMessage."
 
                                            </div>
                                            <div class='searchRightColumn'>
-                                                ".$resultButton."
+                                                ".$acceptButton."<br/><br/>".$resultButton."
                                            </div>
                                       </div>";
                                   return $resultString;

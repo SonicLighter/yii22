@@ -15,6 +15,7 @@ use app\models\Profile;
 use yii\data\Pagination;
 use app\models\search\UserSearch;
 use yii\web\UploadedFile;
+use yii\helpers\Url;
 
 class ProfileController extends Controller{
 
@@ -25,7 +26,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove'],
+                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -86,6 +87,7 @@ class ProfileController extends Controller{
 
     public function actionSearch(){
 
+         Url::remember();
          $searchModel = new UserSearch('search');
          $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -110,7 +112,7 @@ class ProfileController extends Controller{
               $newFriend->receiverId = $id;
               $newFriend->accepted = 0;
               if($newFriend->save()){
-                   return $this->redirect(['profile/search']);
+                   return $this->redirect([Url::previous()]);
               }
          }
 
@@ -123,7 +125,21 @@ class ProfileController extends Controller{
          $removeFriend = Friends::findFriend($id);
          if(!empty($removeFriend)){   // user with such $id exists and we can remove him from friends
               if($removeFriend->delete()){
-                   return $this->redirect(['profile/search']);
+                   return $this->redirect([Url::previous()]);
+              }
+         }
+
+         return $this->redirect(['profile/index']);
+
+    }
+
+    public function actionAccept($id){
+
+         $acceptFriend = Friends::findFriend($id);
+         if(!empty($acceptFriend) && ($acceptFriend->senderId != Yii::$app->user->id)){ // if you are sender, then you can't accept by get[]
+              $acceptFriend->accepted = 1;
+              if($acceptFriend->save()){
+                   return $this->redirect([Url::previous()]);
               }
          }
 
