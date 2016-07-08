@@ -71,10 +71,10 @@ class Friends extends \yii\db\ActiveRecord
                                    (senderId = '.$userId.' AND receiverId = '.Yii::$app->user->id.')')->one();
     }
 
-    public static function getUserFriends(){
+    public static function getUserFriends($accepted){
 
-         $arraySender = ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id, 'accepted' => 1])->all(), 'receiverId');
-         $arrayReceiver = ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 1])->all(), 'senderId');
+         $arraySender = ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id, 'accepted' => $accepted])->all(), 'receiverId');
+         $arrayReceiver = ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => $accepted])->all(), 'senderId');
          return ArrayHelper::merge($arraySender, $arrayReceiver);
 
     }

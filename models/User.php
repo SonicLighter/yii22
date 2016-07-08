@@ -36,6 +36,24 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'password' => 'Password',
+            'authKey' => 'Auth Key',
+            'accessToken' => 'Access Token',
+            'userRole' => 'User Role',
+            'postCount' => 'Posts Count',
+            'email' => 'E-mail',
+            //'admin' => 'Admin',
+        ];
+    }
+
     public function validateEmail(){
 
          $validator = new EmailValidator();
@@ -139,24 +157,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return $this->hasOne(Friends::className(),['senderId' => 'id'])->where(['receiverId' => Yii::$app->user->id]);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'username' => 'Username',
-            'password' => 'Password',
-            'authKey' => 'Auth Key',
-            'accessToken' => 'Access Token',
-            'userRole' => 'User Role',
-            'postCount' => 'Posts Count',
-            'email' => 'E-mail',
-            //'admin' => 'Admin',
-        ];
+    public static function getNotAcceptedCount(){
+         return Friends::find()->where(['senderId' => Yii::$app->user->id, 'accepted' => 0])->count();
     }
 
+    public static function getWaitingCount(){
+         return Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 0])->count();
+    }
 
     /**
      * @inheritdoc

@@ -8,7 +8,7 @@ use yii\base\Model;
 use app\models\User;
 use app\models\Friends;
 use app\models\Posts;
-use yii\helpers\BaseArrayHelper;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 class UserSearch extends User{
@@ -45,9 +45,14 @@ class UserSearch extends User{
                    $query = User::find()->where(['active' => 1])->andWhere(['!=', 'id', Yii::$app->user->identity->id]);
                    break;
               case 'friends':
-                   $query = User::find()->where(['id' => Friends::getUserFriends()]);
+                   $query = User::find()->where(['id' => Friends::getUserFriends(1)]);
                    break;
-
+              case 'requests':
+                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id, 'accepted' => 0])->all(), 'receiverId')]);
+                   break;
+              case 'waiting':
+                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 0])->all(), 'senderId')]);
+                   break;
               default:
                    $query = User::find();
                    break;

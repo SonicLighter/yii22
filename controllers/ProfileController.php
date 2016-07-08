@@ -26,7 +26,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept', 'requests'],
+                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept', 'requests', 'waiting','errors'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -50,7 +50,10 @@ class ProfileController extends Controller{
 
     public function actionIndex(){
 
-         return $this->render('index');
+         return $this->render('index',[
+              'notAcceptedCount' => User::getNotAcceptedCount(),
+              'waitingCount' => User::getWaitingCount(),
+         ]);
 
     }
 
@@ -118,7 +121,22 @@ class ProfileController extends Controller{
     public function actionRequests(){
 
          Url::remember();
-         $pageType = 'friends';
+         $pageType = 'requests';
+         $searchModel = new UserSearch($pageType);
+         $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+         return $this->render('search', [
+              'dataProvider' => $dataProvider,
+              'searchModel' => $searchModel,
+              'pageType' => $pageType,
+         ]);
+
+    }
+
+    public function actionWaiting(){
+
+         Url::remember();
+         $pageType = 'waiting';
          $searchModel = new UserSearch($pageType);
          $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -132,7 +150,7 @@ class ProfileController extends Controller{
 
     public function actionInvite($id){
 
-         if(empty(Friends::findFriend($id)) && (Yii::$app->user->id != $id)){
+         if(is_int($id) && empty(Friends::findFriend($id)) && (Yii::$app->user->id != $id)){
               $newFriend = new Friends();
               $newFriend->senderId = Yii::$app->user->id;
               $newFriend->receiverId = $id;
@@ -142,34 +160,42 @@ class ProfileController extends Controller{
               }
          }
 
-         return $this->redirect(['profile/index']);
+         return $this->redirect('errors');
 
     }
 
     public function actionRemove($id){
-
-         $removeFriend = Friends::findFriend($id);
-         if(!empty($removeFriend)){   // user with such $id exists and we can remove him from friends
-              if($removeFriend->delete()){
-                   return $this->redirect([Url::previous()]);
+         if(is_int($id)){
+              $removeFriend = Friends::findFriend($id);
+              if(!empty($removeFriend)){   // user with such $id exists and we can remove him from friends
+                   if($removeFriend->delete()){
+                        return $this->redirect([Url::previous()]);
+                   }
               }
          }
 
-         return $this->redirect(['profile/index']);
+         return $this->redirect('errors');
 
     }
 
     public function actionAccept($id){
-
-         $acceptFriend = Friends::findFriend($id);
-         if(!empty($acceptFriend) && ($acceptFriend->senderId != Yii::$app->user->id)){ // if you are sender, then you can't accept by get[]
-              $acceptFriend->accepted = 1;
-              if($acceptFriend->save()){
-                   return $this->redirect([Url::previous()]);
+          if(is_int($id)){
+              $acceptFriend = Friends::findFriend($id);
+              if(!empty($acceptFriend) && ($acceptFriend->senderId != Yii::$app->user->id)){ // if you are sender, then you can't accept by get[]
+                   $acceptFriend->accepted = 1;
+                   if($acceptFriend->save()){
+                        return $this->redirect([Url::previous()]);
+                   }
               }
-         }
+          }
 
-         return $this->redirect(['profile/index']);
+         return $this->redirect('errors');
+
+    }
+
+    public function actionErrors(){
+
+         return $this->render('errors');
 
     }
 

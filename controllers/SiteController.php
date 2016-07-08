@@ -109,7 +109,7 @@ class SiteController extends Controller
     {
          $arraySender = ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id])->all(), 'receiverId');
          $arrayReceiver = ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id])->all(), 'senderId');
-         print_r(ArrayHelper::merge($arraySender, $arrayReceiver));
+         print_r(Friends::find()->select('id')->all());
          die();
          /*
          $friends = Friends::findFriends(11);
