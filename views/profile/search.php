@@ -17,7 +17,7 @@ $this->title = 'People';
 <div class="site-about">
      <div class='searchPage'>
          <p>
-              <?= Html::a('Reset search', [Url::toRoute(['search'])], ['class' => 'btn btn-info']) ?>
+              <?= Html::a('Reset search', [Url::toRoute([$pageType])], ['class' => 'btn btn-info']) ?>
          </p>
          <!--<?=
                ListView::widget([

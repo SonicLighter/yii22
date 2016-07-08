@@ -26,7 +26,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept'],
+                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept', 'requests'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -88,19 +88,45 @@ class ProfileController extends Controller{
     public function actionSearch(){
 
          Url::remember();
-         $searchModel = new UserSearch('search');
+         $pageType = 'search';
+         $searchModel = new UserSearch($pageType);
          $dataProvider = $searchModel->search(Yii::$app->request->get());
 
          return $this->render('search', [
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
+              'pageType' => $pageType,
          ]);
 
     }
 
     public function actionFriends(){
 
-         return $this->render('friends');
+         Url::remember();
+         $pageType = 'friends';
+         $searchModel = new UserSearch($pageType);
+         $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+         return $this->render('search', [
+              'dataProvider' => $dataProvider,
+              'searchModel' => $searchModel,
+              'pageType' => $pageType,
+         ]);
+
+    }
+
+    public function actionRequests(){
+
+         Url::remember();
+         $pageType = 'friends';
+         $searchModel = new UserSearch($pageType);
+         $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+         return $this->render('search', [
+              'dataProvider' => $dataProvider,
+              'searchModel' => $searchModel,
+              'pageType' => $pageType,
+         ]);
 
     }
 

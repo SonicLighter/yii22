@@ -18,6 +18,8 @@ $this->title = 'Profile';
            <br/><br/>
            <a href='edit'><div class='userMenu'>Edit Profile</div></a>
            <a href='picture'><div class='userMenu'>Set Profile Picture</div></a>
+           <a href='waiting'><div class='userMenu'>New Friends (4)</div></a>
+           <a href='requests'><div class='userMenu'>My Requests (4)</div></a>
       </div>
       <div class='profile-right_column'>
            <div class='profile-right_column-header'>

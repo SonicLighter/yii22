@@ -13,6 +13,7 @@ use app\models\Friends;
 use app\models\Role;
 use app\models\Posts;
 use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 
 class SiteController extends Controller
 {
@@ -106,6 +107,10 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         $arraySender = ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id])->all(), 'receiverId');
+         $arrayReceiver = ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id])->all(), 'senderId');
+         print_r(ArrayHelper::merge($arraySender, $arrayReceiver));
+         die();
          /*
          $friends = Friends::findFriends(11);
          foreach ($friends as $friend) {

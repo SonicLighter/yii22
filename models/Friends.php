@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "friends".
@@ -65,29 +66,16 @@ class Friends extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'senderId']);
     }
 
-    /*
-    public static function findFriends($userId){
-
-         return Friends::find()->where(['or', 'senderId' => $userId, 'receiverId' => $userId])->all();
-
-    }
-    */
-
-    /*public static function addPermission($userId){
-
-         //$userExists = User::findIdentity($userId);    // user which you are going to add
-         $findFriend = Friends::find()->where('(senderId = '.Yii::$app->user->id.' AND receiverId = '.$userId.') OR
-                                   (senderId = '.$userId.' AND receiverId = '.Yii::$app->user->id.')')->one();
-         if(!empty($findFriend) || (Yii::$app->user->id == $userId)){ // !empty($findFriend) means that friendship already exists
-              return false;
-         }
-
-         return true;
-
-    }*/
-
     public static function findFriend($userId){
          return Friends::find()->where('(senderId = '.Yii::$app->user->id.' AND receiverId = '.$userId.') OR
                                    (senderId = '.$userId.' AND receiverId = '.Yii::$app->user->id.')')->one();
+    }
+
+    public static function getUserFriends(){
+
+         $arraySender = ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id, 'accepted' => 1])->all(), 'receiverId');
+         $arrayReceiver = ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 1])->all(), 'senderId');
+         return ArrayHelper::merge($arraySender, $arrayReceiver);
+
     }
 }

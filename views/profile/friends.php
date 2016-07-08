@@ -12,7 +12,7 @@ use yii\grid\ActionColumn;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 
-$this->title = 'Friends';
+$this->title = 'New Friends';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

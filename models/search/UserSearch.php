@@ -6,7 +6,9 @@ use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use yii\base\Model;
 use app\models\User;
+use app\models\Friends;
 use app\models\Posts;
+use yii\helpers\BaseArrayHelper;
 use Yii;
 
 class UserSearch extends User{
@@ -41,6 +43,9 @@ class UserSearch extends User{
          switch ($this->type) {
               case 'search':
                    $query = User::find()->where(['active' => 1])->andWhere(['!=', 'id', Yii::$app->user->identity->id]);
+                   break;
+              case 'friends':
+                   $query = User::find()->where(['id' => Friends::getUserFriends()]);
                    break;
 
               default:
