@@ -14,6 +14,7 @@ use app\models\Role;
 use app\models\Profile;
 use yii\data\Pagination;
 use app\models\search\UserSearch;
+use app\models\search\PostsSearch;
 use yii\web\UploadedFile;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
@@ -54,9 +55,15 @@ class ProfileController extends Controller{
          if(is_numeric($id)){
               $model = User::findIdentity($id);
               if(!empty($model)){
+                   Url::remember();
+                   $searchModel = new PostsSearch($id);
+                   $dataProvider = $searchModel->search(Yii::$app->request->get());
                    return $this->render('index',[
+                        'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
                         'notAcceptedCount' => User::getNotAcceptedCount(),
                         'waitingCount' => User::getWaitingCount(),
+                        'model' => $model,
                    ]);
               }
          }

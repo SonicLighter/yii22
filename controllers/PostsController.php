@@ -12,6 +12,7 @@ use app\models\User;
 use app\models\Role;
 use app\models\Posts;
 use yii\data\Pagination;
+use yii\helpers\Url;
 
 class PostsController extends Controller{
 
@@ -47,6 +48,7 @@ class PostsController extends Controller{
 
     public function actionIndex(){
 
+         Url::remember();
          return $this->render("index", [
             'dataProvider' => Posts::getDataProvider(),
          ]);
@@ -57,7 +59,7 @@ class PostsController extends Controller{
 
          $model = new Posts();
          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
-             return $this->redirect('index');
+             return $this->redirect([Url::previous()]);
          }
 
          return $this->render('create', ['model' => $model,'date' => Yii::$app->getFormatter()->asDateTime(time())]);
@@ -73,7 +75,7 @@ class PostsController extends Controller{
              }
          }
 
-         return $this->redirect('index');
+         return $this->redirect([Url::previous()]);
 
     }
 
@@ -84,7 +86,7 @@ class PostsController extends Controller{
               $model->delete();
          }
 
-         return $this->redirect('index');
+         return $this->redirect([Url::previous()]);
 
     }
 

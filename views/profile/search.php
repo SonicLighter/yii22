@@ -55,7 +55,7 @@ $this->title = 'People';
                                                 ".Html::img(Url::toRoute($model->profilePicture), ['width' => '120px'])."
                                            </div>
                                            <div class='searchMiddleColumn'>
-                                                <h4>Username: ".HtmlPurifier::process($model->username)."</h4>
+                                                <h4>Username: ". Html::a(HtmlPurifier::process($model->username), [Url::toRoute(['index', 'id' => $model->id])])."</h4>
 
                                                 E-mail: ".HtmlPurifier::process($model->email)."<br/>
 
