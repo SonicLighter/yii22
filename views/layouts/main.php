@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -78,7 +79,7 @@ AppAsset::register($this);
                      'label' => Yii::$app->user->identity->username,
                      'options' => ['class' => 'navbar-nav navbar-right'],
                      'items' => [
-                         ['label' => 'My Profile', 'url' => '/profile/index'],
+                         ['label' => 'My Profile', 'url' => Url::toRoute(['/profile/index', 'id' => Yii::$app->user->id])],
                          ['label' => 'Friends', 'url' => '/profile/friends'],
                          '<li>'
                          . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])

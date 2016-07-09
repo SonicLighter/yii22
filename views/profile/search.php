@@ -20,13 +20,7 @@ $this->title = 'People';
               <?= Html::a('Reset search', [Url::toRoute([$pageType])], ['class' => 'btn btn-info']) ?>
               <?= Html::a('Profile', [Url::toRoute(['profile/index'])], ['class' => 'btn btn-info']) ?>
          </p>
-         <!--<?=
-               ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'summary' => false,
-                    'itemView' => 'search/user',
-               ]);
-         ?>-->
+
          <?=
               GridView::widget([
                    'dataProvider' => $dataProvider,
@@ -34,7 +28,7 @@ $this->title = 'People';
                    'summary' => false,
                    'columns' => [
                        [
-                            'class' => DataColumn::className(), // this line is optional
+                            'class' => DataColumn::className(),
                             'attribute' => 'username',
                             'label' => 'Search by username',
                             'format' => 'html',

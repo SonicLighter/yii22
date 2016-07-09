@@ -16,6 +16,7 @@ use yii\data\Pagination;
 use app\models\search\UserSearch;
 use yii\web\UploadedFile;
 use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
 
 class ProfileController extends Controller{
 
@@ -48,12 +49,18 @@ class ProfileController extends Controller{
         ];
     }
 
-    public function actionIndex(){
-
-         return $this->render('index',[
-              'notAcceptedCount' => User::getNotAcceptedCount(),
-              'waitingCount' => User::getWaitingCount(),
-         ]);
+    public function actionIndex($id){
+         //throw new NotFoundHttpException('User does not exist!');
+         if(is_numeric($id)){
+              $model = User::findIdentity($id);
+              if(!empty($model)){
+                   return $this->render('index',[
+                        'notAcceptedCount' => User::getNotAcceptedCount(),
+                        'waitingCount' => User::getWaitingCount(),
+                   ]);
+              }
+         }
+         return $this->redirect('errors');
 
     }
 

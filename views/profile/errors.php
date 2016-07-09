@@ -14,13 +14,16 @@ $this->title = 'Error';
 <div class="site-about">
 
     <div class="row">
-         <h1><?= Html::encode($this->title) ?></h1>
-         <h1>Why do you see this page? The answer is:</h1>
+         <h1>Something went wrong!</h1>
+         <h1>Why do you see this page? The answer is:</h1><br/>
          <p>
-              1. User, which you are going to (add,delete,accept) (to,from) friends not exists already.
+              1. User does not exist.
          </p>
          <p>
-              2. User, which you are going to (delete,accept) (to,from) friends delete you from friends already.
+              2. User, which you are going to (add,delete,accept) (to,from) friends not exists already.
+         </p>
+         <p>
+              3. User, which you are going to (delete,accept) (to,from) friends delete you from friends already.
          </p>
     </div>
 
