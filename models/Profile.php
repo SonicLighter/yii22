@@ -36,7 +36,7 @@ class Profile extends User{
                ['newPassword', 'string', 'on' => 'editProfile'],
                ['editPassword', 'validateEditPassword', 'on' => 'editProfile'],
                //['picture', 'validateFileName', 'on' => 'editPicture'],
-               [['picture'], 'file', 'extensions' => 'png, jpg', 'on' => 'editProfile'],
+               [['picture'], 'file', 'extensions' => 'png, jpg', 'on' => 'editPicture'],
           ];
 
      }
