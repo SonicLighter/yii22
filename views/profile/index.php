@@ -58,6 +58,14 @@ $this->title = $model->username;
                           'dataProvider' => $dataProvider,
                           'filterModel' => $searchModel,
                           'summary' => false,
+                          'tableOptions' => [
+                              'class' => 'myGridView', /*table table-striped table-bordered*/
+                          ],
+                          /*
+                          'rowOptions' => [
+                               'style' => 'border: 0px solid',
+                          ],
+                          */
                           'columns' => [
                               [
                                    'class' => DataColumn::className(),

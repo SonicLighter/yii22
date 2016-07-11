@@ -38,7 +38,7 @@ class PostsSearch extends Posts{
 
      public function search($params){
 
-          $query = Posts::find()->where(['userId' => $this->pageId])->orderBy('id DESC');
+          $query = Posts::find()->where(['userId' => $this->pageId]);
           $dataProvider = new ActiveDataProvider([
                'query' => $query,
                'pagination' => [
@@ -46,7 +46,14 @@ class PostsSearch extends Posts{
                ],
           ]);
           $dataProvider->setSort([
+               'defaultOrder' => [
+                    'id' => SORT_DESC,
+               ],
                'attributes' => [
+                    'id' => [
+                         'asc' => ['id' => SORT_ASC],
+                         'desc' => ['id' => SORT_DESC],
+                    ],
                     'title' => [
                          'asc' => ['title' => SORT_ASC],
                          'desc' => ['title' => SORT_DESC],
