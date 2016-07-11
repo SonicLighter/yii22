@@ -68,7 +68,7 @@ class PostsController extends Controller{
 
     public function actionUpdate($id){
 
-         $model = Posts::getPost(Yii::$app->user->getId(), $id);
+         $model = Posts::getCurrentPost($id);
          if(!empty($model)){
              if(!($model->load(Yii::$app->request->post()) && $model->validate() && $model->save())){
                  return $this->render('update', ['model' => $model,'date' => Yii::$app->getFormatter()->asDateTime(time())]);
@@ -81,7 +81,7 @@ class PostsController extends Controller{
 
     public function actionDelete($id){
 
-         $model = Posts::getPost(Yii::$app->user->getId(), $id);
+         $model = Posts::getCurrentPost($id);
          if(!empty($model)){
               $model->delete();
          }

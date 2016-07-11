@@ -82,7 +82,13 @@ class Posts extends \yii\db\ActiveRecord
 
     }
 
-    public static function getPost($userId, $postId){
+    public static function getCurrentPost($postId){
+
+         return Posts::find()->where(['userId' => Yii::$app->user->id, 'id' => $postId])->one();
+
+    }
+
+    public static function getUserPost($userId, $postId){
 
          return Posts::find()->where(['userId' => $userId, 'id' => $postId])->one();
 

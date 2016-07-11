@@ -90,11 +90,14 @@ class ProfileController extends Controller{
          $fileToDelete = $model->profilePicture;
          if(Yii::$app->request->isPost){
               $model->picture = UploadedFile::getInstance($model, 'picture');
+              $model->picture->saveAs(Yii::getAlias('@profilePictures').'/'.$model->id.'.jpg');
+              /*
               if(isset($model->picture) && $model->uploadPicture() && $model->save()){
                    if($fileToDelete != Yii::getAlias('@noAvatar')){
                         unlink($fileToDelete);
                    }
               }
+              */
          }
 
          return $this->redirect(['profile/edit']);

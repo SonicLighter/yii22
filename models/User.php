@@ -110,7 +110,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function beforeDelete(){
 
          if(parent::beforeDelete()){
-             Comments::deleteAll(['userId' => $this->id]); 
+             Comments::deleteAll(['userId' => $this->id]);
              Posts::deleteAll(['userId' => $this->id]);     // deleting all posts by userId
              Friends::deleteAll(['senderId' => $this->id]); // deleting from friends
              Friends::deleteAll(['receiverId' => $this->id]);
@@ -274,6 +274,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public function getProfilePicture(){
 
+         if(file_exists(Yii::getAlias('@profilePictures')."/".$this->id.".jpg")){
+              $resultPicture = Yii::getAlias('@profilePictures')."/".$this->id.".jpg";
+         }
+         else{
+              $resultPicture = Yii::getAlias('@noAvatar');
+         }
+
+         return $resultPicture;
+
+    }
 
 }

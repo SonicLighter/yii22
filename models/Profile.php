@@ -62,43 +62,6 @@ class Profile extends User{
          }
     }
 
-    /*
-    public function validateFileName(){
-         //echo "asd";
-         //die();
-         if(!isset($this->picture)){
-             $this->addError('picture', 'You can\'t leave this field empty!');
-         }
-
-    }
-    */
-
-    public static function getRandomFileName($path, $extension){
-
-          do {
-               $name = uniqid().rand(0, 9999);
-               $file = $path.'/'.$name.'.'.$extension;
-          } while (file_exists($file));
-
-          return $file;
-
-    }
-
-    public function uploadPicture(){
-
-         if($this->validate()){
-              $fileName = Profile::getRandomFileName(Yii::getAlias('@profilePictures'), $this->picture->extension);
-              $this->picture->saveAs($fileName);
-              $this->picture = "";
-              $this->profilePicture = $fileName;
-              return true;
-         }
-         else{
-              return false;
-         }
-
-    }
-
 }
 
 ?>
