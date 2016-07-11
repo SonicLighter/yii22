@@ -78,11 +78,11 @@ $this->title = $model->username;
                                         $buttonDelete = "";
                                         $listView = "";
                                         if($model->commentsCount != 0){
-                                             $listView = "<br/>".ListView::widget([
+                                             $listView = "<br/><div class='comments'>".ListView::widget([
                                                   'dataProvider' => $model->postComments,
                                                   'summary' => false,
                                                   'itemView' => 'lists/comments',
-                                             ]);
+                                             ])."</div>";
                                         }
                                         if($model->userId == Yii::$app->user->id){
                                              $buttonUpdate = " | ".Html::a('Update', [Url::toRoute(['posts/update', 'id' => $model->id])])." | ";
@@ -95,7 +95,8 @@ $this->title = $model->username;
                                                   <h4>Entire post:</h4>
                                                   ".$model->text."
                                                   <hr/>
-                                             Created: ".$model->dateCreate." | Updated: ".$model->dateUpdate." ".$buttonUpdate." ".$buttonDelete."
+                                             Created: ".$model->dateCreate." | Updated: ".$model->dateUpdate." | Comments: ".$model->commentsCount."
+                                             | ".Html::a('Add comment', [Url::toRoute(['comment', 'id' => $model->id])])." ".$buttonUpdate." ".$buttonDelete."
                                              </div>
                                              ".$listView."
                                         ";

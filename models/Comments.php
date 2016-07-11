@@ -37,7 +37,7 @@ class Comments extends \yii\db\ActiveRecord
             [['userId', 'postId'], 'integer'],
             [['message'], 'string'],
             [['postId'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['postId' => 'id']],
-            [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['userId' => 'id']],
+            [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
         ];
     }
 
@@ -67,7 +67,7 @@ class Comments extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Users::className(), ['id' => 'userId']);
+        return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 
     public static function getDataProvider(){

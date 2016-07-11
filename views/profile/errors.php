@@ -25,6 +25,12 @@ $this->title = 'Error';
          <p>
               3. User, which you are going to (delete,accept) (to,from) friends delete you from friends already.
          </p>
+         <p>
+              4. You are trying to delete comment by wrong id.
+         </p>
+         <p>
+              5. You are trying to add comment to unknown post.
+         </p>
     </div>
 
 </div>

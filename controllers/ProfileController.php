@@ -11,7 +11,9 @@ use app\models\ContactForm;
 use app\models\User;
 use app\models\Friends;
 use app\models\Role;
+use app\models\Posts;
 use app\models\Profile;
+use app\models\Comments;
 use yii\data\Pagination;
 use app\models\search\UserSearch;
 use app\models\search\PostsSearch;
@@ -28,7 +30,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept', 'requests', 'waiting','errors'],
+                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept', 'requests', 'waiting','errors', 'deletecomment', 'comment'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -204,6 +206,38 @@ class ProfileController extends Controller{
                    }
               }
           }
+
+         return $this->redirect('errors');
+
+    }
+
+    public function actionComment($id){
+
+         $modelPosts = Posts::find()->where(['id' => $id])->one();
+         if(!empty($modelPosts)){
+              $model = new Comments();
+              $model->userId = Yii::$app->user->id;
+              $model->postId = $id;
+              if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
+                   return $this->redirect([Url::previous()]);
+              }
+
+              return $this->render('comment', ['model' => $model, 'modelPosts' => $modelPosts]);
+         }
+
+         return $this->redirect('errors');
+
+    }
+
+    public function actionDeletecomment($id){
+         if(is_numeric($id)){
+              $removeComment = Comments::find()->where(['id' => $id, 'userId' => Yii::$app->user->id])->one();
+              if(!empty($removeComment)){
+                   if($removeComment->delete()){
+                        return $this->redirect([Url::previous()]);
+                   }
+              }
+         }
 
          return $this->redirect('errors');
 

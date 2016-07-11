@@ -115,3 +115,18 @@
 .myGridView{
      width: 100%;
 }
+
+.comments{
+     margin: auto;
+     width: 80%;
+}
+
+.commentWrapper{
+     margin: auto;
+     margin-bottom: 10px;
+     width: 100%;
+     border-bottom: 1px solid rgb(157,157,157);
+     border-top: 1px solid rgb(157,157,157);
+     border-radius: 10px;
+     padding: 20px;
+}
