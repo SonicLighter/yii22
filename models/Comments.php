@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "comments".
@@ -67,4 +69,20 @@ class Comments extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::className(), ['id' => 'userId']);
     }
+
+    public static function getDataProvider(){
+
+          $query = Comments::find()->where(['userId' => Yii::$app->user->getId()])->orderBy('id DESC');
+
+          $dataProvider = new ActiveDataProvider([
+              'query' => $query,
+              'pagination' => [
+                  'pageSize' => 5,
+               ],
+          ]);
+
+          return $dataProvider;
+
+    }
+
 }

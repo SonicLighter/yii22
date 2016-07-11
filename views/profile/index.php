@@ -8,6 +8,7 @@ use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\grid\DataColumn;
+use yii\widgets\ListView;
 
 $this->title = $model->username;
 //$this->params['breadcrumbs'][] = $this->title;
@@ -75,6 +76,14 @@ $this->title = $model->username;
                                    'value' => function($model){
                                         $buttonUpdate = "";
                                         $buttonDelete = "";
+                                        $listView = "";
+                                        if($model->commentsCount != 0){
+                                             $listView = "<br/>".ListView::widget([
+                                                  'dataProvider' => $model->postComments,
+                                                  'summary' => false,
+                                                  'itemView' => 'lists/comments',
+                                             ]);
+                                        }
                                         if($model->userId == Yii::$app->user->id){
                                              $buttonUpdate = " | ".Html::a('Update', [Url::toRoute(['posts/update', 'id' => $model->id])])." | ";
                                              $buttonDelete = Html::a('Delete', [Url::toRoute(['posts/delete', 'id' => $model->id])]);
@@ -88,6 +97,7 @@ $this->title = $model->username;
                                                   <hr/>
                                              Created: ".$model->dateCreate." | Updated: ".$model->dateUpdate." ".$buttonUpdate." ".$buttonDelete."
                                              </div>
+                                             ".$listView."
                                         ";
                                         return $resultString;
                                    },

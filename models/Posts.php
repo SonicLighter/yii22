@@ -106,4 +106,31 @@ class Posts extends \yii\db\ActiveRecord
 
     }
 
+    // Comments
+    public function getComments()
+    {
+        return $this->hasMany(Comments::className(), ['postId' => 'id']);
+    }
+
+    public function getCommentsCount(){
+
+         return count($this->comments);
+
+    }
+
+    public function getPostComments(){
+
+         $query = Comments::find()->where(['postId' => $this->id]);
+
+         $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                 'pageSize' => 3,
+              ],
+         ]);
+
+         return $dataProvider;
+
+    }
+
 }
