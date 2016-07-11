@@ -20,7 +20,6 @@ $this->title = $model->username;
            <?php
                if($model->id == Yii::$app->user->id){
                     echo Html::a("<div class='userMenu'>Edit Profile</div>", [Url::toRoute(['edit'])]);
-                    echo Html::a("<div class='userMenu'>Set Profile Picture</div>", [Url::toRoute(['picture'])]);
                     echo Html::a("<div class='userMenu'>New Friends (".$waitingCount.")</div>", [Url::toRoute(['waiting'])]);
                     echo Html::a("<div class='userMenu'>My Requests (".$notAcceptedCount.")</div>", [Url::toRoute(['requests'])]);
                }
