@@ -88,4 +88,16 @@ class Posts extends \yii\db\ActiveRecord
 
     }
 
+    public function beforeDelete(){
+
+         if(parent::beforeDelete()){
+             Comments::deleteAll(['postId' => $this->id]);  // deleting all comments before post
+             return true;
+         }
+         else{
+              return false;
+         }
+
+    }
+
 }

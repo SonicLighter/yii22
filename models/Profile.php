@@ -33,10 +33,10 @@ class Profile extends User{
                ['username', 'required', 'on' => 'editProfile'],
                ['editPassword', 'boolean', 'on' => 'editProfile'],
                ['active', 'boolean', 'on' => 'editProfile'],
-               ['newPassword', 'string', 'min' => 6, 'on' => 'editProfile'],
+               ['newPassword', 'string', 'on' => 'editProfile'],
                ['editPassword', 'validateEditPassword', 'on' => 'editProfile'],
                //['picture', 'validateFileName', 'on' => 'editPicture'],
-               [['picture'], 'file', 'extensions' => 'png, jpg', 'on' => 'editPicture'],
+               [['picture'], 'file', 'extensions' => 'png, jpg', 'on' => 'editProfile'],
           ];
 
      }

@@ -80,6 +80,11 @@ http://localhost/basic/web/
 
 ### Getting Started
 
+Use to install kartik/fileInput:
+~~~
+composer require kartik-v/yii2-widget-fileinput "@dev"
+~~~
+
 Before you can go on you need to use following command, which allows you to create table for storing users data:
 
 ~~~

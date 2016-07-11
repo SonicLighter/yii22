@@ -81,14 +81,7 @@ AppAsset::register($this);
                      'items' => [
                          ['label' => 'My Profile', 'url' => Url::toRoute(['/profile/index', 'id' => Yii::$app->user->id])],
                          ['label' => 'Friends', 'url' => '/profile/friends'],
-                         '<li>'
-                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                         . Html::submitButton(
-                             'Logout (' . Yii::$app->user->identity->email . ')',
-                             ['class' => 'btn btn-default']
-                         )
-                         . Html::endForm()
-                         . '</li>'
+                         ['label' => 'Logout (' . Yii::$app->user->identity->email . ')', 'url' => '/site/logout'],
                      ],
                 ]
 

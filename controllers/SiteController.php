@@ -26,17 +26,19 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'actions' => ['logout'],
-                        'allow' => true,
+                        'allow' => !Yii::$app->user->isGuest,
                         'roles' => ['@'],
                     ],
                 ],
             ],
+            /*
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
             ],
+            */
         ];
     }
 
