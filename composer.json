@@ -21,7 +21,8 @@
         "kartik-v/yii2-widget-fileinput": "@dev",
         "bupy7/yii2-bbcode": "1.*",
         "asofter/yii2-imperavi-redactor": "*",
-        "2amigos/yii2-tinymce-widget": "*"
+        "2amigos/yii2-tinymce-widget": "*",
+        "kop/yii2-scroll-pager": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

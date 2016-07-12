@@ -110,6 +110,37 @@ use dosamigos\tinymce\TinyMce;
     ]
 ]);?>
 ```
+For scroll:
+~~~
+composer require kop/yii2-scroll-pager "dev-master"
+~~~
+
+Usage:
+ListView:
+
+```php
+echo ListView::widget([
+     'dataProvider' => $dataProvider,
+     'itemOptions' => ['class' => 'item'],
+     'itemView' => '_item_view',
+     'pager' => ['class' => \kop\y2sp\ScrollPager::className()]
+]);
+```
+
+GridView:
+
+```php
+echo GridView::widget([
+     'dataProvider' => $dataProvider,
+     'pager' => [
+        'class' => \kop\y2sp\ScrollPager::className(),
+        'container' => '.grid-view tbody',
+        'item' => 'tr',
+        'paginationSelector' => '.grid-view .pagination',
+        'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer">{text}</a></td></tr>',
+     ],
+]);
+```
 
 Before you can go on you need to use following command, which allows you to create table for storing users data:
 

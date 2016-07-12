@@ -59,14 +59,18 @@ class ProfileController extends Controller{
               $model = User::findIdentity($id);
               if(!empty($model)){
                    Url::remember();
+
                    $searchModel = new PostsSearch($id);
                    $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+                   //$dataProvider = Posts::getPagePosts($id);
                    return $this->render('index',[
                         'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,
                         'notAcceptedCount' => User::getNotAcceptedCount(),
                         'waitingCount' => User::getWaitingCount(),
                         'model' => $model,
+                        'loadCount' => Posts::getLoadCount($id),
                    ]);
               }
          }

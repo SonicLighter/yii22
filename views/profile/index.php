@@ -9,6 +9,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\grid\DataColumn;
 use yii\widgets\ListView;
+use \kop\y2sp\ScrollPager;
 
 $this->title = $model->username;
 //$this->params['breadcrumbs'][] = $this->title;
@@ -61,11 +62,17 @@ $this->title = $model->username;
                           'tableOptions' => [
                               'class' => 'myGridView', /*table table-striped table-bordered*/
                           ],
-                          /*
-                          'rowOptions' => [
-                               'style' => 'border: 0px solid',
+                          'pager' => [
+                                 'class' => ScrollPager::className(),
+                                 'container' => '.grid-view tbody',
+                                 'item' => 'tr',
+                                 'paginationSelector' => '.grid-view .pagination',
+                                 'triggerText' => 'Load more posts...',
+                                 'noneLeftText' => 'End of page',
+                                 'triggerOffset' => $loadCount,
+                                 'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="userMenu">{text}</div></div>',
+                                 'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
                           ],
-                          */
                           'columns' => [
                               [
                                    'class' => DataColumn::className(),
@@ -81,7 +88,9 @@ $this->title = $model->username;
                                              $listView = "<br/><div class='comments'>".ListView::widget([
                                                   'dataProvider' => $model->postComments,
                                                   'summary' => false,
+                                                  //'itemOptions' => ['class' => 'item'],
                                                   'itemView' => 'lists/comments',
+                                                  //'pager' => ['class' => ScrollPager::className()],
                                              ])."</div>";
                                         }
                                         if($model->userId == Yii::$app->user->id){

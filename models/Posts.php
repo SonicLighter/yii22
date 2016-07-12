@@ -79,6 +79,27 @@ class Posts extends \yii\db\ActiveRecord
 
     }
 
+    public static function getPagePosts($id){
+
+         $query = Posts::find()->where(['userId' => $id])->orderBy('id DESC');
+
+         $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                 'pageSize' => 10,
+              ],
+         ]);
+
+         return $dataProvider;
+
+    }
+
+    public static function getLoadCount($id){
+
+         return Posts::find()->where(['userId' => $id])->orderBy('id DESC')->count()/10;
+
+    }
+
     public static function getCurrentPost($postId){
 
          return Posts::find()->where(['userId' => Yii::$app->user->id, 'id' => $postId])->one();

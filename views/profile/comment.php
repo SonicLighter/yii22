@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <h4><?php echo $modelPosts->title; ?></h4>
               <hr/>
               <h4>Entire post:</h4>
-              <?php echo $modelPosts->text; ?>
+              <?php echo $modelPosts->content; ?>
               <hr/>
        </div>
        <div class="col-lg-5">

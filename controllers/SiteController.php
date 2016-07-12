@@ -109,10 +109,13 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         //echo Posts::getLoadCount(11);
+         /*
          $arraySender = ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id])->all(), 'receiverId');
          $arrayReceiver = ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id])->all(), 'senderId');
          print_r(Friends::find()->select('id')->all());
          die();
+         */
          /*
          $friends = Friends::findFriends(11);
          foreach ($friends as $friend) {
