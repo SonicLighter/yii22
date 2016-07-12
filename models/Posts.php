@@ -5,7 +5,7 @@ namespace app\models;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use Yii;
-use bupy7\bbcode\BBCodeBehavior;
+//use bupy7\bbcode\BBCodeBehavior;
 
 /**
  * This is the model class for table "posts".
@@ -31,42 +31,11 @@ class Posts extends \yii\db\ActiveRecord
         return 'posts';
     }
 
-    /**
-     * @inheritdoc
-     */
-
-     /*
-    public function behaviors()
-    {
-        return [
-            'content' => [
-                'class' => BBCodeBehavior::className(),
-                'attribute' => 'content',
-                'saveAttribute' => 'content',
-                'codeDefinitionBuilder' => [
-                    // as elements of array
-                    ['quote', '<blockquote>{param}</blockquote>'],
-
-                    // as class name where class is instance of extended class \JBBCode\CodeDefinitionBuilder
-                    '/namespace/to/CodeDefinitionBuilder/ExtendedClassName',
-                    function($builder) {
-                        $builder->setTagName('code');
-                        $builder->setReplacementText('<pre>{param}</pre>');
-                        return $builder->build();
-                    },
-                ],
-            ],
-        ];
-    }
-    */
-
-
     public function rules()
     {
         return [
             [['userId', 'title', 'content', 'dateCreate', 'dateUpdate'], 'required'],
             [['userId'], 'integer'],
-            //[['description', 'text'], 'string'],
             [['title', 'dateCreate', 'dateUpdate'], 'string', 'max' => 255],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
         ];

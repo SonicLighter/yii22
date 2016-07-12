@@ -86,11 +86,30 @@ Use to install kartik/fileInput:
 composer require kartik-v/yii2-widget-fileinput "@dev"
 ~~~
 
-Use following command to install BBcode text editor:
+Use following command to install TinyMce text editor:
 
 ~~~
-composer require bupy7/yii2-bbcode "1.*"
+composer require "2amigos/yii2-tinymce-widget" "*" or add "2amigos/yii2-tinymce-widget" : "*"
 ~~~
+
+The usage is pretty simple and doesn't differ much from other similar widgets:
+
+```php
+use dosamigos\tinymce\TinyMce;
+
+<?= $form->field($model, 'text')->widget(TinyMce::className(), [
+    'options' => ['rows' => 6],
+    'language' => 'es',
+    'clientOptions' => [
+        'plugins' => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    ]
+]);?>
+```
 
 Before you can go on you need to use following command, which allows you to create table for storing users data:
 

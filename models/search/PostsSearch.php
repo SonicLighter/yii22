@@ -25,7 +25,7 @@ class PostsSearch extends Posts{
 
           return[
                [['id'], 'integer'],
-               [['title', 'description', 'text', 'dateCreate', 'dateUpdate'], 'safe'],
+               [['title', 'content', 'dateCreate', 'dateUpdate'], 'safe'],
           ];
 
      }
