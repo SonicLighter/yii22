@@ -11,21 +11,24 @@ $this->title = 'Create Post';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
+
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+
 
     <div class="row">
-       <div class="col-lg-5">
-
+         <div class='postCreate'>
+            <h1><?= Html::encode($this->title) ?></h1>
             <?php $form = ActiveForm::begin(['id' => 'posts-form']); ?>
 
                 <?= $form->field($model, 'userId')->hiddenInput(['autofocus' => true, 'value' => Yii::$app->user->getId()])->label(false) ?>
 
                 <?= $form->field($model, 'title')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'description')->textarea(['autofocus' => true, 'rows' => 5]) ?>
+                <?= $form->field($model, 'content')->textArea(['rows' => 10]); ?>
 
-                <?= $form->field($model, 'text')->textarea(['autofocus' => true, 'rows' => 8]) ?>
 
                 <?= $form->field($model, 'dateCreate')->hiddenInput(['autofocus' => true, 'value' => $date])->label(false) ?>
 

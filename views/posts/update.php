@@ -23,9 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'title')->textInput(['autofocus' => true, 'value' => $model->title]) ?>
 
-                <?= $form->field($model, 'description')->textarea(['autofocus' => true, 'rows' => 5, 'value' => $model->description]) ?>
-
-                <?= $form->field($model, 'text')->textarea(['autofocus' => true, 'rows' => 8, 'value' => $model->text]) ?>
+                <?= $form->field($model, 'content')->textarea(['autofocus' => true, 'rows' => 8, 'value' => $model->content]) ?>
 
                 <?= $form->field($model, 'dateCreate')->hiddenInput(['autofocus' => true, 'value' => $model->dateCreate])->label(false) ?>
 

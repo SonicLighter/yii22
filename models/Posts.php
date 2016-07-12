@@ -5,6 +5,7 @@ namespace app\models;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use Yii;
+use bupy7\bbcode\BBCodeBehavior;
 
 /**
  * This is the model class for table "posts".
@@ -21,6 +22,7 @@ use Yii;
  */
 class Posts extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -32,12 +34,39 @@ class Posts extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+     /*
+    public function behaviors()
+    {
+        return [
+            'content' => [
+                'class' => BBCodeBehavior::className(),
+                'attribute' => 'content',
+                'saveAttribute' => 'content',
+                'codeDefinitionBuilder' => [
+                    // as elements of array
+                    ['quote', '<blockquote>{param}</blockquote>'],
+
+                    // as class name where class is instance of extended class \JBBCode\CodeDefinitionBuilder
+                    '/namespace/to/CodeDefinitionBuilder/ExtendedClassName',
+                    function($builder) {
+                        $builder->setTagName('code');
+                        $builder->setReplacementText('<pre>{param}</pre>');
+                        return $builder->build();
+                    },
+                ],
+            ],
+        ];
+    }
+    */
+
+
     public function rules()
     {
         return [
-            [['userId', 'title', 'description', 'text', 'dateCreate', 'dateUpdate'], 'required'],
+            [['userId', 'title', 'content', 'dateCreate', 'dateUpdate'], 'required'],
             [['userId'], 'integer'],
-            [['description', 'text'], 'string'],
+            //[['description', 'text'], 'string'],
             [['title', 'dateCreate', 'dateUpdate'], 'string', 'max' => 255],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
         ];
@@ -52,8 +81,7 @@ class Posts extends \yii\db\ActiveRecord
             'id' => 'ID',
             'userId' => 'User ID',
             'title' => 'Title',
-            'description' => 'Description',
-            'text' => 'Text',
+            'content' => 'Content',
             'dateCreate' => 'Date Create',
             'dateUpdate' => 'Date Update',
         ];

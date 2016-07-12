@@ -93,7 +93,7 @@ $this->title = $model->username;
                                                   <h4>".$model->title."</h4>
                                                   <hr/>
                                                   <h4>Entire post:</h4>
-                                                  ".$model->text."
+                                                  ".$model->content."
                                                   <hr/>
                                              Created: ".$model->dateCreate." | Updated: ".$model->dateUpdate." | Comments: ".$model->commentsCount."
                                              | ".Html::a('Add comment', [Url::toRoute(['comment', 'id' => $model->id])])." ".$buttonUpdate." ".$buttonDelete."

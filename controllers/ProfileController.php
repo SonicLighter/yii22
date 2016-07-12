@@ -20,6 +20,7 @@ use app\models\search\PostsSearch;
 use yii\web\UploadedFile;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
+use bupy7\bbcode\BBCodeBehavior;
 
 class ProfileController extends Controller{
 
