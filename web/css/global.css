@@ -121,6 +121,12 @@
      width: 80%;
 }
 
+.commentsWrapper{
+     margin: auto;
+     margin-bottom: 10px;
+     width: 90%;
+}
+
 .commentWrapper{
      margin: auto;
      margin-bottom: 10px;
@@ -129,6 +135,25 @@
      border-top: 1px solid rgb(157,157,157);
      border-radius: 10px;
      padding: 20px;
+}
+
+.commentLeftColumn{
+     width: 20%;
+     display: inline-block;
+}
+
+.commentMiddleColumn{
+     width: 68%;
+     display: inline-block;
+     /*border-right: 1px solid rgb(157,157,157);
+     border-left: 1px solid rgb(157,157,157);*/
+     padding: 5px;
+     vertical-align: top;
+}
+
+.commentRightColumn{
+     display: inline-block;
+     vertical-align: bottom;;
 }
 
 .postCreate{

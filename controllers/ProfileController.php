@@ -220,6 +220,7 @@ class ProfileController extends Controller{
 
          $modelPosts = Posts::find()->where(['id' => $id])->one();
          if(!empty($modelPosts)){
+              Url::remember();
               $model = new Comments();
               $model->userId = Yii::$app->user->id;
               $model->postId = $id;

@@ -9,15 +9,13 @@ use yii\bootstrap\ActiveForm;
 use dosamigos\tinymce\TinyMce;
 
 $this->title = 'Update Post';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="row">
+     <div class="row">
          <div class='postCreate'>
-
+            <h1><?= Html::encode($this->title) ?></h1>
             <?php $form = ActiveForm::begin(['id' => 'posts-form']); ?>
 
                 <?= $form->field($model, 'userId')->hiddenInput(['value' => $model->userId])->label(false) ?>

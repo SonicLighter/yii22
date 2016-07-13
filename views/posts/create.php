@@ -9,7 +9,6 @@ use yii\bootstrap\ActiveForm;
 use dosamigos\tinymce\TinyMce;
 
 $this->title = 'Create Post';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 

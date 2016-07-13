@@ -143,7 +143,7 @@ class Posts extends \yii\db\ActiveRecord
          $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                 'pageSize' => 2,
+                 'pageSize' => 10,
               ],
          ]);
 

@@ -83,6 +83,7 @@ $this->title = $model->username;
                                    'value' => function($model){
                                         $buttonUpdate = "";
                                         $buttonDelete = "";
+                                        /*
                                         $listView = "";
                                         if($model->commentsCount != 0){
                                              $listView = "<br/><div class='comments'>".ListView::widget([
@@ -93,6 +94,7 @@ $this->title = $model->username;
                                                   //'pager' => ['class' => ScrollPager::className()],
                                              ])."</div>";
                                         }
+                                        */
                                         if($model->userId == Yii::$app->user->id){
                                              $buttonUpdate = " | ".Html::a('Update', [Url::toRoute(['posts/update', 'id' => $model->id])])." | ";
                                              $buttonDelete = Html::a('Delete', [Url::toRoute(['posts/delete', 'id' => $model->id])]);
@@ -105,9 +107,8 @@ $this->title = $model->username;
                                                   ".$model->content."
                                                   <hr/>
                                              Created: ".$model->dateCreate." | Updated: ".$model->dateUpdate." | Comments: ".$model->commentsCount."
-                                             | ".Html::a('Add comment', [Url::toRoute(['comment', 'id' => $model->id])])." ".$buttonUpdate." ".$buttonDelete."
+                                             | ".Html::a('Add comment', Url::toRoute(['comment', 'id' => $model->id]))." ".$buttonUpdate." ".$buttonDelete."
                                              </div>
-                                             ".$listView."
                                         ";
                                         return $resultString;
                                    },

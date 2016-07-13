@@ -50,7 +50,7 @@ class Comments extends \yii\db\ActiveRecord
             'id' => 'ID',
             'userId' => 'User ID',
             'postId' => 'Post ID',
-            'message' => 'Message',
+            'message' => 'Leave comment:',
         ];
     }
 
