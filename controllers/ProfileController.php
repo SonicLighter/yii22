@@ -78,10 +78,10 @@ class ProfileController extends Controller{
 
     }
 
-    public function actionEdit(){
+    public function actionEdit($scenario = 'editProfile'){
 
          $model = Profile::findOne(Yii::$app->user->id);
-         $model->scenario = 'editProfile';
+         $model->scenario = $scenario;
          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
               return $this->redirect([Url::previous()]);
          }
@@ -93,7 +93,7 @@ class ProfileController extends Controller{
     public function actionPicture(){
 
          $model = Profile::findOne(Yii::$app->user->id);
-         $model->scenario = 'editPicture';
+         //$model->scenario = 'editPicture';
          $fileToDelete = $model->profilePicture;
          if(Yii::$app->request->isPost){
               $model->picture = UploadedFile::getInstance($model, 'picture');
@@ -107,7 +107,7 @@ class ProfileController extends Controller{
               */
          }
 
-         return $this->redirect(['profile/edit']);
+         return $this->redirect(['profile/edit', 'scenario' => 'editPicture']);
 
     }
 
