@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6b994470d74723227625567e50c93390",
-    "content-hash": "d389c5df851e1b106e55f2f1d7b8b346",
+    "hash": "ba1c8db71e89fa09b017ff0b6eff12c6",
+    "content-hash": "65ca477aa19b212d7d2d7b6f7725f05a",
     "packages": [
         {
             "name": "2amigos/yii2-tinymce-widget",
@@ -66,57 +66,6 @@
                 "yii2"
             ],
             "time": "2015-03-28 21:53:43"
-        },
-        {
-            "name": "asofter/yii2-imperavi-redactor",
-            "version": "0.0.3",
-            "target-dir": "yii/imperavi",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/asofter/yii2-imperavi-redactor.git",
-                "reference": "08e05dd323f7b8f247a68324a5767eb14ffb7a1f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/asofter/yii2-imperavi-redactor/zipball/08e05dd323f7b8f247a68324a5767eb14ffb7a1f",
-                "reference": "08e05dd323f7b8f247a68324a5767eb14ffb7a1f",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-0": {
-                    "yii\\imperavi\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Yaremchuk",
-                    "email": "alwex10@gmail.com"
-                },
-                {
-                    "name": "Veaceslav Medvedev",
-                    "email": "slavcopost@gmail.com"
-                },
-                {
-                    "name": "Alexander Makarov",
-                    "email": "sam@rmcreative.ru",
-                    "homepage": "http://rmcreative.ru/"
-                }
-            ],
-            "description": "Imperavi Redactor WYSIWYG widget (OEM-licensed for Yii 2)",
-            "keywords": [
-                "imperavi",
-                "imperavi redactor",
-                "yii"
-            ],
-            "time": "2016-01-12 16:21:51"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -307,52 +256,6 @@
             ]
         },
         {
-            "name": "bupy7/yii2-bbcode",
-            "version": "v1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bupy7/yii2-bbcode.git",
-                "reference": "c5be890ddf65d3e86a2468f61a938d34737dba45"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bupy7/yii2-bbcode/zipball/c5be890ddf65d3e86a2468f61a938d34737dba45",
-                "reference": "c5be890ddf65d3e86a2468f61a938d34737dba45",
-                "shasum": ""
-            },
-            "require": {
-                "jbbcode/jbbcode": "1.3.*",
-                "php": ">=5.4.0"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "bupy7\\bbcode\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Vasilij Belosludcev",
-                    "email": "bupy765@gmail.com",
-                    "homepage": "http://mihaly4.ru"
-                }
-            ],
-            "description": "A lightweight but extensible BBCode parser for Yii2 with filter HtmlPurifier.",
-            "homepage": "https://github.com/bupy7/yii2-bbcode",
-            "keywords": [
-                "Behavior",
-                "bbcode",
-                "extension",
-                "parser",
-                "yii2"
-            ],
-            "time": "2015-02-08 17:38:59"
-        },
-        {
             "name": "cebe/markdown",
             "version": "1.1.0",
             "source": {
@@ -455,52 +358,6 @@
                 "html"
             ],
             "time": "2015-08-05 01:03:42"
-        },
-        {
-            "name": "jbbcode/jbbcode",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jbowens/jBBCode.git",
-                "reference": "645b6a1c0afa92b7d029d3417ebd8b60a5c578b3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jbowens/jBBCode/zipball/645b6a1c0afa92b7d029d3417ebd8b60a5c578b3",
-                "reference": "645b6a1c0afa92b7d029d3417ebd8b60a5c578b3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "JBBCode": "."
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jackson Owens",
-                    "email": "jackson_owens@alumni.brown.edu",
-                    "homepage": "http://jbowens.org/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A lightweight but extensible BBCode parser written in PHP 5.3.",
-            "homepage": "http://jbbcode.com/",
-            "keywords": [
-                "BB",
-                "bbcode"
-            ],
-            "time": "2014-07-06 05:48:20"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
@@ -711,23 +568,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -760,7 +617,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "tinymce/tinymce",
@@ -850,20 +707,20 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.8",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "53992b136b993e32ca7b6f399cf42b143f8685a6"
+                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/53992b136b993e32ca7b6f399cf42b143f8685a6",
-                "reference": "53992b136b993e32ca7b6f399cf42b143f8685a6",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2b75151ea60e1fd820046416eee2e89c3dda1133",
+                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable",
+                "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
                 "bower-asset/jquery.inputmask": "~3.2.2",
                 "bower-asset/punycode": "1.3.*",
                 "bower-asset/yii2-pjax": "~2.0.1",
@@ -940,7 +797,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-04-28 14:50:20"
+            "time": "2016-07-11 13:36:42"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
