@@ -31,7 +31,7 @@ class ProfileController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept', 'requests', 'waiting','errors', 'deletecomment', 'comment'],
+                         'actions' => ['index', 'edit', 'picture', 'search', 'friends', 'invite', 'remove', 'accept', 'requests', 'waiting','errors', 'deletecomment', 'comment', 'info'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -78,10 +78,10 @@ class ProfileController extends Controller{
 
     }
 
-    public function actionEdit($scenario = 'editProfile'){
+    public function actionEdit(){
 
          $model = Profile::findOne(Yii::$app->user->id);
-         $model->scenario = $scenario;
+         $model->scenario = 'editProfile';
          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
               return $this->redirect([Url::previous()]);
          }
@@ -93,21 +93,25 @@ class ProfileController extends Controller{
     public function actionPicture(){
 
          $model = Profile::findOne(Yii::$app->user->id);
-         //$model->scenario = 'editPicture';
-         $fileToDelete = $model->profilePicture;
+         $model->scenario = 'editPicture';
          if(Yii::$app->request->isPost){
               $model->picture = UploadedFile::getInstance($model, 'picture');
               $model->picture->saveAs(Yii::getAlias('@profilePictures').'/'.$model->id.'.jpg');
-              /*
-              if(isset($model->picture) && $model->uploadPicture() && $model->save()){
-                   if($fileToDelete != Yii::getAlias('@noAvatar')){
-                        unlink($fileToDelete);
-                   }
-              }
-              */
          }
 
-         return $this->redirect(['profile/edit', 'scenario' => 'editPicture']);
+         return $this->render('edit', ['model' => $model]);
+
+    }
+
+    public function actionInfo(){
+
+         $model = Profile::findOne(Yii::$app->user->id);
+         $model->scenario = 'profileInfo';
+         if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
+              return $this->redirect([Url::previous()]);
+         }
+
+         return $this->render('edit', ['model' => $model]);
 
     }
 

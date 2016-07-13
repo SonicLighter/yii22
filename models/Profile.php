@@ -14,6 +14,7 @@ class Profile extends User{
      public $editPassword = true;
      public $newRole;
      public $picture;
+     public $dob;
      //public $activeNew;
 
 
@@ -30,6 +31,7 @@ class Profile extends User{
      public function rules(){
 
           return [
+               ['dob', 'validateDob', 'on' => 'profileInfo'],
                ['username', 'required', 'on' => 'editProfile'],
                ['editPassword', 'boolean', 'on' => 'editProfile'],
                ['active', 'boolean', 'on' => 'editProfile'],
@@ -37,6 +39,8 @@ class Profile extends User{
                ['editPassword', 'validateEditPassword', 'on' => 'editProfile'],
                //['picture', 'validateFileName', 'on' => 'editPicture'],
                [['picture'], 'file', 'extensions' => 'png, jpg', 'on' => 'editPicture'],
+               ['dob', 'required', 'on' => 'profileInfo'],
+               [['dob'], 'string', 'max' => 255],
           ];
 
      }
@@ -47,7 +51,14 @@ class Profile extends User{
             'newPassword' => 'New Password',
             'editPassword' => 'Edit Password',
             'active' => 'Press to change your account status',
+            'dob' => 'Date of Birth',
         ];
+    }
+
+    public function validateDob($attribute){
+
+         $this->birthday = $this->dob;
+
     }
 
     public function validateEditPassword(){

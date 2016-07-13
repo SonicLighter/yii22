@@ -32,7 +32,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             ['newRole', 'validateRole', 'on' => 'update'],
             ['email', 'unique', 'message' => 'Such e-mail address already exists!', 'on' => 'create'],   // username
             [['email','username','password','newRole'], 'required'],
-            [['username', 'password', 'authKey', 'accessToken','email'], 'string', 'max' => 255],
+            [['username', 'password', 'authKey', 'accessToken','email', 'address', 'birthday', 'phone'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,6 +50,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'userRole' => 'User Role',
             'postCount' => 'Posts Count',
             'email' => 'E-mail',
+            'birthday' => 'Date of Birth',
+            'phone' => 'Phone',
+            'address' => 'Address',
             //'admin' => 'Admin',
         ];
     }

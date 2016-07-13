@@ -6,14 +6,16 @@ class m160713_155336_extendInfo extends Migration
 {
     public function up()
     {
-
+         $this->addColumn('users', 'birthday', $this->string());
+         $this->addColumn('users', 'phone', $this->string());
+         $this->addColumn('users', 'address', $this->string());
     }
 
     public function down()
     {
-        echo "m160713_155336_extendInfo cannot be reverted.\n";
-
-        return false;
+         $this->dropColumn('users', 'birthday');
+         $this->dropColumn('users', 'phone');
+         $this->dropColumn('users', 'address');
     }
 
     /*

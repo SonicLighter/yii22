@@ -23,10 +23,17 @@ $this->title = 'Edit Profile';
              <?php
                     $pictureActive = true;
                     $accessActive = true;
+                    $infoActive = true;
                     if($model->scenario == "editProfile"){
                          $pictureActive = false;
+                         $infoActive = false;
+                    }
+                    else if($model->scenario == "editPicture"){
+                         $accessActive = false;
+                         $infoActive = false;
                     }
                     else{
+                         $pictureActive = false;
                          $accessActive = false;
                     }
              ?>
@@ -48,8 +55,11 @@ $this->title = 'Edit Profile';
                              'active' => $accessActive,
                          ],
                          [
-                             'label' => 'Example',
-                             'url' => 'http://www.example.com',
+                             'label' => 'Profile info',
+                             'content' => Yii::$app->controller->renderPartial('edit/info', [
+                                  'model' => $model,
+                             ]),
+                             'active' => $infoActive,
                          ],
                      ],
                  ])
