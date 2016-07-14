@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7188f97367d964d38347487c768e7cc",
-    "content-hash": "dd676cda5e8698064fc22d24e099c07a",
+    "hash": "2c29fbff5fc12afea769a5cc67689a9a",
+    "content-hash": "d382235ab2a9c026755962240982c874",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -129,6 +129,51 @@
             "time": "2015-03-28 21:53:43"
         },
         {
+            "name": "borales/yii2-phone-input",
+            "version": "0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Borales/yii2-phone-input.git",
+                "reference": "1f4eeb6b2d4fdc282ef44a2c354227b18aa3cceb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Borales/yii2-phone-input/zipball/1f4eeb6b2d4fdc282ef44a2c354227b18aa3cceb",
+                "reference": "1f4eeb6b2d4fdc282ef44a2c354227b18aa3cceb",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/intl-tel-input": "*",
+                "giggsey/libphonenumber-for-php": "^7",
+                "yiisoft/yii2": ">=2.0.1"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "borales\\extensions\\phoneInput\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Borales (Alexandr Bordun)",
+                    "email": "bordun.alexandr@gmail.com"
+                }
+            ],
+            "description": "Yii2 International telephone numbers - Asset Bundle, Behavior, Validator, Widget",
+            "homepage": "https://github.com/Borales/yii2-phone-input",
+            "keywords": [
+                "international telephone numbers",
+                "intl-tel-input",
+                "libphonenumber",
+                "yii2"
+            ],
+            "time": "2016-06-05 13:53:38"
+        },
+        {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.5",
             "source": {
@@ -207,6 +252,34 @@
             "license": [
                 "Apache-2.0"
             ]
+        },
+        {
+            "name": "bower-asset/intl-tel-input",
+            "version": "v9.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jackocnr/intl-tel-input.git",
+                "reference": "7ce2b87350c541bfac404cf4bcefaabedc8deb1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jackocnr/intl-tel-input/zipball/7ce2b87350c541bfac404cf4bcefaabedc8deb1c",
+                "reference": "7ce2b87350c541bfac404cf4bcefaabedc8deb1c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./build/js/intlTelInput.js",
+                    "./build/js/utils.js",
+                    "./build/img/flags.png",
+                    "./build/img/flags@2x.png",
+                    "./build/css/intlTelInput.css"
+                ]
+            }
         },
         {
             "name": "bower-asset/jquery",
@@ -450,6 +523,70 @@
                 "html"
             ],
             "time": "2015-08-05 01:03:42"
+        },
+        {
+            "name": "giggsey/libphonenumber-for-php",
+            "version": "7.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/giggsey/libphonenumber-for-php.git",
+                "reference": "75cc4cb41d1f590391f15484df5bdc13963c2b1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/75cc4cb41d1f590391f15484df5bdc13963c2b1a",
+                "reference": "75cc4cb41d1f590391f15484df5bdc13963c2b1a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "pear/pear-core-minimal": "^1.9",
+                "pear/pear_exception": "^1.0",
+                "pear/versioncontrol_git": "dev-master",
+                "phing/phing": "~2.7",
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.6",
+                "symfony/console": "^2.5"
+            },
+            "suggest": {
+                "ext-intl": "To use the geocoder and carrier mapping"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "libphonenumber": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Joshua Gigg",
+                    "email": "giggsey@gmail.com",
+                    "homepage": "http://giggsey.com/"
+                }
+            ],
+            "description": "PHP Port of Google's libphonenumber",
+            "homepage": "https://github.com/giggsey/libphonenumber-for-php",
+            "keywords": [
+                "geocoding",
+                "geolocation",
+                "libphonenumber",
+                "mobile",
+                "phonenumber",
+                "validation"
+            ],
+            "time": "2016-06-29 14:09:08"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",

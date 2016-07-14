@@ -82,6 +82,7 @@ class ProfileController extends Controller{
 
          $model = Profile::findOne(Yii::$app->user->id);
          $model->scenario = 'editProfile';
+         $model->dob = $model->birthday;
          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
               return $this->redirect([Url::previous()]);
          }
@@ -97,6 +98,7 @@ class ProfileController extends Controller{
          if(Yii::$app->request->isPost){
               $model->picture = UploadedFile::getInstance($model, 'picture');
               $model->picture->saveAs(Yii::getAlias('@profilePictures').'/'.$model->id.'.jpg');
+              return $this->redirect([Url::previous()]);
          }
 
          return $this->render('edit', ['model' => $model]);

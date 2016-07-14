@@ -42,12 +42,26 @@ $this->title = $model->username;
       <div class='profile-right_column'>
            <div class='profile-right_column-header'>
 
-                     Username: <?php echo $model->username ?> /
-                     E-mail: <?php echo $model->email ?> /
-                     Profile status: <?php echo ($model->active == 1) ? ('active') : ('not active'); ?>
+                     <?php echo $model->username ?> /
+                     Status: <?php echo ($model->active == 1) ? ('active') : ('not active'); ?> /
+                     Comments: <?php echo ($model->commentPermission == 1) ? ('allowed') : ('not allowed'); ?>
 
            </div>
+
            <div class='profile-right_column-content'>
+                E-mail: <?php echo $model->email ?><br/>
+                <?php
+                    if(!empty($model->birthday)){
+                         echo 'Date of Birth: '.$model->birthday.'<br/>';
+                    }
+                    if(!empty($model->phone)){
+                         echo 'Phone: '.$model->phone.'<br/>';
+                    }
+                    if(!empty($model->address)){
+                         echo 'Address: '.$model->address.'<br/>';
+                    }
+                ?>
+                <hr/><br/>
                 <?php
                     if($model->id == Yii::$app->user->id){
                          echo Html::a('New post', [Url::toRoute(['posts/create'])], ['class' => 'userMenu']);

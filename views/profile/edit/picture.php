@@ -9,7 +9,7 @@ use kartik\file\FileInput;
 use yii\bootstrap\Tabs;
 
 ?>
-<br/><hr/><br/>
+<br/><hr/>
 <p>
      Current picture:
 </p>

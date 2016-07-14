@@ -8,9 +8,10 @@ use yii\bootstrap\ActiveForm;
 use kartik\file\FileInput;
 use yii\bootstrap\Tabs;
 use dosamigos\datepicker\DatePicker;
+use borales\extensions\phoneInput\PhoneInput;
 
 ?>
-<br/><hr/><br/>
+<br/><hr/>
 
      <?php $form = ActiveForm::begin([
           'id' => 'posts-form',
@@ -26,6 +27,20 @@ use dosamigos\datepicker\DatePicker;
                       'format' => 'dd-M-yyyy'
                   ]
           ]);?>
+
+          <p>
+               Type code to your country, example (for Belarus): +375 29 000-00-00
+          </p>
+          <?=
+               $form->field($model, 'phone')->widget(PhoneInput::className(), [
+                   'jsOptions' => [
+                       //'preferredCountries' => ['by', 'ru', 'ua'],
+                       'onlyCountries' => ['by', 'ru', 'ua'],
+                   ]
+               ])
+          ?>
+
+          <?= $form->field($model, 'address')->textInput(['value' => $model->address]) ?>
 
           <div class="form-group">
                  <?= Html::submitButton('Edit Profile', ['class' => 'btn btn-primary', 'name' => 'info-button']) ?>

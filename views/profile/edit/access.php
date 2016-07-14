@@ -9,9 +9,12 @@ use kartik\file\FileInput;
 use yii\bootstrap\Tabs;
 
 ?>
-<br/><hr/><br/>
+<br/><hr/>
 
      <?php $form = ActiveForm::begin(['id' => 'posts-form']); ?>
+
+          <?= $form->field($model, 'commentPermission')->checkbox(); ?>
+
           <?php
              if($model->active == 1){
                   echo 'If you will uncheck following checkbox and press \'EDIT PROFILE\' button, your account became not active. That\'s mean, that other people can\'t find you by using search:';

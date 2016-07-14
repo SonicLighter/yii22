@@ -21,20 +21,21 @@ $this->title = 'Edit Profile';
        <div class='postCreate'>
              <h1><?= Html::encode($this->title) ?></h1><br/>
              <?php
-                    $pictureActive = true;
-                    $accessActive = true;
-                    $infoActive = true;
-                    if($model->scenario == "editProfile"){
-                         $pictureActive = false;
-                         $infoActive = false;
-                    }
-                    else if($model->scenario == "editPicture"){
-                         $accessActive = false;
-                         $infoActive = false;
-                    }
-                    else{
-                         $pictureActive = false;
-                         $accessActive = false;
+                    $pictureActive = false;
+                    $accessActive = false;
+                    $infoActive = false;
+                    switch ($model->scenario) {
+                         case 'editProfile':{
+                              $accessActive = true;
+                              break;
+                         }
+                         case 'editPicture':{
+                              $pictureActive = true;
+                              break;
+                         }
+                         default:
+                              $infoActive = true;
+                              break;
                     }
              ?>
             <?=

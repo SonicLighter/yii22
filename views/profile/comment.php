@@ -30,21 +30,33 @@ $this->title = 'Comments';
 
                  <?php $form = ActiveForm::begin(['id' => 'comments-form']); ?>
 
-                 <?= $form->field($model, 'message')->widget(TinyMce::className(), [
-                   'options' => ['rows' => 5],
-                   'language' => 'en_GB',
-                   'clientOptions' => [
-                       'plugins' => [
-                           "advlist autolink lists link charmap print preview anchor",
-                           "searchreplace visualblocks code fullscreen",
-                           "insertdatetime media table contextmenu paste"
-                       ],
-                       'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-                  ],
-                ]);?>
+                 <?php
+                      $changePermission = ($modelPosts->user->commentPermission == 1);
+                      if($changePermission || (Yii::$app->user->id == $modelPosts->userId)){
+                           echo $form->field($model, 'message')->widget(TinyMce::className(), [
+                             'options' => ['rows' => 5],
+                             'language' => 'en_GB',
+                             'clientOptions' => [
+                                 'plugins' => [
+                                     "advlist autolink lists link charmap print preview anchor",
+                                     "searchreplace visualblocks code fullscreen",
+                                     "insertdatetime media table contextmenu paste"
+                                 ],
+                                 'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                            ],
+                          ]);
+                     }
+                     else{
+                          echo '<br/><hr/><h4>'.$modelPosts->user->username.' changed some settings, which is not allow you to leave a comment here.</h4><hr/>';
+                     }
+                ?>
 
                      <div class="form-group">
-                         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'posts-button']) ?>
+                         <?php
+                              if($changePermission || (Yii::$app->user->id == $modelPosts->userId)){
+                                   echo Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'posts-button']);
+                              }
+                         ?>
                      </div>
 
                  <?php ActiveForm::end(); ?>

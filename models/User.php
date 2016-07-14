@@ -51,7 +51,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'postCount' => 'Posts Count',
             'email' => 'E-mail',
             'birthday' => 'Date of Birth',
-            'phone' => 'Phone',
+            'phone' => '',
             'address' => 'Address',
             //'admin' => 'Admin',
         ];
