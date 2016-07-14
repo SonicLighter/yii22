@@ -142,6 +142,18 @@ echo GridView::widget([
 ]);
 ```
 
+DataPicker:
+
+~~~
+composer require 2amigos/yii2-date-picker-widget:~1.0
+~~~
+
+Phones:
+
+~~~
+composer require "borales/yii2-phone-input" "*"
+~~~
+
 Before you can go on you need to use following command, which allows you to create table for storing users data:
 
 ~~~
