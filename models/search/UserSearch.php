@@ -8,6 +8,7 @@ use yii\base\Model;
 use app\models\User;
 use app\models\Friends;
 use app\models\Posts;
+use app\models\Messages;
 use yii\helpers\ArrayHelper;
 use Yii;
 
@@ -16,6 +17,7 @@ class UserSearch extends User{
      public $userRole;
      public $postCount;
      public $type;
+     public $newMessages;
 
      public function __construct($value = 'users'){
 
@@ -27,7 +29,7 @@ class UserSearch extends User{
 
           return[
                [['id'], 'integer'],
-               [['username', 'userRole', 'postCount', 'email'], 'safe'],
+               [['username', 'userRole', 'postCount', 'email', 'newMessages'], 'safe'],
           ];
 
      }
@@ -53,6 +55,10 @@ class UserSearch extends User{
               case 'waiting':
                    $query = User::find()->where(['id' => ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 0])->all(), 'senderId')]);
                    break;
+              case 'messages':{
+                   $query = User::find()->where(['id' => Messages::getUserDialogs()]);
+                   break;
+              }
               default:
                    $query = User::find();
                    break;
@@ -63,6 +69,11 @@ class UserSearch extends User{
          $query->leftJoin([
               'userPosts' => $subQuery,
          ], 'userPosts.userId=id');
+
+         $subQuery = Messages::find()->select('senderId, COUNT(senderId) as new_messages')->where(['opened' => 0, 'receiverId' => Yii::$app->user->id])->groupBy('senderId');
+         $query->leftJoin([
+            'userMessages' => $subQuery,
+       ], 'userMessages.senderId=id');
 
          $dataProvider = new ActiveDataProvider([
              'query' => $query,
@@ -93,6 +104,11 @@ class UserSearch extends User{
                       'asc' => ['userPosts.post_count' => SORT_ASC],
                       'desc' => ['userPosts.post_count' => SORT_DESC],
                       'label' => 'Posts Count',
+                 ],
+                 'newMessages' => [
+                      'asc' => ['userMessages.new_messages' => SORT_ASC],
+                      'desc' => ['userMessages.new_messages' => SORT_DESC],
+                      'label' => 'New Messages',
                  ],
             ],
          ]);

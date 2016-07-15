@@ -81,6 +81,8 @@ AppAsset::register($this);
                      'items' => [
                          ['label' => 'My Profile', 'url' => Url::toRoute(['/profile/index', 'id' => Yii::$app->user->id])],
                          ['label' => 'Friends', 'url' => '/profile/friends'],
+                         ['label' => 'Messages ('.Yii::$app->user->identity->myMessages.')', 'url' => '/messages/index'],
+                         ['label' => 'Settings', 'url' => '/profile/edit'],
                          ['label' => 'Logout (' . Yii::$app->user->identity->email . ')', 'url' => '/site/logout'],
                      ],
                 ]

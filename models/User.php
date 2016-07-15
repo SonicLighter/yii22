@@ -117,6 +117,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
              Posts::deleteAll(['userId' => $this->id]);     // deleting all posts by userId
              Friends::deleteAll(['senderId' => $this->id]); // deleting from friends
              Friends::deleteAll(['receiverId' => $this->id]);
+             Messages::deleteAll(['senderId' => $this->id]); // deleting from Messages
+             Messages::deleteAll(['receiverId' => $this->id]);
              return true;
          }
          else{
@@ -135,6 +137,19 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function getPostCount(){
 
          return $this->posts;
+
+    }
+
+    // Messages
+    public function getMessages(){
+
+          return $this->hasMany(Messages::className(), ['senderId' => 'id'])->where(['receiverId' => Yii::$app->user->id, 'opened' => 0])->count();
+
+    }
+
+    public function getNewMessages(){
+
+         return $this->messages;
 
     }
 
@@ -287,6 +302,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          }
 
          return $resultPicture;
+
+    }
+
+    public static function getMyMessages(){
+
+         return Messages::find()->where(['receiverId' => Yii::$app->user->id, 'opened' => 0])->count();
 
     }
 
