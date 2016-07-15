@@ -30,7 +30,7 @@ class MessagesController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index'],
+                         'actions' => ['index', 'view'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -63,7 +63,21 @@ class MessagesController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
               'pageType' => $pageType,
+              'loadPage' => User::getDialogLoading(),
          ]);
+
+    }
+
+    public function actionView($id){
+
+         $model = User::findIdentity($id);
+         if(!empty($model)){
+              return $this->render('view',[
+                   'model' => $model,
+              ]);
+         }
+
+         return $this->redirect(Url::toRoute('profile/errors'));
 
     }
 

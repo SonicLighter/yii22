@@ -29,17 +29,16 @@ $this->title = 'Dialogs';
                    'dataProvider' => $dataProvider,
                    'filterModel' => $searchModel,
                    'summary' => false,
-                   /*'pager' => [
+                   'pager' => [
                          'class' => ScrollPager::className(),
                          'container' => '.grid-view tbody',
                          'item' => 'tr',
                          'paginationSelector' => '.grid-view .pagination',
-                         'triggerText' => 'Load more posts...',
+                         'triggerText' => 'Load more dialogs...',
                          'noneLeftText' => 'End of page',
-                         'triggerOffset' => $loadCount,
-                         'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="userMenu">{text}</div></div>',
+                         'triggerOffset' => $loadPage,
                          'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
-                   ],*/
+                   ],
                    'columns' => [
                        [
                             'class' => DataColumn::className(),

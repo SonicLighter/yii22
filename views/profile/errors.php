@@ -31,6 +31,9 @@ $this->title = 'Error';
          <p>
               5. You are trying to add comment to unknown post.
          </p>
+         <p>
+              6. You are trying to open dialog with unknown user.
+         </p>
     </div>
 
 </div>
