@@ -72,6 +72,13 @@
 }
 */
 
+.registerPage{
+     width: 40%;
+     margin: auto;
+     text-align: left;
+     font-size: 15px;
+}
+
 .searchPage{
      width: 60%;
      margin: auto;

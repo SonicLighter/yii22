@@ -28,10 +28,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             ['email', 'validateEmail'],
-            ['email', 'validateUpdate', 'on' => 'update'],
+            ['email', 'validateUpdate'],
             ['newRole', 'validateRole', 'on' => 'update'],
             ['email', 'unique', 'message' => 'Such e-mail address already exists!', 'on' => 'create'],   // username
-            [['email','username','password','newRole'], 'required'],
+            [['email','username','password','newRole'], 'required', 'on' => 'create'],
+            [['email','username','password','newRole'], 'required', 'on' => 'update'],
             [['username', 'password', 'authKey', 'accessToken','email', 'address', 'birthday', 'phone'], 'string', 'max' => 255],
         ];
     }

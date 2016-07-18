@@ -14,6 +14,7 @@ use app\models\Role;
 use app\models\Posts;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 class SiteController extends Controller
 {
@@ -55,24 +56,56 @@ class SiteController extends Controller
         ];
     }
 
+
+    public function beforeAction($action){
+
+         switch ($action->controller->action->id) {
+              case 'index':
+              case 'login':{
+                   if (!Yii::$app->user->isGuest) {
+                     return $this->redirect(Url::toRoute(['profile/index', 'id' => Yii::$app->user->id]))->send();
+                   }
+                   break;
+              }
+              default:
+                   # code...
+                   break;
+         }
+
+         return true;
+
+    }
+
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $model = new User();
+        //$model->scenario = 'registration';
+        $model->active = 0;
+        $model->commentPermission = 1;
+        $model->newRole = 'user';
+        if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
+            return $this->redirect(['site/login']);
+        }
+
+        return $this->render('index',[
+             'model' => $model,
+        ]);
+
     }
 
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
+            // return $this->redirect(Url::toRoute(['profile/index', 'id' => Yii::$app->user->id]));
         }
         return $this->render('login', [
             'model' => $model,
         ]);
+
     }
 
     public function actionLogout()
