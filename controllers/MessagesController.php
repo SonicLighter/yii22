@@ -14,6 +14,7 @@ use app\models\Role;
 use app\models\Posts;
 use app\models\Profile;
 use app\models\Comments;
+use app\models\Messages;
 use yii\data\Pagination;
 use app\models\search\UserSearch;
 use app\models\search\PostsSearch;
@@ -30,7 +31,7 @@ class MessagesController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                         'actions' => ['index', 'view'],
+                         'actions' => ['index', 'view', 'add'],
                          'allow' => !Yii::$app->user->isGuest,
                          'roles' => ['@'],
                     ],
@@ -70,11 +71,40 @@ class MessagesController extends Controller{
 
     public function actionView($id){
 
-         $model = User::findIdentity($id);
-         if(!empty($model)){
+         $modelUser = User::findIdentity($id);
+         if(!empty($modelUser) && (Yii::$app->user->id != $id)){
+              $model = new Messages();
               return $this->render('view',[
+                   'modelUser' => $modelUser,
                    'model' => $model,
               ]);
+         }
+
+         return $this->redirect(Url::toRoute('profile/errors'));
+
+    }
+
+    public function actionAdd($id){
+
+         $modelUser = User::findIdentity($id);
+         if(!empty($modelUser) && (Yii::$app->user->id != $id)){
+              $model = new Messages();
+              $model->senderId = Yii::$app->user->id;
+              $model->receiverId = $id;
+              $model->date = Yii::$app->getFormatter()->asDateTime(time());
+              $model->opened = 0;
+              var_dump(Yii::$app->request->post());
+              echo "<br/>";
+              var_dump($model);
+              echo "<br/>";
+              var_dump($model->validate());
+              if(!($model->load(Yii::$app->request->post()) && $model->save())){
+                   echo "<br/>";
+                    var_dump($model);
+                    echo "<br/><br/>".$model->message;
+                    die();
+                    return $this->redirect(Url::toRoute(['view', 'id' => $id]));
+              }
          }
 
          return $this->redirect(Url::toRoute('profile/errors'));

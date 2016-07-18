@@ -34,6 +34,9 @@ $this->title = 'Error';
          <p>
               6. You are trying to open dialog with unknown user.
          </p>
+         <p>
+              7. You are trying to dialog with yourself.
+         </p>
     </div>
 
 </div>

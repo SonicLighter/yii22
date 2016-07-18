@@ -26,6 +26,7 @@ $this->title = $model->username;
                     echo Html::a("<div class='userMenu'>My Requests (".$notAcceptedCount.")</div>", [Url::toRoute(['requests'])]);
                }
                else{
+                    echo Html::a("<div class='userMenu'>Send message</div>", [Url::toRoute(['messages/view', 'id' => $model->id])]);
                     if(empty($model->friend)){
                          echo Html::a("<div class='userMenu'>Add to friends</div>", [Url::toRoute(['invite', 'id' => $model->id])]);
                     }
@@ -73,6 +74,7 @@ $this->title = $model->username;
                           'dataProvider' => $dataProvider,
                           'filterModel' => $searchModel,
                           'summary' => false,
+                          //'layout' => "{pager}\n{items}\n{pager}",
                           'tableOptions' => [
                               'class' => 'myGridView', /*table table-striped table-bordered*/
                           ],

@@ -34,9 +34,9 @@ class Messages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['senderId', 'receiverId', 'message', 'opened'], 'required'],
+            [['senderId', 'receiverId', 'message', 'opened', 'date'], 'required'],
             [['senderId', 'receiverId', 'opened'], 'integer'],
-            [['message'], 'string'],
+            [['message', 'date'], 'string'],
             [['receiverId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['receiverId' => 'id']],
             [['senderId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['senderId' => 'id']],
         ];

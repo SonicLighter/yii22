@@ -193,3 +193,22 @@
      padding: 20px;
      text-align: center;
 }
+
+.sendForm{
+     width: 100%;
+     margin: auto;
+}
+
+.sendMessage{
+     display: inline-block;
+     width: 70%;
+}
+
+.sendButton{
+     margin-top: 25px;
+     height: 53px;
+     display: inline-block;
+     vertical-align: top;
+     color: rgb(157,157,157);
+     background: #343434;
+}
