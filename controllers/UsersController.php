@@ -85,12 +85,12 @@ class UsersController extends Controller{
      public function actionUpdate($id){
 
           $model = User::findIdentity($id);
-          $model->scenario = 'update'; // using update to validate username in own validator
+
           if(empty($model)){
                return $this->redirect(['users/index']); // no user with such id
           }
 
-          //$model->role = Roles::findRoleIndex(Roles::getRoles(), key(Yii::$app->authManager->getRolesByUser($id)));
+          $model->scenario = 'update'; // using update to validate username in own validator
           $model->newRole = $model->role->item_name;
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
                return $this->redirect(['users/index']);
@@ -115,20 +115,6 @@ class UsersController extends Controller{
           return $this->redirect(['users/index']);
 
      }
-
-     /*
-     public function actionProfile(){
-
-          $model = new EditUser();
-
-          if($model->load(Yii::$app->request->post()) && $model->validate()){
-
-          }
-
-          return $this->render('profile', ['model' => $model]);
-
-     }
-     */
 
 }
 
