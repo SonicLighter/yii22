@@ -50,10 +50,10 @@ class UserSearch extends User{
                    $query = User::find()->where(['id' => Friends::getUserFriends(1)]);
                    break;
               case 'requests':
-                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id, 'accepted' => 0])->all(), 'receiverId')]);
+                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Friends::getUserRequests(), 'receiverId')]);
                    break;
               case 'waiting':
-                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 0])->all(), 'senderId')]);
+                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Friends::getUserWaiting(), 'senderId')]);
                    break;
               case 'messages':{
                    $query = User::find()->where(['id' => Messages::getUserDialogs()]);

@@ -201,14 +201,37 @@
 
 .sendMessage{
      display: inline-block;
-     width: 70%;
+     width: 89%;
 }
 
 .sendButton{
+     width: 10%;
      margin-top: 25px;
      height: 53px;
      display: inline-block;
      vertical-align: top;
      color: rgb(157,157,157);
      background: #343434;
+}
+
+.myMessageWrapper{
+     width: 80%;
+}
+
+.otherMessageWrapper{
+     margin-left: 20%;
+     width: 80%;
+}
+
+.messageImage{
+     float: left;
+     display: inline-block;
+     width: 10%;
+     vertical-align: top;
+}
+
+.messageContent{
+     display: inline-block;
+     width: 90%;
+     vertical-align: top;
 }

@@ -128,6 +128,7 @@ class ProfileController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
               'pageType' => $pageType,
+              'loadPage' => User::find()->where(['active' => 1])->count(),
          ]);
 
     }
@@ -143,6 +144,7 @@ class ProfileController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
               'pageType' => $pageType,
+              'loadPage' => count(Friends::getUserFriends(1)),
          ]);
 
     }
@@ -158,6 +160,7 @@ class ProfileController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
               'pageType' => $pageType,
+              'loadPage' => count(Friends::getUserRequests()),
          ]);
 
     }
@@ -173,6 +176,7 @@ class ProfileController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
               'pageType' => $pageType,
+              'loadPage' => count(Friends::getUserWaiting()),
          ]);
 
     }

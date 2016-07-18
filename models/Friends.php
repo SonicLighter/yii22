@@ -78,4 +78,16 @@ class Friends extends \yii\db\ActiveRecord
          return ArrayHelper::merge($arraySender, $arrayReceiver);
 
     }
+
+    public static function getUserRequests(){
+
+         return Friends::find()->where(['senderId' => Yii::$app->user->id, 'accepted' => 0])->all();
+
+    }
+
+    public static function getUserWaiting(){
+
+         return Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 0])->all();
+
+    }
 }

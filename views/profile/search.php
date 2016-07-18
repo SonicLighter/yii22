@@ -11,6 +11,7 @@ use yii\grid\DataColumn;
 use yii\grid\ActionColumn;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
+use \kop\y2sp\ScrollPager;
 
 $this->title = 'People';
 ?>
@@ -26,6 +27,17 @@ $this->title = 'People';
                    'dataProvider' => $dataProvider,
                    'filterModel' => $searchModel,
                    'summary' => false,
+                   'pager' => [
+                          'class' => ScrollPager::className(),
+                          'container' => '.grid-view tbody',
+                          'item' => 'tr',
+                          'paginationSelector' => '.grid-view .pagination',
+                          'triggerText' => 'Load more messages...',
+                          'noneLeftText' => 'End of page',
+                          'triggerOffset' => $loadPage,
+                          'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="userMenu">{text}</div></div>',
+                          'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
+                   ],
                    'columns' => [
                        [
                             'class' => DataColumn::className(),

@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "messages".
@@ -77,6 +78,40 @@ class Messages extends \yii\db\ActiveRecord
          $arraySender = ArrayHelper::getColumn(Messages::find()->where(['senderId' => Yii::$app->user->id])->groupBy('receiverId')->all(), 'receiverId');
          $arrayReceiver = ArrayHelper::getColumn(Messages::find()->where(['receiverId' => Yii::$app->user->id])->groupBy('senderId')->all(), 'senderId');
          return ArrayHelper::merge($arraySender, $arrayReceiver);
+
+    }
+
+    public static function getUserMessages($userId){
+
+         $query = Messages::find()->where(['senderId' => Yii::$app->user->id, 'receiverId' => $userId])->orWhere(['senderId' => $userId, 'receiverId' => Yii::$app->user->id])->orderBy('id DESC');
+
+         $dataProvider = new ActiveDataProvider([
+              'query' => $query,
+              'pagination' =>[
+                   'pageSize' => 10,
+              ],
+         ]);
+
+         return $dataProvider;
+
+    }
+
+    public static function getMessagePages($userId){
+
+         return Messages::find()->where(['senderId' => Yii::$app->user->id, 'receiverId' => $userId])->orWhere(['senderId' => $userId, 'receiverId' => Yii::$app->user->id])->count();
+
+    }
+
+    public static function setMessagesOpened($userId){
+
+         $messages = Messages::find()->where(['senderId' => Yii::$app->user->id, 'receiverId' => $userId, 'opened' => 0])->orWhere(['senderId' => $userId, 'receiverId' => Yii::$app->user->id, 'opened' => 0])->all();
+
+         foreach ($messages as $message) {
+              if($message->senderId != Yii::$app->user->id){
+                   $message->opened = 1;
+                   $message->save();
+              }
+         }
 
     }
 

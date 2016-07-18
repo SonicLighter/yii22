@@ -74,9 +74,13 @@ class MessagesController extends Controller{
          $modelUser = User::findIdentity($id);
          if(!empty($modelUser) && (Yii::$app->user->id != $id)){
               $model = new Messages();
+              $dataProvider = Messages::getUserMessages($id);
+              Messages::setMessagesOpened($id);
               return $this->render('view',[
                    'modelUser' => $modelUser,
                    'model' => $model,
+                   'dataProvider' => $dataProvider,
+                   'loadPage' => Messages::getMessagePages($id),
               ]);
          }
 
