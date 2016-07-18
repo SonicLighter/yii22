@@ -93,16 +93,7 @@ class MessagesController extends Controller{
               $model->receiverId = $id;
               $model->date = Yii::$app->getFormatter()->asDateTime(time());
               $model->opened = 0;
-              var_dump(Yii::$app->request->post());
-              echo "<br/>";
-              var_dump($model);
-              echo "<br/>";
-              var_dump($model->validate());
-              if(!($model->load(Yii::$app->request->post()) && $model->save())){
-                   echo "<br/>";
-                    var_dump($model);
-                    echo "<br/><br/>".$model->message;
-                    die();
+              if(($model->load(Yii::$app->request->post()) && $model->validate() && $model->save())){
                     return $this->redirect(Url::toRoute(['view', 'id' => $id]));
               }
          }
