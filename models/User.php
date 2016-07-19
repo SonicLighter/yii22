@@ -34,6 +34,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['email','username','password','newRole'], 'required', 'on' => 'create'],
             [['email','username','password','newRole'], 'required', 'on' => 'update'],
             [['username', 'password', 'authKey', 'accessToken','email'], 'string', 'max' => 255],
+            [['email','username','password'], 'required', 'on' => 'registration'],
         ];
     }
 

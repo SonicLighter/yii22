@@ -29,7 +29,7 @@ $this->title = 'SOCIALNETWORK.COM';
                  <?= $form->field($model, 'password')->passwordInput() ?>
 
                  <div class="form-group">
-                     <?= Html::submitButton('Registration', ['class' => 'btn btn-primary', 'name' => 'user-button']) ?>
+                     <?= Html::submitButton('Registration', ['class' => 'btn btn-default', 'name' => 'user-button']) ?>
                  </div>
 
              <?php ActiveForm::end(); ?>
