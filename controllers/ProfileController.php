@@ -81,10 +81,11 @@ class ProfileController extends Controller{
 
     public function actionEdit(){
 
-         $model = Profile::findOne(Yii::$app->user->id);
+         $model = User::findOne(Yii::$app->user->id)->profile;
          $model->scenario = 'editProfile';
+         $model->username = $model->user->username;
          $model->dob = $model->birthday;
-         if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
+         if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save() && $model->user->save()){
               return $this->redirect([Url::previous()]);
          }
 
@@ -94,11 +95,11 @@ class ProfileController extends Controller{
 
     public function actionPicture(){
 
-         $model = Profile::findOne(Yii::$app->user->id);
+         $model = User::findOne(Yii::$app->user->id)->profile;
          $model->scenario = 'editPicture';
          if(Yii::$app->request->isPost){
               $model->picture = UploadedFile::getInstance($model, 'picture');
-              $model->picture->saveAs(Yii::getAlias('@profilePictures').'/'.$model->id.'.jpg');
+              $model->picture->saveAs(Yii::getAlias('@profilePictures').'/'.$model->user->id.'.jpg');
               return $this->redirect([Url::previous()]);
          }
 
@@ -108,7 +109,7 @@ class ProfileController extends Controller{
 
     public function actionInfo(){
 
-         $model = Profile::findOne(Yii::$app->user->id);
+         $model = User::findOne(Yii::$app->user->id)->profile;
          $model->scenario = 'profileInfo';
          if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
               return $this->redirect([Url::previous()]);

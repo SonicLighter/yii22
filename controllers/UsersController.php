@@ -61,7 +61,7 @@ class UsersController extends Controller{
           $roles = Role::getRoles();
           //var_dump($searchModel);
           //die();
-          
+
           return $this->render("index", [
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
@@ -74,8 +74,6 @@ class UsersController extends Controller{
 
           $model = new User();
           $model->scenario = 'create'; // using create to validate username only for this action
-          $model->active = 0;
-          $model->commentPermission = 1;
           if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
                return $this->redirect(['users/index']);
           }

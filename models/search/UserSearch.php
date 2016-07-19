@@ -45,7 +45,7 @@ class UserSearch extends User{
 
          switch ($this->type) {
               case 'search':
-                   $query = User::find()->where(['!=', 'id', Yii::$app->user->identity->id]);/*->andWhere(['!=', 'id', Yii::$app->user->identity->id]);*/
+                   $query = User::find()->where(['!=', 'id', Yii::$app->user->identity->id])->andWhere(['id' => ArrayHelper::getColumn(Profile::find()->where(['active' => 1])->all(), 'userId')]);
                    break;
               case 'friends':
                    $query = User::find()->where(['id' => Friends::getUserFriends(1)]);
@@ -61,7 +61,7 @@ class UserSearch extends User{
                    break;
               }
               default:
-                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Profile::find()->all(), 'userId')]);
+                   $query = User::find();
                    break;
          }
 

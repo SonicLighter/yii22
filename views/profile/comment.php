@@ -31,7 +31,7 @@ $this->title = 'Comments';
                  <?php $form = ActiveForm::begin(['id' => 'comments-form']); ?>
 
                  <?php
-                      $changePermission = ($modelPosts->user->commentPermission == 1);
+                      $changePermission = ($modelPosts->user->profile->commentPermission == 1);
                       if($changePermission || (Yii::$app->user->id == $modelPosts->userId)){
                            echo $form->field($model, 'message')->widget(TinyMce::className(), [
                              'options' => ['rows' => 5],

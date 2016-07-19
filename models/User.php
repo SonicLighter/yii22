@@ -33,7 +33,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             ['email', 'unique', 'message' => 'Such e-mail address already exists!', 'on' => 'create'],   // username
             [['email','username','password','newRole'], 'required', 'on' => 'create'],
             [['email','username','password','newRole'], 'required', 'on' => 'update'],
-            [['username', 'password', 'authKey', 'accessToken','email', 'address', 'birthday', 'phone'], 'string', 'max' => 255],
+            [['username', 'password', 'authKey', 'accessToken','email'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,9 +51,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'userRole' => 'User Role',
             'postCount' => 'Posts Count',
             'email' => 'E-mail',
-            'birthday' => 'Date of Birth',
-            'phone' => '',
-            'address' => 'Address',
             //'admin' => 'Admin',
         ];
     }
@@ -107,6 +104,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          $userRole = $auth->getRole($this->newRole);
          $auth->assign($userRole, $this->id);
 
+         if(empty($this->profile)){
+              $profile = new Profile();
+              $profile->userId = $this->id;
+              $profile->active = 0;
+              $profile->commentPermission = 0;
+              $profile->save();
+         }
+
          return parent::afterSave($insert, $changedAttributes);
 
     }
@@ -120,6 +125,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
              Friends::deleteAll(['receiverId' => $this->id]);
              Messages::deleteAll(['senderId' => $this->id]); // deleting from Messages
              Messages::deleteAll(['receiverId' => $this->id]);
+             Profile::deleteAll(['userId' => $this->id]);   // deleting from profile
              return true;
          }
          else{

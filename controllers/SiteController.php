@@ -82,8 +82,6 @@ class SiteController extends Controller
 
         $model = new User();
         //$model->scenario = 'registration';
-        $model->active = 0;
-        $model->commentPermission = 1;
         $model->newRole = 'user';
         if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
             return $this->redirect(['site/login']);
@@ -143,13 +141,6 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
-         $users = User::find()->all();
-         var_dump($users);
-         die();
-         foreach ($users as $user) {
-              echo $user->userRole."<br/>";
-         }
-         die();
          //$user = User::findIdentity(225);
          //echo $user->userRole;
          //die();
