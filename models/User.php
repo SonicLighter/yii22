@@ -185,6 +185,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
          return Friends::find()->where(['receiverId' => Yii::$app->user->id, 'accepted' => 0])->count();
     }
 
+
+    // Profile
+    public function getProfile(){
+
+         return $this->hasOne(Profile::className(),['userId' => 'id']);
+
+    }
+
     /**
      * @inheritdoc
      */

@@ -44,22 +44,22 @@ $this->title = $model->username;
            <div class='profile-right_column-header'>
 
                      <?php echo $model->username ?> /
-                     Status: <?php echo ($model->active == 1) ? ('active') : ('not active'); ?> /
-                     Comments: <?php echo ($model->commentPermission == 1) ? ('allowed') : ('not allowed'); ?>
+                     Status: <?php echo ($model->profile->active == 1) ? ('active') : ('not active'); ?> /
+                     Comments: <?php echo ($model->profile->commentPermission == 1) ? ('allowed') : ('not allowed'); ?>
 
            </div>
 
            <div class='profile-right_column-content'>
                 E-mail: <?php echo $model->email ?><br/>
                 <?php
-                    if(!empty($model->birthday)){
-                         echo 'Date of Birth: '.$model->birthday.'<br/>';
+                    if(!empty($model->profile->birthday)){
+                         echo 'Date of Birth: '.$model->profile->birthday.'<br/>';
                     }
-                    if(!empty($model->phone)){
-                         echo 'Phone: '.$model->phone.'<br/>';
+                    if(!empty($model->profile->phone)){
+                         echo 'Phone: '.$model->profile->phone.'<br/>';
                     }
-                    if(!empty($model->address)){
-                         echo 'Address: '.$model->address.'<br/>';
+                    if(!empty($model->profile->address)){
+                         echo 'Address: '.$model->profile->address.'<br/>';
                     }
                 ?>
                 <hr/><br/>

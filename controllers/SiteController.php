@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Profile;
 use app\models\Friends;
 use app\models\Role;
 use app\models\Posts;
@@ -142,6 +143,16 @@ class SiteController extends Controller
     // database
     public function actionDatabase()
     {
+         $users = User::find()->all();
+         var_dump($users);
+         die();
+         foreach ($users as $user) {
+              echo $user->userRole."<br/>";
+         }
+         die();
+         //$user = User::findIdentity(225);
+         //echo $user->userRole;
+         //die();
          //echo Posts::getLoadCount(11);
          /*
          $arraySender = ArrayHelper::getColumn(Friends::find()->where(['senderId' => Yii::$app->user->id])->all(), 'receiverId');

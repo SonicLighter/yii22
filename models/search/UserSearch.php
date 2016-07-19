@@ -7,6 +7,7 @@ use yii\data\Pagination;
 use yii\base\Model;
 use app\models\User;
 use app\models\Friends;
+use app\models\Profile;
 use app\models\Posts;
 use app\models\Messages;
 use yii\helpers\ArrayHelper;
@@ -44,7 +45,7 @@ class UserSearch extends User{
 
          switch ($this->type) {
               case 'search':
-                   $query = User::find()->where(['active' => 1])->andWhere(['!=', 'id', Yii::$app->user->identity->id]);
+                   $query = User::find()->where(['!=', 'id', Yii::$app->user->identity->id]);/*->andWhere(['!=', 'id', Yii::$app->user->identity->id]);*/
                    break;
               case 'friends':
                    $query = User::find()->where(['id' => Friends::getUserFriends(1)]);
@@ -60,7 +61,7 @@ class UserSearch extends User{
                    break;
               }
               default:
-                   $query = User::find();
+                   $query = User::find()->where(['id' => ArrayHelper::getColumn(Profile::find()->all(), 'userId')]);
                    break;
          }
 

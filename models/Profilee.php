@@ -10,21 +10,7 @@ use yii\web\UploadedFile;
 use borales\extensions\phoneInput\PhoneInputValidator;
 use borales\extensions\phoneInput\PhoneInputBehavior;
 
-/**
- * This is the model class for table "profile".
- *
- * @property integer $id
- * @property integer $userId
- * @property integer $active
- * @property string $birthday
- * @property string $phone
- * @property string $address
- * @property integer $commentPermission
- *
- * @property Users $user
- */
-class Profile extends \yii\db\ActiveRecord
-{
+class Profile extends User{
 
      public $newPassword;
      public $editPassword = true;
@@ -35,63 +21,53 @@ class Profile extends \yii\db\ActiveRecord
 
      public function __construct(){
 
-
           if(!file_exists(Yii::getAlias('@profilePictures'))){     // create images/profile directory to store profile pictures
                FileHelper::createDirectory(Yii::getAlias('@profilePictures'), '0777');
           }
 
-          /*
-          if(!file_exists('images/profile/')){     // create images/profile directory to store profile pictures
-               FileHelper::createDirectory('images/profile/', '0777');
-          }
-          */
           $this->newRole = key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->id));
 
      }
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'profile';
-    }
+     public function rules(){
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
+          return [
+               ['username', 'required', 'on' => 'editProfile'],
+               ['editPassword', 'boolean', 'on' => 'editProfile'],
+               [['active', 'commentPermission'], 'boolean', 'on' => 'editProfile'],
+               ['newPassword', 'string', 'on' => 'editProfile'],
+               ['editPassword', 'validateEditPassword', 'on' => 'editProfile'],
+               [['picture'], 'file', 'extensions' => 'png, jpg', 'on' => 'editPicture'],
+               [['dob'], 'required', 'on' => 'profileInfo'],
+               ['dob', 'validateDob', 'on' => 'profileInfo'],
+               [['dob','phone','address'], 'string', 'max' => 255],
+               [['phone'], PhoneInputValidator::className()],
+               ['phone', 'validatePhone', 'on' => 'profileInfo'],
+               ['address', 'validateAddress', 'on' => 'profileInfo'],
+          ];
+
+     }
+
+    public function behaviors()
     {
         return [
-            [['userId', 'active', 'commentPermission'], 'required'],
-            [['userId', 'active', 'commentPermission'], 'integer'],
-            [['birthday', 'phone', 'address'], 'string', 'max' => 255],
-            [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
+            'phoneInput' => [
+                 'class' => PhoneInputBehavior::className(),
+                 'attributes' => ['phone'],
+            ],
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'userId' => 'User ID',
-            'active' => 'Active',
-            'birthday' => 'Birthday',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'commentPermission' => 'Comment Permission',
+            'newPassword' => 'New Password',
+            'editPassword' => 'Edit Password',
+            'active' => 'Press to change your account status',
+            'commentPermission' => 'Press to change your comment permission (allow or do not allow to users add comments to your posts)',
+            'dob' => 'Date of Birth',
+            'phone' => '',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 
     public function validateDob(){
@@ -145,3 +121,5 @@ class Profile extends \yii\db\ActiveRecord
     }
 
 }
+
+?>

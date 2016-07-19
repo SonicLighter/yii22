@@ -20,6 +20,7 @@ use app\models\search\PostsSearch;
 use yii\web\UploadedFile;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
+use yii\helpers\ArrayHelper;
 //use bupy7\bbcode\BBCodeBehavior;
 
 class ProfileController extends Controller{
@@ -128,7 +129,7 @@ class ProfileController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
               'pageType' => $pageType,
-              'loadPage' => User::find()->where(['active' => 1])->count(),
+              'loadPage' => User::find()->where(['id' => ArrayHelper::getColumn(Profile::find()->where(['active' => 1])->all(), 'userId')])->count(),
          ]);
 
     }

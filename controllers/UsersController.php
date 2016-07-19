@@ -59,7 +59,9 @@ class UsersController extends Controller{
           $searchModel = new UserSearch();
           $dataProvider = $searchModel->search(Yii::$app->request->get());
           $roles = Role::getRoles();
-
+          //var_dump($searchModel);
+          //die();
+          
           return $this->render("index", [
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
