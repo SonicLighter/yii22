@@ -8,6 +8,7 @@ use yii\grid\DataColumn;
 use yii\grid\ActionColumn;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
+use yii\captcha\Captcha;
 /* @var $this yii\web\View */
 
 $this->title = 'SOCIALNETWORK.COM';
@@ -27,6 +28,10 @@ $this->title = 'SOCIALNETWORK.COM';
                  <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                  <?= $form->field($model, 'password')->passwordInput() ?>
+
+                 <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                 ]) ?>
 
                  <div class="registerButton">
                      <?= Html::submitButton('Registration', ['class' => 'btn btn-login', 'name' => 'user-button']) ?>

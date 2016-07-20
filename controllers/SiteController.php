@@ -83,8 +83,8 @@ class SiteController extends Controller
         $model = new User();
         $model->scenario = 'registration';
         $model->newRole = 'user';
-        if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()){
-            return $this->redirect(['site/login']);
+        if($model->load(Yii::$app->request->post()) && $model->validate() && $model->save(false)){
+             return $this->redirect(['site/login']);
         }
 
         return $this->render('index',[

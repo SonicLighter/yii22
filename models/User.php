@@ -12,6 +12,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
      public $newRole; // it's contains role from create user page
+     public $verifyCode;
 
     /**
      * @inheritdoc
@@ -35,6 +36,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['email','username','password','newRole'], 'required', 'on' => 'update'],
             [['username', 'password', 'authKey', 'accessToken','email'], 'string', 'max' => 255],
             [['email','username','password'], 'required', 'on' => 'registration'],
+            ['verifyCode', 'captcha', 'on' => 'registration'],
         ];
     }
 
@@ -52,6 +54,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'userRole' => 'User Role',
             'postCount' => 'Posts Count',
             'email' => 'E-mail',
+            //'verifyCode' => 'Verification Code',
             //'admin' => 'Admin',
         ];
     }
