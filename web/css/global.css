@@ -19,7 +19,7 @@
      color: #FFFFFF;
      text-decoration: none;
      user-select: none;
-     background: #343434 /*rgb(212,75,56)*/;
+     background: #696969 /*rgb(212,75,56)*/;
      padding: .7em 1.5em;
      border-radius: 10px;
 }
@@ -263,6 +263,54 @@
      color: #FFFFFF;
 }
 .btn-login:active {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
+
+.btn-profile-menu {
+     width: 100%;
+     padding-left: 30px;
+     text-align: left;
+     background-color:#696969;
+     color:#FFFFFF;
+     border-color:#292929;
+}
+.btn-profile-menu:hover, .btn-profile-menu:focus {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
+.btn-profile-menu:active {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
+
+.btn-content {
+     background-color:#696969;
+     color:#FFFFFF;
+     border-color:#292929;
+}
+.btn-content:hover, .btn-content:focus {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
+.btn-content:active {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
+
+
+.btn-send {
+     vertical-align: top;
+     margin-top: 25px;
+     background-color:#696969;
+     color:#FFFFFF;
+     border-color:#292929;
+}
+.btn-send:hover, .btn-send:focus {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
+.btn-send:active {
      background-color: #3b3b3b;
      color: #FFFFFF;
 }

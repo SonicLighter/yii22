@@ -29,9 +29,9 @@ $this->title = 'Dialog with '.$modelUser->username;
                     'method' => 'post',
                ]); ?>
                <div class='sendMessage'>
-                    <?= $form->field($model, 'message')->textArea(['autofocus' => true], ['rows' => 3]) ?>
+                    <?= $form->field($model, 'message')->textInput(['autofocus' => true]) ?>
                </div>
-                    <?= Html::submitButton('Send', ['class' => 'sendButton', 'name' => 'posts-button']) ?>
+                    <?= Html::submitButton('Send', ['class' => 'btn btn-send', 'name' => 'posts-button']) ?>
 
                <?php ActiveForm::end(); ?>
 
@@ -52,8 +52,8 @@ $this->title = 'Dialog with '.$modelUser->username;
                                'triggerText' => 'Load more messages...',
                                'noneLeftText' => 'End of page',
                                'triggerOffset' => $loadPage,
-                               'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="userMenu">{text}</div></div>',
-                               'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
+                               'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="btn btn-content">{text}</div></div>',
+                               'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="btn btn-content">{text}</div></a></td></tr>',
                         ],
 
                         'columns' => [

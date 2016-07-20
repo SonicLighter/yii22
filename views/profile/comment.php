@@ -17,7 +17,7 @@ $this->title = 'Comments';
 
       <div class='postCreate'>
            <p>
-                <?= Html::a($modelPosts->user->username, Url::toRoute(['profile/index', 'id' => $modelPosts->userId]), ['class' => 'userMenu']) ?>
+                <?= Html::a($modelPosts->user->username, Url::toRoute(['profile/index', 'id' => $modelPosts->userId]), ['class' => 'btn btn-profile-menu']) ?>
            </p>
            <br/><p><h3>Post:</h3></p>
             <div class='searchWrapper'>

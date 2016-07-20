@@ -21,20 +21,20 @@ $this->title = $model->username;
            <br/><br/>
            <?php
                if($model->id == Yii::$app->user->id){
-                    echo Html::a("<div class='userMenu'>Edit Profile</div>", [Url::toRoute(['edit'])]);
-                    echo Html::a("<div class='userMenu'>New Friends (".$waitingCount.")</div>", [Url::toRoute(['waiting'])]);
-                    echo Html::a("<div class='userMenu'>My Requests (".$notAcceptedCount.")</div>", [Url::toRoute(['requests'])]);
+                    echo Html::a("Edit Profile", [Url::toRoute(['edit'])], ['class' => 'btn btn-profile-menu']);
+                    echo Html::a("New Friends (".$waitingCount.")", [Url::toRoute(['waiting'])], ['class' => 'btn btn-profile-menu']);
+                    echo Html::a("My Requests (".$notAcceptedCount.")", [Url::toRoute(['requests'])], ['class' => 'btn btn-profile-menu']);
                }
                else{
-                    echo Html::a("<div class='userMenu'>Send message</div>", [Url::toRoute(['messages/view', 'id' => $model->id])]);
+                    echo Html::a("Send message", [Url::toRoute(['messages/view', 'id' => $model->id])] , ['class' => 'btn btn-profile-menu']);
                     if(empty($model->friend)){
-                         echo Html::a("<div class='userMenu'>Add to friends</div>", [Url::toRoute(['invite', 'id' => $model->id])]);
+                         echo Html::a("Add to friends", [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-profile-menu']);
                     }
                     else{
                          if(!empty($model->receiver) && ($model->receiver->accepted == 0)){
-                              echo Html::a("<div class='userMenu'>Accept user&nbsp</div>", [Url::toRoute(['accept', 'id' => $model->id])]);
+                              echo Html::a("Accept user&nbsp", [Url::toRoute(['accept', 'id' => $model->id])], ['class' => 'btn btn-profile-menu']);
                          }
-                         echo Html::a("<div class='userMenu'>Delete friend</div>", [Url::toRoute(['remove', 'id' => $model->id])]);
+                         echo Html::a("Delete friend", [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-profile-menu']);
                     }
                }
            ?>
@@ -65,10 +65,10 @@ $this->title = $model->username;
                 <hr/><br/>
                 <?php
                     if($model->id == Yii::$app->user->id){
-                         echo Html::a('New post', [Url::toRoute(['posts/create'])], ['class' => 'userMenu']);
+                         echo Html::a('New post', [Url::toRoute(['posts/create'])], ['class' => 'btn btn-content']);
                     }
                 ?>
-                <?= Html::a('Reset search', [Url::toRoute(['index', 'id' => $model->id])], ['class' => 'userMenu']) ?><br/><br/>
+                <?= Html::a('Reset search', [Url::toRoute(['index', 'id' => $model->id])], ['class' => 'btn btn-content']) ?><br/><br/>
                 <?=
                      GridView::widget([
                           'dataProvider' => $dataProvider,
@@ -86,8 +86,8 @@ $this->title = $model->username;
                                  'triggerText' => 'Load more posts...',
                                  'noneLeftText' => 'End of page',
                                  'triggerOffset' => $loadCount,
-                                 'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="userMenu">{text}</div></div>',
-                                 'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
+                                 'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="btn btn-content">{text}</div></div>',
+                                 'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="btn btn-content">{text}</div></a></td></tr>',
                           ],
                           'columns' => [
                               [
