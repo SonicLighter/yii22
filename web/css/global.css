@@ -306,10 +306,12 @@
      color:#FFFFFF;
      border-color:#292929;
 }
+
 .btn-send:hover, .btn-send:focus {
      background-color: #3b3b3b;
      color: #FFFFFF;
 }
+
 .btn-send:active {
      background-color: #3b3b3b;
      color: #FFFFFF;

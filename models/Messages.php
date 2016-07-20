@@ -75,6 +75,7 @@ class Messages extends \yii\db\ActiveRecord
 
     public static function getUserDialogs(){
 
+         // аналогичная ситуация была в getUserFriends, оставил тут так, потому что есть groupBy
          $arraySender = ArrayHelper::getColumn(Messages::find()->where(['senderId' => Yii::$app->user->id])->groupBy('receiverId')->all(), 'receiverId');
          $arrayReceiver = ArrayHelper::getColumn(Messages::find()->where(['receiverId' => Yii::$app->user->id])->groupBy('senderId')->all(), 'senderId');
          return ArrayHelper::merge($arraySender, $arrayReceiver);
