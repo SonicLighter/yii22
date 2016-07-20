@@ -139,7 +139,11 @@ class Profile extends \yii\db\ActiveRecord
          else{
              //echo 'Max int: '.PHP_INT_MAX.' Calculated: '.(strtotime($currentDate) - strtotime($this->dob)).' Calc: '.(PHP_INT_MAX-(strtotime($currentDate) - strtotime($this->dob)));
              //$years = (int)((strtotime($currentDate) - strtotime($this->dob))/31104000);
-             $years = getdate(strtotime($currentDate))['year'] - substr($this->dob, 7);
+
+             if(strlen($currentDate) != 16){
+                  $this->addError('dob', 'Incorrect date format, usage: dd-mm-gggg (01-01-2016)!');
+             }
+             $years = getdate(strtotime($currentDate))['year'] - substr($this->dob, 6);
              if(($years < 5) || ($years > 90)){
                  $this->addError('dob', 'Your age can\'t be less then 5 and greater then 90 years!');
              }
@@ -153,7 +157,7 @@ class Profile extends \yii\db\ActiveRecord
     public function validatePhone(){
 
          $phone = Profile::find()->where(['phone' => $this->phone])->one();
-         if(!empty($phone) && (Yii::$app->user->id != $phone->id)){
+         if(!empty($phone) && (Yii::$app->user->id != $phone->user->id)){
               $this->addError('phone', 'This phone number already exists!');
          }
 

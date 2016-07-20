@@ -16,6 +16,7 @@ use kartik\checkbox\CheckboxX;
 
           <?= $form->field($model, 'commentPermission')->widget(CheckboxX::classname(), [
               'autoLabel'=>true,
+              'pluginOptions'=>['threeState'=>false],
           ])->label(false) ?>
 
           <?php
@@ -30,15 +31,19 @@ use kartik\checkbox\CheckboxX;
           ?>
           <?= $form->field($model, 'active')->widget(CheckboxX::classname(), [
               'autoLabel'=>true,
+              'pluginOptions'=>['threeState'=>false],
           ])->label(false) ?>
 
-          <?= $form->field($model, 'username')->textInput([/*'autofocus' => true, */'value' => $model->username]) ?>
+          <div class='editInfoBlock'>
+               <?= $form->field($model, 'username')->textInput([/*'autofocus' => true, */'value' => $model->username]) ?>
 
-          <?= $form->field($model, 'newPassword')->passwordInput() ?>
+               <?= $form->field($model, 'newPassword')->passwordInput() ?>
 
-          <?= $form->field($model, 'editPassword')->widget(CheckboxX::classname(), [
-              'autoLabel'=>true,
-          ])->label(false) ?>
+               <?= $form->field($model, 'editPassword')->widget(CheckboxX::classname(), [
+                   'autoLabel'=>true,
+                   'pluginOptions'=>['threeState'=>false],
+               ])->label(false) ?>
+          </div>
 
           <div class="form-group">
                  <?= Html::submitButton('Edit Profile', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

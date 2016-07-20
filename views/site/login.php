@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
              <?= $form->field($model, 'rememberMe')->widget(CheckboxX::classname(), [
                  'autoLabel'=>true,
+                 'pluginOptions'=>['threeState'=>false],
              ])->label(false) ?>
 
 

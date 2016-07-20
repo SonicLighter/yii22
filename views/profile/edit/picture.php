@@ -21,14 +21,15 @@ use yii\bootstrap\Tabs;
      'options' => ['enctype' => 'multipart/form-data'],
      'action' => ['profile/picture'],
 ]) ?>
-
-<?= $form->field($model, 'picture')->widget(FileInput::classname(), [
-      'options' => ['multiple' => false, 'accept' => 'image/*'],
-      'pluginOptions' => [
-          'previewFileType' => 'image',
-          'showUpload' => true,
-      ],
-])?>
+<div class='editInfoBlock'>
+     <?= $form->field($model, 'picture')->widget(FileInput::classname(), [
+           'options' => ['multiple' => false, 'accept' => 'image/*'],
+           'pluginOptions' => [
+               'previewFileType' => 'image',
+               'showUpload' => true,
+           ],
+     ])?>
+</div>
 
 <?php ActiveForm::end(); ?>
 

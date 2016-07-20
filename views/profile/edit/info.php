@@ -17,17 +17,16 @@ use borales\extensions\phoneInput\PhoneInput;
           'id' => 'posts-form',
           'action' => ['profile/info'],
      ]); ?>
-
-          <?= $form->field($model, 'dob')->widget(
-              DatePicker::className(), [
-                  'inline' => false,
-                  'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-                  'clientOptions' => [
-                      'autoclose' => true,
-                      'format' => 'dd-M-yyyy'
-                 ],
-          ]);?>
-
+          <div class='editInfoBlock'>
+               <?= $form->field($model, 'dob')->widget(
+                   DatePicker::className(), [
+                       'inline' => false,
+                       'clientOptions' => [
+                           'autoclose' => true,
+                           'format' => 'dd-mm-yyyy'
+                      ],
+               ]);?>
+          </div>
           <p>
                Type code to your country, example (for Belarus): +375 29 000-00-00
           </p>
@@ -40,7 +39,9 @@ use borales\extensions\phoneInput\PhoneInput;
                ])
           ?>
 
-          <?= $form->field($model, 'address')->textInput(['value' => $model->address]) ?>
+          <div class='editInfoBlock'>
+               <?= $form->field($model, 'address')->textInput(['value' => $model->address]) ?>
+          </div>
 
           <div class="form-group">
                  <?= Html::submitButton('Edit Profile', ['class' => 'btn btn-primary', 'name' => 'info-button']) ?>

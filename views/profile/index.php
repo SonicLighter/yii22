@@ -86,7 +86,7 @@ $this->title = $model->username;
                                  'triggerText' => 'Load more posts...',
                                  'noneLeftText' => 'End of page',
                                  'triggerOffset' => $loadCount,
-                                 'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="btn btn-content">{text}</div></div>',
+                                 'noneLeftTemplate' => '',
                                  'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="btn btn-content">{text}</div></a></td></tr>',
                           ],
                           'columns' => [

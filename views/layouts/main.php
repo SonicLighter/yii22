@@ -51,15 +51,17 @@ AppAsset::register($this);
                  'visible' => Yii::$app->user->can("openRoles"),
             ],
             [
-                  'label' => 'Posts',
-                  'url' => ['/posts/index'],
-                  'visible' => !Yii::$app->user->isGuest,
-            ],
-            [
                  'label' => 'Search',
                  'url' => ['/profile/search'],
                  'visible' => !Yii::$app->user->isGuest,
             ],
+            /*
+            [
+                  'label' => 'Posts',
+                  'url' => ['/posts/index'],
+                  'visible' => !Yii::$app->user->isGuest,
+            ],
+            */
             /*
             [
                  'label' => 'Home',
@@ -120,7 +122,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; SOCIALNETWORK <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"></p>
     </div>
 </footer>
 
