@@ -67,7 +67,7 @@ class Profile extends \yii\db\ActiveRecord
 
             [['userId'], 'integer'],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
-            ['username', 'required', 'on' => 'editProfile'],
+            [['username', 'active', 'commentPermission', 'editPassword'], 'required', 'on' => 'editProfile', 'message' => 'Field  cannot be blank.'],
             ['editPassword', 'boolean', 'on' => 'editProfile'],
             [['active', 'commentPermission'], 'boolean', 'on' => 'editProfile'],
             ['newPassword', 'string', 'on' => 'editProfile'],

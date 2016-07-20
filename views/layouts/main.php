@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use bluezed\scrollTop\ScrollTop;
 
 AppAsset::register($this);
 ?>
@@ -26,6 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+<?= ScrollTop::widget() ?>
     <?php
     NavBar::begin([
         'brandLabel' => 'SOCIALNETWORK.COM',

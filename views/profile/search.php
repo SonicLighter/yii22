@@ -35,7 +35,6 @@ $this->title = 'People';
                           'triggerText' => 'Load more messages...',
                           'noneLeftText' => 'End of page',
                           'triggerOffset' => $loadPage,
-                          'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="userMenu">{text}</div></div>',
                           'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
                    ],
                    'columns' => [
@@ -49,7 +48,7 @@ $this->title = 'People';
                                  $acceptButton = "";
                                  $infoMessage = "";
                                  if(empty($model->friend)){
-                                      $resultButton = Html::a('Add to friends', [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-info']);
+                                      $resultButton = Html::a('Add to friends', [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-default']);
                                  }
                                  else{
                                       if(!empty($model->sender) && ($model->sender->accepted == 0)){
@@ -57,9 +56,9 @@ $this->title = 'People';
                                       }
                                       else if(!empty($model->receiver) && ($model->receiver->accepted == 0)){
                                            $infoMessage = "Info: You didn't accept this user.";
-                                           $acceptButton = Html::a('Accept user&nbsp', [Url::toRoute(['accept', 'id' => $model->id])], ['class' => 'btn btn-info']);
+                                           $acceptButton = Html::a('Accept user&nbsp', [Url::toRoute(['accept', 'id' => $model->id])], ['class' => 'btn btn-default']);
                                       }
-                                      $resultButton = Html::a('Delete friend', [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-info']);
+                                      $resultButton = Html::a('Delete friend', [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-default']);
                                  }
                                  $resultString =
                                      "<div class='searchWrapper'>

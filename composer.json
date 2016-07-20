@@ -22,7 +22,10 @@
         "2amigos/yii2-tinymce-widget": "*",
         "kop/yii2-scroll-pager": "dev-master",
         "2amigos/yii2-date-picker-widget": "~1.0",
-        "borales/yii2-phone-input": "*"
+        "borales/yii2-phone-input": "*",
+        "bluezed/yii2-scroll-top": "*",
+        "yiisoft/yii2-jui": "^2.0",
+        "kartik-v/yii2-checkbox-x": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

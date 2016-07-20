@@ -154,6 +154,16 @@ Phones:
 composer require "borales/yii2-phone-input" "*"
 ~~~
 
+Scroll-up:
+
+~~~
+require --prefer-dist bluezed/yii2-scroll-top "*"
+~~~
+
+```php
+<?= \bluezed\scrollTop\ScrollTop::widget() ?>
+```
+
 Before you can go on you need to use following command, which allows you to create table for storing users data:
 
 ~~~

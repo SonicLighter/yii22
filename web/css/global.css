@@ -242,3 +242,27 @@
      width: 90%;
      vertical-align: top;
 }
+
+.registerButton{
+     width: 100%;
+     margin: auto;
+     text-align: center;
+}
+
+/*
+     BOOTSTRAP
+*/
+
+.btn-login {
+     background-color:#696969;
+     color:#FFFFFF;
+     border-color:#292929;
+}
+.btn-login:hover, .btn-login:focus {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
+.btn-login:active {
+     background-color: #3b3b3b;
+     color: #FFFFFF;
+}
