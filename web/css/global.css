@@ -254,6 +254,25 @@
 }
 
 /*
+     ADMIN
+*/
+
+.admin-login-wrapper{
+     width: 50%;
+     margin: auto;
+     padding: 20px;
+     border-bottom: 1px solid rgb(157,157,157);
+     border-top: 1px solid rgb(157,157,157);
+     border-radius: 10px;
+     background: #ededed;
+}
+
+.admin-login-input-wrapper{
+     width: 70%;
+     margin: auto;
+}
+
+/*
      BOOTSTRAP
 */
 

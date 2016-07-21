@@ -9,6 +9,11 @@ $config = [
     //
     'timeZone' => 'Europe/Minsk',
     //
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\AdminModule',
+        ],
+    ],
     'components' => [
          //
          'formatter' => [

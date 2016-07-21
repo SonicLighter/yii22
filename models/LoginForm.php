@@ -32,7 +32,22 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['email', 'validateAdmin', 'on' => 'adminpanel'],
         ];
+    }
+
+    // this method for adminpanel
+    public function validateAdmin($attribute){
+
+         $user = User::findByEmail($this->email);
+         if(!empty($user)){
+              switch ($user->userRole) {
+                   case 'user':
+                        $this->addError($attribute, 'You have no permission to access to admin panel!');
+                        break;
+              }
+         }
+
     }
 
     /**
