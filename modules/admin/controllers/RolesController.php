@@ -22,7 +22,7 @@ class RolesController extends Controller{
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'create', 'delete'],
                         'allow' => true,
                         'roles' => ['openRoles'], // admin and moderator
                     ],
@@ -49,6 +49,35 @@ class RolesController extends Controller{
          return $this->render('index', [
               'dataProvider' => Role::getDataProvider(),
          ]);
+
+    }
+
+    public function actionCreate(){
+
+         $model = new Role();
+         $model->scenario = 'create';
+         if($model->load(Yii::$app->request->post()) && $model->validate()){
+              if($role = Yii::$app->authManager->createRole($model->item_name)){
+                   Yii::$app->authManager->add($role);
+                   return $this->redirect(['roles/index']);
+              }
+         }
+
+         return $this->render('create', [
+              'model' => $model,
+         ]);
+
+    }
+
+    public function actionDelete($item_name){
+
+         $auth = YII::$app->authManager;
+         $role = $auth->getRole($item_name);
+         if(!empty($role)){
+
+         }
+
+         return $this->redirect('index');
 
     }
 

@@ -17,6 +17,8 @@ use yii\data\Pagination;
  */
 class Role extends \yii\db\ActiveRecord
 {
+
+     public $allowComments = true;
     /**
      * @inheritdoc
      */
@@ -31,10 +33,12 @@ class Role extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_name', 'user_id'], 'required'],
+            ['item_name', 'validateRole', 'on' => 'create'],
+            [['item_name'], 'required', 'on' => 'create'],
+            ['allowComments', 'boolean'],
             [['created_at'], 'integer'],
             [['item_name', 'user_id'], 'string', 'max' => 64],
-            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
+            //[['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
         ];
     }
 
@@ -48,6 +52,16 @@ class Role extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'created_at' => 'Created At',
         ];
+    }
+
+    public function validateRole(){
+
+         $auth = YII::$app->authManager;
+         $newRole = $auth->getRole($this->item_name);
+         if(!empty($newRole)){
+              $this->addError('item_name', 'Such role already exists!');
+         }
+
     }
 
     /**
