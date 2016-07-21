@@ -49,6 +49,13 @@ class DefaultController extends Controller
 
     }
 
+    public function actionMain(){
+
+         echo 'hello from Default/Main, this action is allowed only for admins and moderators!!!';
+         die();
+
+    }
+
 
 
 }

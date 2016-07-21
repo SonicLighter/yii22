@@ -59,7 +59,7 @@ class SiteController extends Controller
 
 
     public function beforeAction($action){
-
+         
          switch ($action->controller->action->id) {
               case 'index':
               case 'login':{
