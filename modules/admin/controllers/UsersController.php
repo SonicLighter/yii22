@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\admin\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
@@ -14,6 +14,8 @@ use yii\data\Pagination;
 use app\models\search\UserSearch;
 
 class UsersController extends Controller{
+
+    public $layout = 'main';
 
     public function behaviors()
     {
@@ -66,6 +68,7 @@ class UsersController extends Controller{
               'dataProvider' => $dataProvider,
               'searchModel' => $searchModel,
               'roles' => $roles,
+              'loadCount' => User::find()->count(),
           ]);
 
      }

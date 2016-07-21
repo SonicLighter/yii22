@@ -41,14 +41,9 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             [
-                 'label' => 'Users',
-                 'url' => ['/users/index'],
+                 'label' => 'AdminPanel',
+                 'url' => ['/admin'],
                  'visible' =>  Yii::$app->user->can("openUsers"),
-            ],
-            [
-                 'label' => 'Roles',
-                 'url' => ['/roles/index'],
-                 'visible' => Yii::$app->user->can("openRoles"),
             ],
             [
                  'label' => 'Search',

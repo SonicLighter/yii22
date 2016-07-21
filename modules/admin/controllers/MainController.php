@@ -15,6 +15,8 @@ use yii\helpers\Url;
 class MainController extends Controller
 {
 
+     public $layout = 'main';
+
      public function behaviors()
      {
          return [

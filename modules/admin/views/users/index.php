@@ -12,9 +12,9 @@ use yii\helpers\ArrayHelper;
 use yii\grid\DataColumn;
 use app\models\User;
 use app\models\Roles;
+use \kop\y2sp\ScrollPager;
 
 $this->title = 'Users';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -22,10 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
          <?php
               if(key(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) == 'admin'){
-                   echo Html::a('Create User', ['create'], ['class' => 'btn btn-info']);
+                   echo Html::a('Create User', ['create'], ['class' => 'btn btn-default']);
               }
          ?>
-         <?= Html::a('Refresh filters', ['index'], ['class' => 'btn btn-info']) ?>
+         <?= Html::a('Refresh filters', ['index'], ['class' => 'btn btn-default']) ?>
 
     </p>
 
@@ -33,6 +33,17 @@ $this->params['breadcrumbs'][] = $this->title;
          GridView::widget([
               'dataProvider' => $dataProvider,
               'filterModel' => $searchModel,
+              'pager' => [
+                    'class' => ScrollPager::className(),
+                    'container' => '.grid-view tbody',
+                    'item' => 'tr',
+                    'paginationSelector' => '.grid-view .pagination',
+                    'triggerText' => 'Load more posts...',
+                    'noneLeftText' => 'End of page',
+                    'triggerOffset' => $loadCount,
+                    'noneLeftTemplate' => '',
+                    'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="btn btn-content">{text}</div></a></td></tr>',
+              ],
               'columns' => [
                    [
                        'class' => DataColumn::className(), // this line is optional
