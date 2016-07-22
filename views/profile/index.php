@@ -81,17 +81,17 @@ $this->title = $model->username;
                 <?php
                     if($model->id == Yii::$app->user->id){
                          echo "<br/><hr/>";
-                         echo Html::a("<i class='glyphicon glyphicon-pencil'></i> New post", [Url::toRoute(['posts/create'])]);
+                         echo Html::a("<i class='glyphicon glyphicon-file'></i> New post", [Url::toRoute(['posts/create'])]);
                     }
                 ?>
                 <br/>
            </div>
-                <div class='profile-right_column-content'>
                 <?=
                      GridView::widget([
                           'dataProvider' => $dataProvider,
                           'filterModel' => $searchModel,
                           'summary' => false,
+                          'emptyText' => '',
                           //'layout' => "{pager}\n{items}\n{pager}",
                           'tableOptions' => [
                               'class' => 'myGridView', /*table table-striped table-bordered*/
@@ -114,39 +114,49 @@ $this->title = $model->username;
                                    'value' => function($model){
                                         $buttonUpdate = "";
                                         $buttonDelete = "";
-                                        /*
-                                        $listView = "";
-                                        if($model->commentsCount != 0){
-                                             $listView = "<br/><div class='comments'>".ListView::widget([
-                                                  'dataProvider' => $model->postComments,
-                                                  'summary' => false,
-                                                  //'itemOptions' => ['class' => 'item'],
-                                                  'itemView' => 'lists/comments',
-                                                  //'pager' => ['class' => ScrollPager::className()],
-                                             ])."</div>";
+                                        $comments = Html::a('<i class="glyphicon glyphicon-comment"></i> '.$model->commentsCount.'', [Url::toRoute(['comment', 'id' => $model->id])]);
+                                        $date = $model->dateUpdate;
+                                        if($model->dateCreate != $model->dateUpdate){
+                                             $date = '<i class="glyphicon glyphicon-pencil"></i> &nbsp '.$model->dateUpdate;
                                         }
-                                        */
                                         if($model->userId == Yii::$app->user->id){
-                                             $buttonUpdate = " | ".Html::a('Update', [Url::toRoute(['posts/update', 'id' => $model->id])])." | ";
-                                             $buttonDelete = Html::a('Delete', [Url::toRoute(['posts/delete', 'id' => $model->id])]);
+                                             $buttonUpdate = Html::a('<i class="glyphicon glyphicon-edit"></i>', [Url::toRoute(['posts/update', 'id' => $model->id])]);
+                                             $buttonDelete = Html::a('<i class="glyphicon glyphicon-trash"></i>', [Url::toRoute(['posts/delete', 'id' => $model->id])]);
                                         }
                                         $resultString = "
-                                             <div class='newsWrapper'>
-                                                  <h4>".$model->title."</h4>
-                                                  <hr/>
-                                                  <h4>Entire post:</h4>
+                                             <div class='profile-right_item-news'>
+                                                  <div class='profile-right_item-newstitle'>
+                                                       ".$model->title."
+                                                  </div>
+                                                  <div class='profile-right_item-active'>
+                                                       ".$buttonUpdate." ".$buttonDelete."
+                                                  </div><br/><hr/>
                                                   ".$model->content."
                                                   <hr/>
-                                             Created: ".$model->dateCreate." | Updated: ".$model->dateUpdate." | Comments: ".$model->commentsCount."
-                                             | ".Html::a('Add comment', Url::toRoute(['comment', 'id' => $model->id]))." ".$buttonUpdate." ".$buttonDelete."
+                                                  <div class='profile-right_item-newsdate'>
+                                                       ".$date."
+                                                  </div>
+                                                  <div class='profile-right_item-newscomments'>
+                                                       ".$comments."
+                                                  </div><br/>
                                              </div>
                                         ";
+                                        /*
+                                        <div class='newsWrapper'>
+                                             <h4>".$model->title."</h4>
+                                             <hr/>
+                                             <h4>Entire post:</h4>
+                                             ".$model->content."
+                                             <hr/>
+                                        Created: ".$model->dateCreate." | Updated: ".$model->dateUpdate." | Comments: ".$model->commentsCount."
+                                        | ".Html::a('Add comment', Url::toRoute(['comment', 'id' => $model->id]))." ".$buttonUpdate." ".$buttonDelete."
+                                        </div>
+                                        */
                                         return $resultString;
                                    },
                               ],
                           ],
                      ]);
                  ?>
-           </div>
       </div>
 </div>
