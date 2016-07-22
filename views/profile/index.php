@@ -10,6 +10,7 @@ use yii\helpers\Url;
 use yii\grid\DataColumn;
 use yii\widgets\ListView;
 use \kop\y2sp\ScrollPager;
+use yii\bootstrap\Button;
 
 $this->title = $model->username;
 //$this->params['breadcrumbs'][] = $this->title;
@@ -17,58 +18,75 @@ $this->title = $model->username;
 ?>
 <div class="site-profile">
       <div class='profile-left_column'>
+           <?php
+
+               //echo Html::a("<i class='glyphicon glyphicon-eye-close'></i> My Profile", 'options' => [ 'url' => 'profile/index', 'class' => 'btn btn-profile-menu']);
+               echo Html::a("<i class='glyphicon glyphicon-home'></i> &nbsp My Profile", Url::toRoute(['profile/index', 'id' => Yii::$app->user->id]), ['class'=>'btn btn-profile-menu']);
+               echo Html::a("<i class='glyphicon glyphicon-envelope'></i> &nbsp Messages (".Yii::$app->user->identity->myMessages.")", [Url::toRoute(['/messages/index'])], ['class' => 'btn btn-profile-menu']);
+               echo Html::a("<i class='glyphicon glyphicon-user'></i> &nbsp My Friends", Url::toRoute(['profile/friends']), ['class'=>'btn btn-profile-menu']);
+               echo Html::a("<i class='glyphicon glyphicon-time'></i> &nbsp New Friends (".$waitingCount.")", [Url::toRoute(['waiting'])], ['class' => 'btn btn-profile-menu']);
+               echo Html::a("<i class='glyphicon glyphicon-star'></i> &nbsp My Requests (".$notAcceptedCount.")", [Url::toRoute(['requests'])], ['class' => 'btn btn-profile-menu']);
+
+           ?>
+      </div>
+      <div class='profile-middle_column'>
            <?= Html::img(Url::toRoute($model->profilePicture), ['width' => '100%']) ?>
            <br/><br/>
            <?php
                if($model->id == Yii::$app->user->id){
-                    echo Html::a("Edit Profile", [Url::toRoute(['edit'])], ['class' => 'btn btn-profile-menu']);
-                    echo Html::a("New Friends (".$waitingCount.")", [Url::toRoute(['waiting'])], ['class' => 'btn btn-profile-menu']);
-                    echo Html::a("My Requests (".$notAcceptedCount.")", [Url::toRoute(['requests'])], ['class' => 'btn btn-profile-menu']);
+                    echo Html::a("Settings", [Url::toRoute(['edit'])], ['class' => 'btn btn-profile-menu-selected']);
                }
                else{
-                    echo Html::a("Send message", [Url::toRoute(['messages/view', 'id' => $model->id])] , ['class' => 'btn btn-profile-menu']);
+                    echo Html::a("Send message", [Url::toRoute(['messages/view', 'id' => $model->id])] , ['class' => 'btn btn-profile-menu-selected']);
                     if(empty($model->friend)){
-                         echo Html::a("Add to friends", [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-profile-menu']);
+                         echo Html::a("Add to friends", [Url::toRoute(['invite', 'id' => $model->id])], ['class' => 'btn btn-profile-menu-selected']);
                     }
                     else{
                          if(!empty($model->receiver) && ($model->receiver->accepted == 0)){
-                              echo Html::a("Accept user&nbsp", [Url::toRoute(['accept', 'id' => $model->id])], ['class' => 'btn btn-profile-menu']);
+                              echo Html::a("Accept user&nbsp", [Url::toRoute(['accept', 'id' => $model->id])], ['class' => 'btn btn-profile-menu-selected']);
                          }
-                         echo Html::a("Delete friend", [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-profile-menu']);
+                         echo Html::a("Delete friend", [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-profile-menu-selected']);
                     }
                }
            ?>
 
       </div>
       <div class='profile-right_column'>
-           <div class='profile-right_column-header'>
+           <div class='profile-right_item'>
+                <div class='profile-right_item-username'>
+                     <?php echo $model->username ?>
+                </div>
+                <div class='profile-right_item-active'>
+                     <?php echo ($model->profile->active == 1) ? ('Active') : ('Not active'); ?>
+                </div>
+                <br/><hr/>
+                <div class='profile-right_item-info'>
+                     E-mail:
+                </div>
+                <div class='profile-right_item-infovalue'>
+                     <?php echo $model->email ?>
+                </div><br/>
 
-                     <?php echo $model->username ?> /
-                     Status: <?php echo ($model->profile->active == 1) ? ('active') : ('not active'); ?> /
-                     Comments: <?php echo ($model->profile->commentPermission == 1) ? ('allowed') : ('not allowed'); ?>
-
-           </div>
-
-           <div class='profile-right_column-content'>
-                E-mail: <?php echo $model->email ?><br/>
                 <?php
                     if(!empty($model->profile->birthday)){
-                         echo 'Date of Birth: '.$model->profile->birthday.'<br/>';
+                         echo '<div class="profile-right_item-info">Date of Birth:</div><div class="profile-right_item-infovalue">'.$model->profile->birthday.'</div><br/>';
                     }
                     if(!empty($model->profile->phone)){
-                         echo 'Phone: '.$model->profile->phone.'<br/>';
+                         echo '<div class="profile-right_item-info">Phone:</div><div class="profile-right_item-infovalue">'.$model->profile->phone.'</div><br/>';
                     }
                     if(!empty($model->profile->address)){
-                         echo 'Address: '.$model->profile->address.'<br/>';
+                         echo '<div class="profile-right_item-info">Address:</div><div class="profile-right_item-infovalue">'.$model->profile->address.'</div><br/>';
                     }
                 ?>
-                <hr/><br/>
                 <?php
                     if($model->id == Yii::$app->user->id){
-                         echo Html::a('New post', [Url::toRoute(['posts/create'])], ['class' => 'btn btn-content']);
+                         echo "<br/><hr/>";
+                         echo Html::a("<i class='glyphicon glyphicon-pencil'></i> New post", [Url::toRoute(['posts/create'])]);
                     }
                 ?>
-                <?= Html::a('Reset search', [Url::toRoute(['index', 'id' => $model->id])], ['class' => 'btn btn-content']) ?><br/><br/>
+                <br/>
+           </div>
+                <div class='profile-right_column-content'>
                 <?=
                      GridView::widget([
                           'dataProvider' => $dataProvider,
@@ -91,9 +109,6 @@ $this->title = $model->username;
                           ],
                           'columns' => [
                               [
-                                   'class' => DataColumn::className(),
-                                   'attribute' => 'title',
-                                   'label' => 'Search by title',
                                    'format' => 'html',
                                    //'header' => 'Name',
                                    'value' => function($model){
@@ -116,7 +131,7 @@ $this->title = $model->username;
                                              $buttonDelete = Html::a('Delete', [Url::toRoute(['posts/delete', 'id' => $model->id])]);
                                         }
                                         $resultString = "
-                                             <div class='searchWrapper'>
+                                             <div class='newsWrapper'>
                                                   <h4>".$model->title."</h4>
                                                   <hr/>
                                                   <h4>Entire post:</h4>

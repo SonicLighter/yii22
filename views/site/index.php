@@ -16,11 +16,11 @@ $this->title = 'SOCIALNETWORK.COM';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Welcome to SOCIALNETWORK.COM!</h1>
-
-        <p class="lead">We are suggest you to <?= HTML::a('login', Url::toRoute(['site/login']))?> or register:</p>
-
+        <h2>WELCOME TO SOCIALNETWORK.COM!</h4><br/>
         <div class='registerPage'>
+             <center>
+                   <p class="lead">We are suggest you to <?= HTML::a('login', Url::toRoute(['site/login']))?> or register:</p>
+              </center><br/>
              <?php $form = ActiveForm::begin(['id' => 'user-form']); ?>
 
                  <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
@@ -34,7 +34,7 @@ $this->title = 'SOCIALNETWORK.COM';
                  ]) ?>
 
                  <div class="registerButton">
-                     <?= Html::submitButton('Registration', ['class' => 'btn btn-login', 'name' => 'user-button']) ?>
+                     <?= Html::submitButton('Registration', ['class' => 'btn btn-default', 'name' => 'user-button']) ?>
                  </div>
 
              <?php ActiveForm::end(); ?>

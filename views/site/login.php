@@ -9,28 +9,24 @@ use yii\bootstrap\ActiveForm;
 use kartik\checkbox\CheckboxX;
 
 $this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+     <div class='registerPage'>
+         <h4><?= Html::encode($this->title) ?></h1>
+         <p>Please fill out the following fields to login:</p>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+         You may login with <strong>admin@yii.by/admin</strong>.<br/><br/>
 
-        <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+         <?php $form = ActiveForm::begin([
+             'id' => 'login-form',
+         ]); ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+             <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
+             <?= $form->field($model, 'password')->passwordInput() ?>
+
+
 
              <?= $form->field($model, 'rememberMe')->widget(CheckboxX::classname(), [
                  'autoLabel'=>true,
@@ -38,13 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
              ])->label(false) ?>
 
 
-                <?= Html::submitButton('Login', ['class' => 'btn btn-login', 'name' => 'login-button']) ?>
-            </div>
-        </div>
+             <center> <?= Html::submitButton('Login', ['class' => 'btn btn-default', 'name' => 'login-button']) ?> </center>
 
-    <?php ActiveForm::end(); ?>
 
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin@yii.by/admin</strong>.
+         <?php ActiveForm::end(); ?>
     </div>
 </div>

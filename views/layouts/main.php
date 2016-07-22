@@ -26,7 +26,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div class="wrap" style="background: #DDDDDD">
 <?= ScrollTop::widget() ?>
     <?php
     NavBar::begin([

@@ -20,7 +20,7 @@ $this->title = 'Create Post';
 
     <div class="row">
          <div class='postCreate'>
-            <h1><?= Html::encode($this->title) ?></h1>
+            <h4><?= Html::encode($this->title) ?></h1>
             <?php $form = ActiveForm::begin(['id' => 'posts-form']); ?>
 
                 <?= $form->field($model, 'userId')->hiddenInput(['value' => Yii::$app->user->getId()])->label(false) ?>

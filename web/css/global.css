@@ -3,40 +3,6 @@
      margin: auto;
 }
 
-.profile-left_column{
-     float: left;
-     width: 25%;
-     padding-right: 20px;
-}
-
-.profile-right_column{
-     float: left;
-     width: 75%;
-}
-
-.profile-right_column-header{
-     width: 100%;
-     color: #FFFFFF;
-     text-decoration: none;
-     user-select: none;
-     background: #696969 /*rgb(212,75,56)*/;
-     padding: .7em 1.5em;
-     border-radius: 10px;
-}
-
-.profile-right_column-content{
-     margin-top: 10px;
-     display: block;
-     width: 100%;
-     padding-top: 10px;
-     padding-bottom: 1px;
-     padding-left: 10px;
-     padding-right: 10px;
-     border-radius: 5px;
-     color: #000000;
-     /*background: #f7f7f7;*/
-}
-
 .userMenu {
      width: 100%;
      color: rgb(157,157,157);
@@ -73,10 +39,16 @@
 */
 
 .registerPage{
-     width: 40%;
+     width: 50%;
+     padding: 15px;
+     padding-left: 40px;
+     padding-right: 40px;
+     background: #FFFFFF;
+     border-radius: 6px;
+     border: 1px solid rgba(196,194,194,1);
+     margin-left: 10px;
      margin: auto;
      text-align: left;
-     font-size: 15px;
 }
 
 .searchPage{
@@ -164,8 +136,15 @@
 }
 
 .postCreate{
-     margin: auto;
      width: 70%;
+     padding: 15px;
+     padding-left: 40px;
+     padding-right: 40px;
+     background: #FFFFFF;
+     border-radius: 6px;
+     border: 1px solid rgba(196,194,194,1);
+     margin-left: 10px;
+     margin: auto;
 }
 
 .dialogWrapper{
@@ -254,6 +233,20 @@
 }
 
 /*
+     NEWS
+*/
+
+.newsWrapper{
+     margin: auto;
+     margin-bottom: 10px;
+     width: 100%;
+     border-bottom: 1px solid rgb(157,157,157);
+     border-top: 1px solid rgb(157,157,157);
+     border-radius: 10px;
+     padding: 20px;
+}
+
+/*
      ADMIN
 */
 
@@ -270,6 +263,92 @@
 .admin-login-input-wrapper{
      width: 70%;
      margin: auto;
+}
+
+/*
+     PROFILE
+*/
+
+.profile-left_column{
+     float: left;
+     width: 16%;
+     padding-right: 10px;
+}
+
+.profile-middle_column{
+     float: left;
+     width: 20%;
+     padding: 10px;
+     background: #FFFFFF;
+     border-radius: 6px;
+     border: 1px solid rgba(196,194,194,1);
+}
+
+.profile-right_column{
+     width: 64%;
+     float: left;
+}
+
+.profile-right_item{
+     width: 100%;
+     padding: 15px;
+     background: #FFFFFF;
+     border-radius: 6px;
+     border: 1px solid rgba(196,194,194,1);
+     margin-left: 10px;
+}
+
+.profile-right_item-username{
+     float: left;
+     width: 80%;
+     font-size: 25px;
+}
+
+.profile-right_item-active{
+     float: left;
+     vertical-align: top;
+     text-align: right;
+     width: 20%;
+     font-size: 15px;
+     color: rgb(221,221,221);
+}
+
+.profile-right_item-info{
+     float: left;
+     width: 30%;
+     font-size: 15px;
+     color: rgba(196,194,194,1);
+}
+
+.profile-right_item-infovalue{
+     float: left;
+     width: 70%;
+     font-size: 15px;
+     vertical-align: top;
+     margin-bottom: 5px;
+}
+
+.profile-right_column-header{
+     width: 100%;
+     color: #FFFFFF;
+     text-decoration: none;
+     user-select: none;
+     background: #696969 /*rgb(212,75,56)*/;
+     padding: .7em 1.5em;
+     border-radius: 10px;
+}
+
+.profile-right_column-content{
+     margin-top: 10px;
+     display: block;
+     width: 100%;
+     padding-top: 10px;
+     padding-bottom: 1px;
+     padding-left: 10px;
+     padding-right: 10px;
+     border-radius: 5px;
+     color: #000000;
+     /*background: #f7f7f7;*/
 }
 
 /*
@@ -291,20 +370,40 @@
 }
 
 .btn-profile-menu {
+     margin-bottom: 1px;
+     color: #000000;
      width: 100%;
-     padding-left: 30px;
+     padding-left: 10px;
      text-align: left;
-     background-color:#696969;
-     color:#FFFFFF;
-     border-color:#292929;
 }
+
 .btn-profile-menu:hover, .btn-profile-menu:focus {
-     background-color: #3b3b3b;
-     color: #FFFFFF;
+     background: rgba(196,194,194,1);
+     color: #000000;
 }
+
 .btn-profile-menu:active {
-     background-color: #3b3b3b;
-     color: #FFFFFF;
+     background: rgba(196,194,194,1);
+     color: #000000;
+}
+
+.btn-profile-menu-selected {
+     margin-bottom: 3px;
+     color: #000000;
+     width: 100%;
+     padding-left: 10px;
+     text-align: left;
+     background: rgb(221,221,221);
+}
+
+.btn-profile-menu-selected:hover, .btn-profile-menu-selected:focus {
+     background: rgba(196,194,194,1);
+     color: #000000;
+}
+
+.btn-profile-menu-selected:active {
+     background: rgba(196,194,194,1);
+     color: #000000;
 }
 
 .btn-content {
