@@ -17,23 +17,27 @@ $this->title = 'People';
 ?>
 <div class="site-about">
      <div class='searchPage'>
-         <p>
-              <?= Html::a('Reset search', [Url::toRoute([$pageType])], ['class' => 'btn btn-info']) ?>
-              <?= Html::a('Profile', [Url::toRoute(['profile/index', 'id' => Yii::$app->user->id])], ['class' => 'btn btn-info']) ?>
-         </p>
+         <div class='profile-right_item-friends'>
+              <?= Html::a('Reset search', [Url::toRoute([$pageType])], ['class' => 'btn btn-default']) ?>
+              <?= Html::a('Profile', [Url::toRoute(['profile/index', 'id' => Yii::$app->user->id])], ['class' => 'btn btn-default']) ?>
+         </div>
 
          <?=
               GridView::widget([
                    'dataProvider' => $dataProvider,
                    'filterModel' => $searchModel,
                    'summary' => false,
+                   'emptyText' => '',
+                   'tableOptions' => [
+                       'class' => 'myGridView', /*table table-striped table-bordered*/
+                   ],
                    'pager' => [
                           'class' => ScrollPager::className(),
                           'container' => '.grid-view tbody',
                           'item' => 'tr',
                           'paginationSelector' => '.grid-view .pagination',
                           'triggerText' => 'Load more messages...',
-                          'noneLeftText' => 'End of page',
+                          'noneLeftText' => '',
                           'triggerOffset' => $loadPage,
                           'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
                    ],
@@ -41,7 +45,7 @@ $this->title = 'People';
                        [
                             'class' => DataColumn::className(),
                             'attribute' => 'username',
-                            'label' => 'Search by username',
+                            'label' => '',
                             'format' => 'html',
                             //'header' => 'Name',
                             'value' => function($model){
@@ -61,7 +65,7 @@ $this->title = 'People';
                                       $resultButton = Html::a('Delete friend', [Url::toRoute(['remove', 'id' => $model->id])], ['class' => 'btn btn-default']);
                                  }
                                  $resultString =
-                                     "<div class='searchWrapper'>
+                                     "<div class='profile-right_item-friends'>
                                            <div class='searchLeftColumn'>
                                                 ".Html::img(Url::toRoute($model->profilePicture), ['width' => '120px'])."
                                            </div>

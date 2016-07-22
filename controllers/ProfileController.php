@@ -240,7 +240,11 @@ class ProfileController extends Controller{
                    return $this->redirect([Url::previous()]);
               }
 
-              return $this->render('comment', ['model' => $model, 'modelPosts' => $modelPosts]);
+              return $this->render('comment', [
+                   'model' => $model,
+                   'modelPosts' => $modelPosts,
+                   'loadCount' => Comments::find()->where(['postId' => $id])->count(),
+              ]);
          }
 
          return $this->redirect('errors');

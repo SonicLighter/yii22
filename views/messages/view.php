@@ -18,7 +18,7 @@ $this->title = 'Dialog with '.$modelUser->username;
 ?>
 
 <div class="site-about">
-     <div class='searchPage'>
+     <div class='postCreate'>
           <h4><?= Html::a('Dialog', Url::toRoute(['messages/view', 'id' => $modelUser->id])).' with '.Html::a($modelUser->username, Url::toRoute(['profile/index', 'id' => $modelUser->id])) ?></h4>
 
           <div class='sendForm'>
@@ -50,9 +50,8 @@ $this->title = 'Dialog with '.$modelUser->username;
                                'item' => 'tr',
                                'paginationSelector' => '.grid-view .pagination',
                                'triggerText' => 'Load more messages...',
-                               'noneLeftText' => 'End of page',
+                               'noneLeftText' => '',
                                'triggerOffset' => $loadPage,
-                               'noneLeftTemplate' => '<div class="ias-noneleft" style="text-align: center;"><div class="btn btn-content">{text}</div></div>',
                                'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="btn btn-content">{text}</div></a></td></tr>',
                         ],
 
@@ -70,7 +69,7 @@ $this->title = 'Dialog with '.$modelUser->username;
                                                   </div>
                                                   <div class='messageContent'>
                                                        ".Html::a($model->sender->username, Url::toRoute(['profile/index', 'id' => $model->sender->id]))."
-                                                       | ".$model->date."<br/>Message:<br/>
+                                                       | ".$model->date."<br/>
                                                        ".$model->message."
                                                   </div>
                                                   <hr/>

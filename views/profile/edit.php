@@ -19,7 +19,7 @@ $this->title = 'Edit Profile';
 
     <div class="row">
        <div class='postCreate'>
-             <h1><?= Html::encode($this->title) ?></h1><br/>
+             <h4><?= Html::encode($this->title) ?></h4><br/>
              <?php
                     $pictureActive = false;
                     $accessActive = false;

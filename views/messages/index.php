@@ -17,11 +17,11 @@ $this->title = 'Dialogs';
 
 ?>
 <div class="site-about">
-     <div class='searchPage'>
+     <div class='postCreate'>
           <h1><?= Html::encode($this->title) ?></h1>
           <p>
-               <?= Html::a('Reset search', 'index', ['class' => 'btn btn-info']) ?>
-               <?= Html::a('Profile', [Url::toRoute(['profile/index', 'id' => Yii::$app->user->id])], ['class' => 'btn btn-info']) ?>
+               <?= Html::a('Reset search', 'index', ['class' => 'btn btn-default']) ?>
+               <?= Html::a('Profile', [Url::toRoute(['profile/index', 'id' => Yii::$app->user->id])], ['class' => 'btn btn-default']) ?>
           </p>
 
           <?=
@@ -35,7 +35,7 @@ $this->title = 'Dialogs';
                          'item' => 'tr',
                          'paginationSelector' => '.grid-view .pagination',
                          'triggerText' => 'Load more dialogs...',
-                         'noneLeftText' => 'End of page',
+                         'noneLeftText' => '',
                          'triggerOffset' => $loadPage,
                          'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer"><div class="userMenu">{text}</div></a></td></tr>',
                    ],
@@ -48,14 +48,14 @@ $this->title = 'Dialogs';
                             //'header' => 'Name',
                             'value' => function($model){
                                  $resultString =
-                                     "<div class='searchWrapper'>
+                                     "
                                            <div class='dialogLeftColumn'>
                                                 ".Html::img(Url::toRoute($model->profilePicture), ['width' => '120px'])."
                                            </div>
                                            <div class='dialogMiddleColumn'>
                                                 <h4>Open dialog with ". Html::a(HtmlPurifier::process($model->username), [Url::toRoute(['view', 'id' => $model->id])])."</h4>
                                            </div>
-                                      </div>";
+                                      ";
                                   return $resultString;
                             },
                        ],
